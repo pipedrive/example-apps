@@ -1,0 +1,28 @@
+{
+  "name": "example-apps",
+  "version": "1.0.0",
+  "description": "Example apps for Pipedrive Integrations",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipedrive/example-apps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pipedrive/example-apps/issues"
+  },
+  "homepage": "https://github.com/pipedrive/example-apps#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-async-errors": "^3.1.1",
+    "pipedrive": "^13.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
