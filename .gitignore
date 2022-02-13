@@ -1,1 +1,41 @@
+# logs
+logs
+*.log
+npm-debug.log*
+
+# node-waf configuration
+.lock-wscript
+
+# compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# dependency directories
 node_modules
+
+# optional npm cache directory
+.npm
+
+# optional REPL history
+.node_repl_history
+
+# mac files
+.DS_Store
+
+
+# webstorm
+.idea
+
+# vscode
+.vscode/*
+!.vscode/launch.json
+*code-workspace
+
+# compiled code
+dist/
+
+# devspace
+.devspace
+devspace.yaml
+
+# Environment variables
+.env
