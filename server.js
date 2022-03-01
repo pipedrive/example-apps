@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 require('express-async-errors');
 const path = require('path');
 const app = express();
@@ -7,16 +8,20 @@ const public = path.join(__dirname, 'public');
 const errorHandler = require('./middlewares/error-handler');
 
 app.use(errorHandler);
+app.use(bodyParser.json());
 
-app.get('/callback', require('./apps/001-callback-url-oauth/callback'));
+// OAuth2 Handlers
+app.get('/callback', require('./apps/oauth/callback'));
+app.delete('/callback', require('./apps/oauth/uninstall'));
 
+// Panel handlers
 app.get('/surface', (req, res) => {
     res.sendFile(path.join(public, 'index.html'));
 });
 
-app.get('/api', (req, res) => {
-    res.send('Api!');
-});
+// Debug endpoints
+app.get('/pipedrive-api-example/:userId/:companyId', require('./apps/oauth/api-example'));
+app.get('/db', require('./apps/db'));
 
 
 app.listen(port, () => {
