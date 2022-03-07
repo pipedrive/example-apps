@@ -1,7 +1,7 @@
-const db = require('../database');
+const { db } = require('../database');
 
 async function handler(req, res) {
-    res.send(db.db);
+    res.send(db);
 };
 
 

@@ -5,7 +5,7 @@ const db = {
     // key is a combination of userId_companyId
 };
 
-function saveInstallation(userId, companyId, tokens) {
+async function saveInstallation(userId, companyId, tokens) {
     db[`${userId}_${companyId}`] = {
         ...tokens,
         userId,
@@ -13,18 +13,18 @@ function saveInstallation(userId, companyId, tokens) {
     };
 }
 
-function deleteInstallation(userId, companyId) {
+async function deleteInstallation(userId, companyId) {
     console.log(`${userId}_${companyId}`);
 
     delete db[`${userId}_${companyId}`];
 }
 
-function getClientInstallation(userId, companyId) {
+async function getClientInstallation(userId, companyId) {
     return db[`${userId}_${companyId}`];
 }
 
 
-function updateClientInstallation() {
+async function updateClientInstallation() {
 
 }
 

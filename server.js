@@ -1,13 +1,15 @@
 const express = require('express');
-const bodyParser = require('body-parser')
 require('express-async-errors');
+const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const port = 3000;
 const public = path.join(__dirname, 'public');
 const errorHandler = require('./middlewares/error-handler');
+const apiClient = require('./middlewares/api-client');
 
 app.use(errorHandler);
+app.use(apiClient);
 app.use(bodyParser.json());
 
 // OAuth2 Handlers
