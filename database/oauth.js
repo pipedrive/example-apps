@@ -1,5 +1,3 @@
-const config = require('../config');
-
 const db = {
     // object of objects
     // key is a combination of userId_companyId
