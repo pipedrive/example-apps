@@ -1,5 +1,3 @@
-const config = require('../config');
-
 const db = {
     // object of objects
     // key is a combination of userId_companyId
@@ -14,8 +12,6 @@ async function saveInstallation(userId, companyId, tokens) {
 }
 
 async function deleteInstallation(userId, companyId) {
-    console.log(`${userId}_${companyId}`);
-
     delete db[`${userId}_${companyId}`];
 }
 

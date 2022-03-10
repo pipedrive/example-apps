@@ -1,5 +1,5 @@
 const config = require('../../config');
-const db = require('../../database');
+const db = require('../../database/oauth');
 
 async function handler(req, res) {
     const basicAuthHeader = Buffer.from(`${config.clientId}:${config.clientSecret}`).toString('base64');
