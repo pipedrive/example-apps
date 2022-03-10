@@ -1,9 +1,9 @@
 const { getRecord } = require('../database/todo');
 
 async function handler(req, res) {
-    const { userId, companyId, recordId } = req.params;
+    const { userId, companyId, dealId, recordId } = req.params;
 
-    const records = await getRecord(userId, companyId, recordId);
+    const records = await getRecord(userId, companyId, dealId, recordId);
 
     res.send(records);
 };

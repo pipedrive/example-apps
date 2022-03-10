@@ -26,11 +26,11 @@ app.get('/pipedrive-api-example/:userId/:companyId', require('./endpoints/oauth/
 app.get('/db', require('./endpoints/db'));
 
 // ToDo endpoints
-app.get('/todo/:userId/:companyId/', require('./endpoints/get-todo'));
-app.get('/todo/:userId/:companyId/:recordId', require('./endpoints/get-todo'));
-app.post('/todo/:userId/:companyId', require('./endpoints/create-todo'));
-app.put('/todo/:userId/:companyId', require('./endpoints/update-todo'));
-app.delete('/todo/:userId/:companyId/:recordId', require('./endpoints/delete-todo'));
+app.get('/todo/:userId/:companyId/:dealId', require('./endpoints/get-todo'));
+app.get('/todo/:userId/:companyId/:dealId/:recordId', require('./endpoints/get-todo'));
+app.post('/todo/:userId/:companyId/:dealId', require('./endpoints/create-todo'));
+app.put('/todo/:userId/:companyId/:dealId', require('./endpoints/update-todo'));
+app.delete('/todo/:userId/:companyId/:dealId/:recordId', require('./endpoints/delete-todo'));
 
 
 app.listen(port, () => {

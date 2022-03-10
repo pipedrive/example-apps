@@ -1,9 +1,9 @@
 const { deleteRecord } = require('../database/todo');
 
 async function handler(req, res) {
-    const { userId, companyId, recordId } = req.params;
+    const { userId, companyId, dealId, recordId } = req.params;
 
-    const record = await deleteRecord(userId, companyId, recordId);
+    const record = await deleteRecord(userId, companyId, dealId, recordId);
 
     res.send(record);
 };

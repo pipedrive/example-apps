@@ -1,14 +1,14 @@
 const db = {
     // object of objects
-    // key is a combination of userId_companyId
+    // key is a combination of userId_companyId_dealId
 };
 
-async function saveRecord(userId, companyId, record) {
-    if (!db[`${userId}_${companyId}`]) {
-        db[`${userId}_${companyId}`] = {};
+async function saveRecord(userId, companyId, dealId, record) {
+    if (!db[`${userId}_${companyId}_${dealId}`]) {
+        db[`${userId}_${companyId}_${dealId}`] = {};
     }
 
-    const userRecordsObj = db[`${userId}_${companyId}`];
+    const userRecordsObj = db[`${userId}_${companyId}_${dealId}`];
 
     userRecordsObj[Object.keys(userRecordsObj).length + 1] = {
         title: record.title,
@@ -17,8 +17,8 @@ async function saveRecord(userId, companyId, record) {
     };
 }
 
-async function deleteRecord(userId, companyId, recordId) {
-    const record = db[`${userId}_${companyId}`][recordId];
+async function deleteRecord(userId, companyId, dealId, recordId) {
+    const record = db[`${userId}_${companyId}_${dealId}`][recordId];
 
     if (record) {
         record.deleted = true;
@@ -27,19 +27,17 @@ async function deleteRecord(userId, companyId, recordId) {
     return record;
 }
 
-async function getRecord(userId, companyId, recordId) {
-console.log(recordId);
-
+async function getRecord(userId, companyId, dealId, recordId) {
     if (recordId) {
-        return db[`${userId}_${companyId}`][recordId];
+        return db[`${userId}_${companyId}_${dealId}`][recordId];
     }
 
-    return db[`${userId}_${companyId}`];
+    return db[`${userId}_${companyId}_${dealId}`];
 }
 
 
-async function updateRecord(userId, companyId, record) {
-    const userRecordsObj = db[`${userId}_${companyId}`];
+async function updateRecord(userId, companyId, dealId, record) {
+    const userRecordsObj = db[`${userId}_${companyId}_${dealId}`];
 
     if(userRecordsObj[record.id]) {
         userRecordsObj[record.id] = {
