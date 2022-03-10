@@ -1,4 +1,4 @@
-const { getRecord } = require('../../database/todo');
+const { getRecord } = require('../database/todo');
 
 async function handler(req, res) {
     const { userId, companyId, recordId } = req.params;

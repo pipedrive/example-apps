@@ -1,4 +1,4 @@
-const { deleteRecord } = require('../../database/todo');
+const { deleteRecord } = require('../database/todo');
 
 async function handler(req, res) {
     const { userId, companyId, recordId } = req.params;

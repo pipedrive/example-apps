@@ -13,8 +13,8 @@ app.use(apiClient);
 app.use(bodyParser.json());
 
 // OAuth2 Handlers
-app.get('/callback', require('./apps/todo/oauth/callback'));
-app.delete('/callback', require('./apps/todo/oauth/uninstall'));
+app.get('/callback', require('./endpoints/oauth/callback'));
+app.delete('/callback', require('./endpoints/oauth/uninstall'));
 
 // Panel handlers
 app.get('/surface', (req, res) => {
@@ -22,15 +22,15 @@ app.get('/surface', (req, res) => {
 });
 
 // Debug endpoints
-app.get('/pipedrive-api-example/:userId/:companyId', require('./apps/todo/oauth/api-example'));
-app.get('/db', require('./apps/db'));
+app.get('/pipedrive-api-example/:userId/:companyId', require('./endpoints/oauth/api-example'));
+app.get('/db', require('./endpoints/db'));
 
 // ToDo endpoints
-app.get('/todo/:userId/:companyId/', require('./apps/todo/get-todo'));
-app.get('/todo/:userId/:companyId/:recordId', require('./apps/todo/get-todo'));
-app.post('/todo/:userId/:companyId', require('./apps/todo/create-todo'));
-app.put('/todo/:userId/:companyId', require('./apps/todo/update-todo'));
-app.delete('/todo/:userId/:companyId/:recordId', require('./apps/todo/delete-todo'));
+app.get('/todo/:userId/:companyId/', require('./endpoints/get-todo'));
+app.get('/todo/:userId/:companyId/:recordId', require('./endpoints/get-todo'));
+app.post('/todo/:userId/:companyId', require('./endpoints/create-todo'));
+app.put('/todo/:userId/:companyId', require('./endpoints/update-todo'));
+app.delete('/todo/:userId/:companyId/:recordId', require('./endpoints/delete-todo'));
 
 
 app.listen(port, () => {

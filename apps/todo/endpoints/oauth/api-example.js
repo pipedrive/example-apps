@@ -1,5 +1,5 @@
 const pipedriveSdk = require('pipedrive');
-const db = require('../../../database/oauth');
+const db = require('../../database/oauth');
 
 async function handler(req, res) {
     const { userId, companyId } = req.params;

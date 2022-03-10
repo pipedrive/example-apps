@@ -1,4 +1,4 @@
-const { updateRecord } = require('../../database/todo');
+const { updateRecord } = require('../database/todo');
 
 async function handler(req, res) {
     const { title, checked, id } = req.body;

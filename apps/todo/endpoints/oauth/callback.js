@@ -1,4 +1,4 @@
-const db = require('../../../database/oauth');
+const db = require('../../database/oauth');
 
 async function handler(req, res) {
 
