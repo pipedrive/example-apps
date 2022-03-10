@@ -12,8 +12,6 @@ async function saveInstallation(userId, companyId, tokens) {
 }
 
 async function deleteInstallation(userId, companyId) {
-    console.log(`${userId}_${companyId}`);
-
     delete db[`${userId}_${companyId}`];
 }
 
