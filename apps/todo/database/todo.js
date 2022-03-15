@@ -32,7 +32,7 @@ async function getRecord(userId, companyId, dealId, recordId) {
         return db[`${userId}_${companyId}_${dealId}`][recordId];
     }
 
-    return db[`${userId}_${companyId}_${dealId}`];
+    return db[`${userId}_${companyId}_${dealId}`] ?? {};
 }
 
 

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const port = 3000;
-const public = path.join(__dirname, 'public');
+const public = path.join(__dirname, 'build/static');
 const errorHandler = require('./middlewares/error-handler');
 const apiClient = require('./middlewares/api-client');
 
@@ -12,14 +12,14 @@ app.use(errorHandler);
 app.use(apiClient);
 app.use(bodyParser.json());
 
+app.use('/static', express.static(public));
+
 // OAuth2 Handlers
 app.get('/callback', require('./endpoints/oauth/callback'));
 app.delete('/callback', require('./endpoints/oauth/uninstall'));
 
 // Panel handlers
-app.get('/surface', (req, res) => {
-    res.sendFile(path.join(public, 'index.html'));
-});
+app.all('/', require('./endpoints/surface-render'));
 
 // Debug endpoints
 app.get('/pipedrive-api-example/:userId/:companyId', require('./endpoints/oauth/api-example'));
