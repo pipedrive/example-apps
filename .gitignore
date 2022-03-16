@@ -32,6 +32,7 @@ node_modules
 
 # compiled code
 dist/
+build/
 
 # devspace
 .devspace
