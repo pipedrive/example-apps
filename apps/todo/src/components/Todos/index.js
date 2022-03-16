@@ -1,41 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useLocation } from "react-router-dom";
 import { apiUri } from "../../frontend-config";
+import { GlobalContext } from '../../context/GlobalContext';
+import { Command } from '@pipedrive/surface-sdk';
 
 function useQuery() {
-    const { search } = useLocation();
-  
-    return React.useMemo(() => new URLSearchParams(search), [search]);
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
-const useFetch = (url, method, payload = {}) => {
-  const [data, setData] = React.useState(null);
+async function apiRequest(url, method, payload = {}) {
+  const options = {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
 
-  useEffect(() => {
-    async function fetchData() {
-      const options = {
-        method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      }
+  if (method !== 'GET') {
+    options.body = JSON.stringify(payload);
+  }
 
-      if(method !== 'GET') {
-        options.body = JSON.stringify(payload);
-      }
+  const response = await fetch(url, options);
+  
+  if (method === 'GET') {
+    return response.json();
+  }
 
-      const response = await fetch(url, options);
+  return await response;
+}
 
-      const json = await response.json();
-      setData(json);
-    }
-    fetchData();
-  }, [url]);
-
-  return data;
-};
-
-function Todo({ todo, index, completeTodo, removeTodo }) {
+function Todo({ todo, completeTodo, removeTodo }) {
   return (
     <div
       className="todo"
@@ -43,8 +39,8 @@ function Todo({ todo, index, completeTodo, removeTodo }) {
     >
       {todo.title}
       <div>
-        <button onClick={() => completeTodo(index)}>✔️</button>
-        <button onClick={() => removeTodo(index)}>❌</button>
+        <button onClick={() => completeTodo(todo)}>✔️</button>
+        <button onClick={() => removeTodo(todo)}>❌</button>
       </div>
     </div>
   );
@@ -74,88 +70,86 @@ function TodoForm({ addTodo }) {
   );
 }
 
-const Todos = () => {
-    const query = useQuery();
-    const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}`;
-    const result = useFetch(URL, 'GET');
+function Todos() {
+  const [todos, setTodos] = React.useState([]);
+  const { surfaceSdk } = useContext(GlobalContext);
+  const query = useQuery();
+  const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}`;
 
+  useEffect(() => {
+    const fetchRecord = async () => {
+      await fetchRecords();
+    }
+
+    fetchRecord();
+  }, []);
+
+  async function fetchRecords() {
     const todoRecords = [];
-    const defaultRecords = [
-      {
-        title: "No records for this deal yet",
-        checked: false
-      },
-      {
-        title: "No records for this deal yet",
-        checked: false
-      },
-    ];
+    const result = await apiRequest(URL, 'GET');
 
     for (const recordId in result) {
+      if (result[recordId].deleted) {
+        continue;
+      }
+
       todoRecords.push({
         ...result[recordId],
         id: recordId,
       });
     }
 
-    console.log(todoRecords);
-    console.log(defaultRecords);
+    setTodos(todoRecords);
+  }
   
-    const [todos, setTodos] = React.useState(defaultRecords);
-  
-    const addTodo = title => {
-      // const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}`;
-      // const result = useFetch(URL, 'POST', { title });
+  async function addTodo(title) {
+    const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}`;
+    await apiRequest(URL, 'POST', { title });
 
-      const newTodos = [...todos, { title }];
-      setTodos(newTodos);
-    };
-  
-    const completeTodo = index => {
-      // const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}`;
-      // const result = useFetch(URL, 'PUT', {
-      //   "title": "Something new 1211",
-      //   "checked": true,
-      //   "id": 2
-      // });
+    await fetchRecords();
+  }
 
-      const newTodos = [...todos];
-  
-      if(newTodos[index].checked) {
-        newTodos[index].checked = false;
-      } else {
-        newTodos[index].checked = true;
-      }
-  
-      setTodos(newTodos);
-    };
-  
-    const removeTodo = index => {
-      // const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}/${index}`;
-      // const result = useFetch(URL, 'DELETE');
+  async function completeTodo(todo) {
+    const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}`;
+    await apiRequest(URL, 'PUT', {
+      title: todo.title,
+      checked: !todo.checked,
+      id: todo.id
+    });
 
-      const newTodos = [...todos];
-      newTodos.splice(index, 1);
-      setTodos(newTodos);
-    };
-  
-    return (
-        <div className="app">
-        <div className="todo-list">
-          {todos.map((todo, index) => (
-            <Todo
-              key={index}
-              index={index}
-              todo={todo}
-              completeTodo={completeTodo}
-              removeTodo={removeTodo}
-            />
-          ))}
-          <TodoForm addTodo={addTodo} />
-        </div>
+    await fetchRecords();
+  }
+
+  async function removeTodo(todo) {
+    const URL = `${apiUri}/todo/${query.get('userId')}/${query.get('companyId')}/${query.get('selectedIds')}/${todo.id}`;
+
+
+    await surfaceSdk.execute(Command.SHOW_SNACKBAR, {
+      message: 'Task was deleted',
+    });
+
+    await apiRequest(URL, 'DELETE');
+
+    await fetchRecords();
+  }
+
+  return (
+      <div className="app">
+      <div className="todo-list">
+        {todos.map((todo, index) => (
+          <Todo
+            key={index}
+            index={index}
+            todo={todo}
+            completeTodo={completeTodo}
+            removeTodo={removeTodo}
+          />
+        ))}
+        <TodoForm addTodo={addTodo} />
       </div>
-    );
-};
+    </div>
+  );
+}
 
 Todos.propTypes = {};
 
