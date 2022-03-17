@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts build && nodemon server.js",
-    "react:start": "react-scripts start",
+    "react:start": "PORT=3001 react-scripts start",
     "react:build": "react-scripts build"
   },
   "repository": {
@@ -27,7 +27,6 @@
     "pipedrive": "^13.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.2.2",
     "react-scripts": "^5.0.0"
   },
   "devDependencies": {
@@ -44,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3000"
 }

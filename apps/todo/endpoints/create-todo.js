@@ -8,9 +8,9 @@ async function handler(req, res) {
         return res.send('title is not set');
     }
 
-    await saveRecord(userId, companyId, dealId, { title });
+    const data = await saveRecord(userId, companyId, dealId, { title });
 
-    res.send('ok');
-};
+    res.send(data);
+}
 
 module.exports = handler;
