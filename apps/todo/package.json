@@ -24,6 +24,7 @@
     "body-parser": "^1.19.2",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "pipedrive": "^13.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

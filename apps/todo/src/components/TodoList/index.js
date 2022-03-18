@@ -11,15 +11,22 @@ import apiRequest from '../../utils/api-request';
 import computeTodolistHeight from '../../utils/compute-todolist-height';
 
 const sdk = new SurfaceSDK();
+let todoListUrl;
 
 const TodoList = () => {
   const [todoList, setTodoList] = React.useState([]);
   const [ctaVisible, setCtaVisible] = useState(true);
-  const todoListUrl = buildTodoListUrl();
 
   useEffect(() => {
     const fetchRecords = async () => {
+      await sdk.initialize({ size: { height: 100 }});
+
+      const { data: { token } } = await sdk.execute(Command.GET_SIGNED_TOKEN);
+
       const todoRecords = [];
+
+      todoListUrl = buildTodoListUrl(token);
+
       const result = await apiRequest(todoListUrl, 'GET');
 
       for (const recordId in result) {
@@ -40,7 +47,7 @@ const TodoList = () => {
         setCtaVisible(false);
       }
 
-      sdk.initialize({ size: { height: computeTodolistHeight(todoRecords) }});
+      sdk.execute(Command.RESIZE, { height: computeTodolistHeight(todoRecords) });
     }
 
     fetchRecords();
@@ -71,8 +78,9 @@ const TodoList = () => {
   }
 
   const removeTodoItem = async (todo) => {
+    const { data: { token } } = await sdk.execute(Command.GET_SIGNED_TOKEN);
     const { id } = todo;
-    const todoItemUrl = `${todoListUrl}/${todo.id}`;
+    const todoItemUrl = `${buildTodoListUrl()}/${todo.id}?token=${token}`;
 
     const { data: { confirmed }} = await sdk.execute(Command.SHOW_CONFIRMATION, {
       title: 'Confirm',
@@ -103,9 +111,7 @@ const TodoList = () => {
   }
 
   const convertToDeal = async ({ title }) => {
-    const { status, id } = await sdk.execute(Command.OPEN_MODAL, { type: Modal.DEAL, prefill: { title } });
-
-    console.log(status, id);
+    await sdk.execute(Command.OPEN_MODAL, { type: Modal.DEAL, prefill: { title } });
   }
 
   const hideCallToAction = () => {
