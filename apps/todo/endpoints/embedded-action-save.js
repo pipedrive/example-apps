@@ -18,7 +18,8 @@ async function handler(req, res) {
     res.send({
         success: {
             message: "Successfully done",
-            type: "snackbar"
+            type: "snackbar",
+            refreshPanelData: true,
         }
     });
 };
