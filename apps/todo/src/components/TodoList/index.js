@@ -61,12 +61,27 @@ const TodoList = () => {
       id
     });
 
+    if (!checked) {
+      await sdk.execute(Command.SHOW_SNACKBAR, {
+        message: 'Task marked as done',
+      });
+    }
+
     setTodoList(todoList.map(todo => todo.id === id ? ({ ...todo, checked: !checked }) : todo))
   }
 
   const removeTodoItem = async (todo) => {
     const { id } = todo;
     const todoItemUrl = `${todoListUrl}/${todo.id}`;
+
+    const { data: { confirmed }} = await sdk.execute(Command.SHOW_CONFIRMATION, {
+      title: 'Confirm',
+      description: 'Are you sure you want to complete this action?'
+    });
+
+    if (!confirmed) {
+      return;
+    }
 
     await apiRequest(todoItemUrl, 'DELETE');
 
@@ -87,8 +102,10 @@ const TodoList = () => {
     sdk.execute(Command.RESIZE, { height: computeTodolistHeight(updatedTodoList) });
   }
 
-  const convertToDeal = ({ title }) => {
-    sdk.execute(Command.OPEN_MODAL, { type: Modal.DEAL, prefill: { title } });
+  const convertToDeal = async ({ title }) => {
+    const { status, id } = await sdk.execute(Command.OPEN_MODAL, { type: Modal.DEAL, prefill: { title } });
+
+    console.log(status, id);
   }
 
   const hideCallToAction = () => {

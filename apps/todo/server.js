@@ -32,6 +32,10 @@ app.post('/todo/:userId/:companyId/:dealId', require('./endpoints/create-todo'))
 app.put('/todo/:userId/:companyId/:dealId', require('./endpoints/update-todo'));
 app.delete('/todo/:userId/:companyId/:dealId/:recordId', require('./endpoints/delete-todo'));
 
+// Embedded action
+app.get('/embedded-action/', require('./endpoints/embedded-action'));
+app.post('/embedded-action/', require('./endpoints/embedded-action-save'));
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
