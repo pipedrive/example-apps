@@ -1,7 +1,6 @@
 const pipedriveSdk = require('pipedrive');
 const config = require('../config');
 
-
 async function oauthContext(req, res, next) {
     const apiClient = pipedriveSdk.ApiClient.instance;
 

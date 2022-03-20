@@ -5,6 +5,6 @@ async function handler(req, res) {
             actions: {}
         }
     });
-};
+}
 
 module.exports = handler;

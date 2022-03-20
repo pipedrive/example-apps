@@ -7,27 +7,24 @@ import TodoItemView from '../TodoItem/TodoItemView';
 import AddItem from '../AddItem';
 
 import buildTodoListUrl from '../../utils/build-todo-list-url';
-import apiRequest from '../../utils/api-request';
 import computeTodolistHeight from '../../utils/compute-todolist-height';
+import ApiClient from '../../utils/api-client';
 
 const sdk = new SurfaceSDK();
-let todoListUrl;
+const apiClient = new ApiClient(sdk);
+
+const todoListUrl = buildTodoListUrl();
+
+const urlSearchParams = new URLSearchParams(window.location.search);
 
 const TodoList = () => {
-  const [todoList, setTodoList] = React.useState([]);
-  const [ctaVisible, setCtaVisible] = useState(true);
+  const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
     const fetchRecords = async () => {
-      await sdk.initialize({ size: { height: 100 }});
-
-      const { data: { token } } = await sdk.execute(Command.GET_SIGNED_TOKEN);
+      const result = await apiClient.fetchWithToken(todoListUrl, 'GET', null, urlSearchParams.get('token'));
 
       const todoRecords = [];
-
-      todoListUrl = buildTodoListUrl(token);
-
-      const result = await apiRequest(todoListUrl, 'GET');
 
       for (const recordId in result) {
         if (result[recordId].deleted) {
@@ -43,26 +40,22 @@ const TodoList = () => {
 
       setTodoList(todoRecords);
 
-      if (todoRecords.length) {
-        setCtaVisible(false);
-      }
-
-      sdk.execute(Command.RESIZE, { height: computeTodolistHeight(todoRecords) });
+      sdk.initialize({ size: { height: computeTodolistHeight(todoRecords) }});
     }
 
     fetchRecords();
   }, []);
 
   const saveTodoItem = async ({ title, checked }, { id: todoId }) => {
-    const { id } = await apiRequest(todoListUrl, 'POST', { title, checked });
+    const { id } = await apiClient.fetch(todoListUrl, 'POST', { title, checked });
 
-    setTodoList(todoList.map(todo => todo.id === todoId ? ({ type: 'view', title, checked, id }) : todo))
+    setTodoList(todoList.map(todo => todo.id === todoId ? ({ type: 'view', title, checked, id }) : todo));
   }
 
   const toggleTodoItem = async (todo) => {
     const { id, title, checked } = todo;
 
-    await apiRequest(todoListUrl, 'PUT', {
+    await apiClient.fetch(todoListUrl, 'PUT', {
       title,
       checked: !checked,
       id
@@ -74,14 +67,10 @@ const TodoList = () => {
       });
     }
 
-    setTodoList(todoList.map(todo => todo.id === id ? ({ ...todo, checked: !checked }) : todo))
+    setTodoList(todoList.map(todo => todo.id === id ? ({ ...todo, checked: !checked }) : todo));
   }
 
   const removeTodoItem = async (todo) => {
-    const { data: { token } } = await sdk.execute(Command.GET_SIGNED_TOKEN);
-    const { id } = todo;
-    const todoItemUrl = `${buildTodoListUrl()}/${todo.id}?token=${token}`;
-
     const { data: { confirmed }} = await sdk.execute(Command.SHOW_CONFIRMATION, {
       title: 'Confirm',
       description: 'Are you sure you want to complete this action?'
@@ -91,14 +80,18 @@ const TodoList = () => {
       return;
     }
 
-    await apiRequest(todoItemUrl, 'DELETE');
+    const { id } = todo;
+    const todoItemUrl = `${todoListUrl}/${id}`;
+
+    await apiClient.fetch(todoItemUrl, 'DELETE');
 
     const updatedTodoList = todoList.filter(todo => todo.id !== id);
 
     setTodoList(updatedTodoList);
+
     sdk.execute(Command.RESIZE, { height: computeTodolistHeight(updatedTodoList) });
 
-    await sdk.execute(Command.SHOW_SNACKBAR, {
+    sdk.execute(Command.SHOW_SNACKBAR, {
       message: 'Task was deleted',
     });
   }
@@ -110,18 +103,11 @@ const TodoList = () => {
     sdk.execute(Command.RESIZE, { height: computeTodolistHeight(updatedTodoList) });
   }
 
-  const convertToDeal = async ({ title }) => {
-    await sdk.execute(Command.OPEN_MODAL, { type: Modal.DEAL, prefill: { title } });
-  }
+  const convertToDeal = async ({ title }) => sdk.execute(Command.OPEN_MODAL, { type: Modal.DEAL, prefill: { title } });
 
-  const hideCallToAction = () => {
-    setCtaVisible(false);
-    addTodoItem();
-  }
-
-  if (ctaVisible) {
+  if (!todoList.length) {
     return (
-      <CallToAction onClick={hideCallToAction} />
+      <CallToAction onClick={addTodoItem} />
     )
   }
 

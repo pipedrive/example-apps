@@ -1,7 +1,6 @@
 const db = require('../../database/oauth');
 
 async function handler(req, res) {
-
     // Getting authorization code from Pipedrive
     const authCode = req.query.code;
 
@@ -19,6 +18,6 @@ async function handler(req, res) {
     } catch (e) {
         throw new Error(e.message);
     }
-};
+}
 
 module.exports = handler;

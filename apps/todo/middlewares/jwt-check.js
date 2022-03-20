@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config');
 
-function jwtCheck(req, res, next) {
-    const { token } = req.query;
+function jwtCheck(secret) {
+    return function (req, res, next) {
+      const { token } = req.query;
 
-    jwt.verify(token, config.surfaceJwt);
+      jwt.verify(token, secret);
 
-    next();
+      next();
+    }
 }
 
 module.exports = jwtCheck;

@@ -22,6 +22,6 @@ async function handler(req, res) {
             refreshPanelData: true,
         }
     });
-};
+}
 
 module.exports = handler;

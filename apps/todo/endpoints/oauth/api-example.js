@@ -13,7 +13,6 @@ async function handler(req, res) {
     const deals = await api.getDeals();
 
     res.send(deals);
-};
-
+}
 
 module.exports = handler;
