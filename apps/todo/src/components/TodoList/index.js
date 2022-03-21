@@ -71,7 +71,7 @@ const TodoList = () => {
   }
 
   const removeTodoItem = async (todo) => {
-    const { data: { confirmed }} = await sdk.execute(Command.SHOW_CONFIRMATION, {
+    const { confirmed } = await sdk.execute(Command.SHOW_CONFIRMATION, {
       title: 'Confirm',
       description: 'Are you sure you want to complete this action?'
     });

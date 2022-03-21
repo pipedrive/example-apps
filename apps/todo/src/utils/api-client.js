@@ -6,7 +6,7 @@ export default class ApiClient {
   }
 
   async fetch(url, method, payload = {}) {
-    const { data: { token } } = await this.sdk.execute(Command.GET_SIGNED_TOKEN);
+    const { token } = await this.sdk.execute(Command.GET_SIGNED_TOKEN);
 
     return this.fetchWithToken(url, method, payload, token);
   }
