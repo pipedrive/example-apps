@@ -9,12 +9,15 @@ async function saveRecord(userId, companyId, dealId, record) {
     }
 
     const userRecordsObj = db[`${userId}_${companyId}_${dealId}`];
+    const id = Object.keys(userRecordsObj).length + 1;
 
     userRecordsObj[Object.keys(userRecordsObj).length + 1] = {
         title: record.title,
         checked: false,
         deleted: false,
     };
+
+    return { id };
 }
 
 async function deleteRecord(userId, companyId, dealId, recordId) {
@@ -32,7 +35,7 @@ async function getRecord(userId, companyId, dealId, recordId) {
         return db[`${userId}_${companyId}_${dealId}`][recordId];
     }
 
-    return db[`${userId}_${companyId}_${dealId}`];
+    return db[`${userId}_${companyId}_${dealId}`] ?? {};
 }
 
 

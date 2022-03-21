@@ -1,0 +1,12 @@
+.AddItem {
+    color: #317AE2;
+    font-size: 12px;
+    margin-top: 14px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+}

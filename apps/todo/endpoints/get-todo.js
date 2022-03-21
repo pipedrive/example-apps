@@ -6,6 +6,6 @@ async function handler(req, res) {
     const records = await getRecord(userId, companyId, dealId, recordId);
 
     res.send(records);
-};
+}
 
 module.exports = handler;

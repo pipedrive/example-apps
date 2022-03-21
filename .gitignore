@@ -31,7 +31,8 @@ node_modules
 *code-workspace
 
 # compiled code
-dist/
+dist
+build
 
 # devspace
 .devspace

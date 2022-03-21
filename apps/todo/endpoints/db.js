@@ -6,7 +6,6 @@ async function handler(req, res) {
         oauth: db,
         todo: todoDb,
     });
-};
-
+}
 
 module.exports = handler;

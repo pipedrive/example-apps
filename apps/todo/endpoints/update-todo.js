@@ -11,6 +11,6 @@ async function handler(req, res) {
     await updateRecord(userId, companyId, dealId, { title, checked, id });
 
     res.send('ok');
-};
+}
 
 module.exports = handler;

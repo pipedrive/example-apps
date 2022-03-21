@@ -4,7 +4,9 @@
   "description": "Example apps for Pipedrive Integrations",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "react-scripts build && nodemon server.js",
+    "react:start": "PORT=3001 react-scripts start",
+    "react:build": "react-scripts build"
   },
   "repository": {
     "type": "git",
@@ -16,14 +18,32 @@
   "bugs": {
     "url": "https://github.com/pipedrive/example-apps/issues"
   },
-  "homepage": "https://github.com/pipedrive/example-apps#readme",
+  "homepage": "./",
   "dependencies": {
+    "@pipedrive/surface-sdk": "^0.5.0",
     "body-parser": "^1.19.2",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
-    "pipedrive": "^13.2.4"
+    "jsonwebtoken": "^8.5.1",
+    "pipedrive": "^13.2.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:3000"
 }

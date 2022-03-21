@@ -1,0 +1,37 @@
+{
+    "type":"object",
+    "properties":{
+        "blocks":{
+            "type":"object",
+            "properties":{
+                "block_new_task":{
+                    "$ref":"#/definitions/element-input",
+                    "options":{
+                        "label":"Task name",
+                        "placeholder":"Win a million",
+                        "message":"Create a task from embedded action"
+                    }
+                }
+            }
+        },
+        "actions":{
+            "type":"object",
+            "properties":{
+                "cancel_action":{
+                    "$ref":"#/definitions/action-secondary",
+                    "options":{
+                        "label":"Cancel",
+                        "handler":"cancel"
+                    }
+                },
+                "submit_action":{
+                    "$ref":"#/definitions/action-primary",
+                    "options":{
+                        "label":"Save",
+                        "handler":"request"
+                    }
+                }
+            }
+        }
+    }
+}
