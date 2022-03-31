@@ -20,8 +20,8 @@ Use ngrok or some alternative tunneling service to get publicly accessible URL f
 ngrok http 3000 --host-header=localhost
 ```
 
-1. Create an app in Pipedrive marketplace manager.
-2. Create new deal details view panel and choose custom app surface option. For URL provide the ngrok URL. Choose a JWT secret for the surface.
+1. Create an app in Pipedrive Marketplace Manager.
+2. Create new deal details view panel and choose Custom Surface panel option. For URL provide the ngrok URL. Choose a JWT secret for the surface.
 3. Create new embedded action for deal details view. For URL provide the ngrok URL with route `/embedded-action`. Choose a JWT secret for the embedded action. Upload `embedded-action-schema.json` as the embedded action schema.
 4. Add Callback URL which is ngrok URL with `/callback` route.
 5. Save app. Open it again to retrieve client id and secret.
