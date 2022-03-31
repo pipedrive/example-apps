@@ -20,7 +20,7 @@
   },
   "homepage": "./",
   "dependencies": {
-    "@pipedrive/surface-sdk": "^0.6.0",
+    "@pipedrive/custom-app-surfaces-sdk": "^0.1.0",
     "body-parser": "^1.19.2",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",

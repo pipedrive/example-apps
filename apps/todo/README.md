@@ -6,10 +6,11 @@ This example app covers following Pipedrive app capabilities:
 * OAuth flow with Pipedrive
 * Custom app surfaces
 * Embedded actions
+* Pipedrive API client
 
 ## Installation
 
-Make sure to have at least nodejs version 14.
+Recommended Node.js version is 16.
 
 Install dependencies with command `npm install`
 
