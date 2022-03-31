@@ -2,7 +2,7 @@
   "name": "example-app-todo-list",
   "version": "1.0.0",
   "description": "Simple todo list app for Pipedrive",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
   "private": true,
   "scripts": {
