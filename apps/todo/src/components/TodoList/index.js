@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SurfaceSDK, { Command, Modal } from '@pipedrive/surface-sdk';
+import SurfaceSDK, { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
 
 import CallToAction from '../CallToAction';
 import TodoItemEdit from '../TodoItem/TodoItemEdit';

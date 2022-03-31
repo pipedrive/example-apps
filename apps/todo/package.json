@@ -1,8 +1,10 @@
 {
-  "name": "example-apps",
+  "name": "example-app-todo-list",
   "version": "1.0.0",
-  "description": "Example apps for Pipedrive Integrations",
-  "main": "index.js",
+  "description": "Simple todo list app for Pipedrive",
+  "main": "server.js",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "react-scripts build && nodemon server.js",
     "react:start": "PORT=3001 react-scripts start",
@@ -14,13 +16,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/pipedrive/example-apps/issues"
   },
   "homepage": "./",
   "dependencies": {
-    "@pipedrive/surface-sdk": "^0.6.0",
+    "@pipedrive/custom-app-surfaces-sdk": "^0.1.0",
     "body-parser": "^1.19.2",
     "express": "^4.17.2",
     "express-async-errors": "^3.1.1",
