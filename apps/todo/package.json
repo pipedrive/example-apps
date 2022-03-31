@@ -1,8 +1,10 @@
 {
-  "name": "example-apps",
+  "name": "example-app-todo-list",
   "version": "1.0.0",
-  "description": "Example apps for Pipedrive Integrations",
+  "description": "Simple todo list app for Pipedrive",
   "main": "index.js",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "react-scripts build && nodemon server.js",
     "react:start": "PORT=3001 react-scripts start",
@@ -14,7 +16,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/pipedrive/example-apps/issues"
   },
