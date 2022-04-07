@@ -14,7 +14,7 @@ Recommended Node.js version is 16.
 
 Install dependencies with command `npm install`
 
-Use ngrok or some alternative tunneling service to get publicly accessible URL for port 3000.
+Use ngrok or some alternative tunneling service to get publicly accessible HTTPS URL for port 3000.
 
 ```
 ngrok http 3000 --host-header=localhost
