@@ -2,6 +2,7 @@ import { CalendarIcon, DealIcon, PersonIcon } from '../shared/icons';
 import ItemStatus from './item-status';
 import ItemProposal from './item-proposal';
 import useData from '../../hooks/useData';
+import Tags from './tags';
 
 export default function Item() {
 	const { item, setItem } = useData();
@@ -26,10 +27,7 @@ export default function Item() {
 						{item.title}
 					</h2>
 
-					<div className="tags">
-						<span>New</span>
-						<span>{item.price}</span>
-					</div>
+					<Tags items={['New', item.price]}/>
 
 					<ItemStatus status={item.status}/>
 				</div>
@@ -42,7 +40,7 @@ export default function Item() {
 
 				<div className="main">
 					<div className="label">
-						<span className="date">Delivery: {item.price}</span>
+						<span className="font-size--s">Delivery: {item.price}</span>
 					</div>
 				</div>
 			</div>

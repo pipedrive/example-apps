@@ -6,7 +6,7 @@ import useData from '../../hooks/useData';
 export default function Wrapper({ setHeight, children }) {
 	const elementRef = useRef(null);
 	const sdk = useSdk();
-	const { proposals, item } = useData();
+	const { items } = useData();
 
 	useEffect(() => {
 		if (!sdk) {
@@ -34,7 +34,7 @@ export default function Wrapper({ setHeight, children }) {
 
 	useEffect(() => {
 		setHeight(elementRef?.current?.clientHeight);
-	}, [item, proposals, elementRef?.current?.clientHeight]);
+	}, [items, elementRef?.current?.clientHeight]);
 
 	return (
 		<div className="cui5-text wrapper" ref={elementRef}>

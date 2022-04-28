@@ -5,10 +5,13 @@ const DataContext = createContext({
 	item: {},
 	setItem: {},
 	proposals: [],
-	setProposals: () => {}
+	setProposals: () => {},
+	items: [],
+	setItems: () => {}
 });
 
 const DataContextProvider = ({ children }) => {
+	const [items, setItems] = useState([]);
 	const [proposals, setProposals] = useState([]);
 	const [item, setItem] = useState({
 		title: 'Molksvagen 2022 deal',
@@ -25,6 +28,8 @@ const DataContextProvider = ({ children }) => {
 			setProposals,
 			item,
 			setItem,
+			items,
+			setItems,
 		}}>
 			{children}
 		</DataContext.Provider>

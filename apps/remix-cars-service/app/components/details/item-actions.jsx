@@ -37,7 +37,7 @@ export default function ItemActions({ selectedId }) {
 				<span>New proposal</span>
 			</Button>
 			<Button variant="primary" disabled={!selectedId} onClick={selectProposal}>
-				<span>Send selected proposal</span>
+				<span>Select proposal</span>
 			</Button>
 		</div>
 	);

@@ -6,6 +6,12 @@ export default function Button({ variant, size, disabled, onClick, children }) {
 		case 'primary':
 			variantClassName = 'cui5-button--variant-primary';
 			break;
+		case 'ghost':
+			variantClassName = 'cui5-button--variant-ghost';
+			break;
+		case 'ghost-alternative':
+			variantClassName = 'cui5-button--variant-ghost-alternative';
+			break;
 	}
 	switch (size) {
 		case 's':

@@ -6,7 +6,7 @@ html, body {
 
 .wrapper {
     margin: 0 auto;
-    padding: var(--pd-spacing-150) var(--pd-spacing-200) var(--pd-spacing-150);
+    padding: var(--pd-spacing-200) var(--pd-spacing-200) var(--pd-spacing-150);
     max-width: 496px;
 }
 
@@ -61,7 +61,7 @@ html, body {
     content: '';
 }
 
-.date {
+.font-size--s {
     font-size: var(--pd-font-caption-s-font-size);
 }
 
@@ -133,4 +133,35 @@ html, body {
 
 .download-icon:hover {
     fill: var(--pd-color-positive-hover);
+}
+
+.list-item {
+    display: flex;
+    margin-bottom: var(--pd-spacing-150);
+}
+
+.list-item:last-child {
+    margin-bottom: 0;
+}
+
+.list-item-title.cui5-text {
+    margin-bottom: 0;
+}
+
+.list-item-tags {
+    margin: var(--pd-spacing-50) 0;
+}
+.list-item-logo {
+    width: 72px;
+    height: 72px;
+}
+
+.list-item-main {
+    margin: 0 0 0 var(--pd-spacing-150);
+    flex: 1;
+}
+
+.list-item-actions {
+    align-items: center;
+    display: flex;
 }
