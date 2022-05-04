@@ -1,29 +1,44 @@
 import { userPrefs } from "~/cookies";
 
+const defaults = [
+	{
+		id: 'qwe',
+		title: 'Molksvagen 2022',
+		price: 'USD 2000.00',
+		status: 'assembling',
+		delivery: '31 Aug 2022, 9:00pm',
+		person: 'John Smith',
+		proposal: null,
+	},
+	{
+		id: 'rty',
+		title: 'Audium 2021',
+		price: 'USD 2500.00',
+		status: 'ready',
+		delivery: '22 May 2021, 3:00pm',
+		person: 'May Doe',
+		proposal: null,
+	},
+];
+
 class CarsService {
 	constructor({ request }) {
 		this.request = request;
 		this.cars = new Map();
+	}
 
-		this.cars.set('qwe', {
-			id: 'qwe',
-			title: 'Molksvagen 2022',
-			price: 'USD 2000.00',
-			status: 'assembling',
-			delivery: '31 Aug 2022, 9:00pm',
-			person: 'John Smith',
-			proposal: null,
-		});
+	async fillDefaults() {
+		const settings = await this.getSettings();
 
-		this.cars.set('rty', {
-			id: 'rty',
-			title: 'Audium 2021',
-			price: 'USD 2500.00',
-			status: 'ready',
-			delivery: '22 May 2021, 3:00pm',
-			person: 'May Doe',
-			proposal: null,
-		});
+		defaults.forEach((item) => {
+			const userPref = settings.find(({ id }) => id === item.id);
+
+			this.cars.set(item.id, {
+				...item,
+				status: userPref?.status || item.status,
+				proposal: userPref?.proposal || item.proposal,
+			});
+		})
 	}
 
 	async getSettings() {
@@ -90,13 +105,14 @@ class CarsService {
 
 	async updateItem(id) {
 		const formData = await this.request.formData();
-
 		const item = await this.getItem(id);
+
+		const proposal = formData.get('proposal');
 
 		this.cars.set(id, {
 			...item,
 			status: formData.get('status'),
-			proposal: formData.get('proposal'),
+			proposal: proposal === 'null' ? null : proposal,
 		});
 	}
 }

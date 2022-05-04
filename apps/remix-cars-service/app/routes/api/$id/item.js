@@ -5,6 +5,8 @@ import CarsService from '../../../services/cars';
 export async function loader({ request, params }) {
 	const cars = new CarsService({ request });
 
+	await cars.fillDefaults();
+
 	const data = await cars.getItem(params.id);
 
 	return json({
@@ -15,6 +17,8 @@ export async function loader({ request, params }) {
 
 export const action = async ({ request, params }) => {
 	const cars = new CarsService({ request });
+
+	await cars.fillDefaults();
 
 	switch (request.method) {
 		case "POST": {
