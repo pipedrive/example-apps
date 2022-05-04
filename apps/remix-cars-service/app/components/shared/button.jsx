@@ -6,6 +6,9 @@ export default function Button({ variant, size, disabled, onClick, children }) {
 		case 'primary':
 			variantClassName = 'cui5-button--variant-primary';
 			break;
+		case 'negative':
+			variantClassName = 'cui5-button--variant-negative	';
+			break;
 		case 'ghost':
 			variantClassName = 'cui5-button--variant-ghost';
 			break;
@@ -25,7 +28,9 @@ export default function Button({ variant, size, disabled, onClick, children }) {
 
 	return (
 		<button className={`cui5-button ${variantClassName} ${sizeClassName}`} disabled={Boolean(disabled)} onClick={onClick}>
-			{children}
+			<span className="cui5-button__label">
+				{children}
+			</span>
 		</button>
 	);
 }

@@ -13,14 +13,7 @@ const DataContext = createContext({
 const DataContextProvider = ({ children }) => {
 	const [items, setItems] = useState([]);
 	const [proposals, setProposals] = useState([]);
-	const [item, setItem] = useState({
-		title: 'Molksvagen 2022 deal',
-		price: 'USD 2000.00',
-		status: 'assembling',
-		delivery: '31 Aug 2021, 9:00pm',
-		person: 'John Smith',
-		proposal: null,
-	});
+	const [item, setItem] = useState({});
 
 	return (
 		<DataContext.Provider value={{

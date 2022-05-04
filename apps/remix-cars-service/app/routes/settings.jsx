@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLoaderData } from "@remix-run/react";
 import { Command } from '@pipedrive/custom-app-surfaces-sdk';
 
-import Wrapper from '../components/details/wrapper';
-import Item from '../components/details/item';
-import Proposals from '../components/details/proposals';
-import { SdkContextProvider } from '../contexts/sdk';
 import useSdk from '../hooks/useSdk';
-import useItemDetailsLoader from '../hooks/useItemDetailsLoader';
+import Wrapper from '../components/list/wrapper';
+import ItemsSettings from '../components/list/items-settings';
+import { SdkContextProvider } from '../contexts/sdk';
 
 export const loader = async ({ request }) => {
 	const url = new URL(request.url);
@@ -16,45 +14,35 @@ export const loader = async ({ request }) => {
 	return { id };
 };
 
-const MAX_HEIGHT = 750;
-const DEFAULT_HEIGHT = 350;
-const DEFAULT_WIDTH = 496;
+const MIN_HEIGHT = 600;
 
-const Details = () => {
+const Settings = () => {
 	const [height, updateHeight] = useState(0);
 	const sdk = useSdk();
-	const { item, setItem, updateItem } = useItemDetailsLoader({ id: 'qwe' });
 
 	useEffect(() => {
 		if (!sdk || height === 0) {
 			return;
 		}
 
-		sdk.execute(Command.RESIZE, { width: DEFAULT_WIDTH, height });
+		sdk.execute(Command.RESIZE, { height });
 	}, [sdk, height]);
 
 	const setHeight = (height) => {
 		if (!height) {
-			updateHeight(DEFAULT_HEIGHT)
+			updateHeight(MIN_HEIGHT)
 			return;
 		}
 
-		if (height > MAX_HEIGHT) {
-			updateHeight(MAX_HEIGHT);
+		if (height < MIN_HEIGHT) {
+			updateHeight(MIN_HEIGHT);
 		} else {
 			updateHeight(height);
 		}
 	}
-
-	if (!item) {
-		return null;
-	}
-
 	return (
 		<Wrapper setHeight={setHeight}>
-			<Item item={item} setItem={setItem}/>
-
-			<Proposals item={item} onItemUpdate={updateItem}/>
+			<ItemsSettings/>
 		</Wrapper>
 	);
 }
@@ -64,7 +52,7 @@ export default function Container() {
 
 	return (
 		<SdkContextProvider id={identifier}>
-			<Details/>
+			<Settings/>
 		</SdkContextProvider>
 	);
 }

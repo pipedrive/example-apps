@@ -1,8 +1,17 @@
 import { DocumentIcon, PencilIcon } from '../shared/icons';
 import Button from '../shared/button';
+import useProposalsLoader from '../../hooks/useProposalsLoader';
 
 export default function ItemProposal({ proposal, onEdit }) {
+	const { proposals } = useProposalsLoader();
+
 	if (!proposal) {
+		return null;
+	}
+
+	const data = proposals?.find(({ id }) => proposal === id);
+
+	if (!data) {
 		return null;
 	}
 
@@ -15,7 +24,7 @@ export default function ItemProposal({ proposal, onEdit }) {
 
 				<div className="main">
 					<div className="label">
-						{proposal.title}
+						{data.title}
 					</div>
 				</div>
 

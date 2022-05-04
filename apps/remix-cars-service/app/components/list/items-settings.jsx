@@ -8,10 +8,12 @@ import { ArrowRightIcon } from '../shared/icons';
 import useSdk from '../../hooks/useSdk';
 import { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
 import ItemDetails from './item-details';
+import useFormData from '../../hooks/useFormData';
 
-export default function Items() {
+export default function ItemsSettings() {
 	const sdk = useSdk();
-	const { items, isLoading } = useItemsLoader();
+	const { makePostRequest } = useFormData();
+	const { items, isLoading, fetchItems } = useItemsLoader();
 
 	if (isLoading) {
 		return (
@@ -21,11 +23,26 @@ export default function Items() {
 		);
 	}
 
-	const showDetails = async () => {
-		await sdk.execute(Command.OPEN_MODAL, {
-			type: Modal.EMBEDDED_ACTION,
-			action_id: 'Details',
+	const resetItem = async (id) => {
+		const { confirmed } = await sdk.execute(Command.SHOW_CONFIRMATION, {
+			title: 'Reset item',
+			description: `You're about to change status to "Assembling".`
 		});
+
+		if (!confirmed) {
+			return;
+		}
+
+		await makePostRequest(`/api/${id}/item`, {
+			status: 'assembling',
+			proposal: null,
+		});
+
+		await sdk.execute(Command.SHOW_SNACKBAR, {
+			message: 'Item has been updated',
+		});
+
+		await fetchItems();
 	}
 
 	return (
@@ -35,9 +52,11 @@ export default function Items() {
 					<ItemDetails title={title} price={price} status={status} delivery={delivery}/>
 
 					<div className="list-item-actions">
-						<Button variant="ghost-alternative" onClick={showDetails}>
-							<ArrowRightIcon/>
-						</Button>
+						{status !== 'assembling' && (
+							<Button variant="negative" onClick={() => resetItem(id)}>
+								Reset
+							</Button>
+						)}
 					</div>
 				</div>
 			))}

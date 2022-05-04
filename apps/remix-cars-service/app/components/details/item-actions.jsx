@@ -1,12 +1,12 @@
 import { Command } from '@pipedrive/custom-app-surfaces-sdk';
 
 import Button from '../shared/button';
-import useData from '../../hooks/useData';
 import useSdk from '../../hooks/useSdk';
+import useData from '../../hooks/useData';
 
-export default function ItemActions({ selectedId }) {
+export default function ItemActions({ selectedId, updateItem }) {
 	const sdk = useSdk();
-	const { item, setItem, proposals } = useData();
+	const { proposals, item } = useData();
 
 	const selectProposal = async () => {
 		if (item.status !== 'ready') {
@@ -20,14 +20,14 @@ export default function ItemActions({ selectedId }) {
 			}
 		}
 
-		setItem({
+		await updateItem({
 			...item,
 			status: 'ready',
-			proposal: proposals.find(({ id }) => selectedId === id),
+			proposal: selectedId,
 		});
 
 		await sdk.execute(Command.SHOW_SNACKBAR, {
-			message: 'Proposal has been sent',
+			message: 'Item has been updated',
 		});
 	}
 

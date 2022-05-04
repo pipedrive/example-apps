@@ -1,11 +1,10 @@
 import { CalendarIcon, DealIcon, PersonIcon } from '../shared/icons';
+
 import ItemStatus from './item-status';
 import ItemProposal from './item-proposal';
-import useData from '../../hooks/useData';
 import Tags from './tags';
 
-export default function Item() {
-	const { item, setItem } = useData();
+export default function Item({ item, setItem }) {
 	const isReadyForDelivery = item.status === 'ready';
 
 	const handleReset = () => {

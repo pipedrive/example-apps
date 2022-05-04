@@ -7,7 +7,6 @@ html, body {
 .wrapper {
     margin: 0 auto;
     padding: var(--pd-spacing-200) var(--pd-spacing-200) var(--pd-spacing-150);
-    max-width: 496px;
 }
 
 .loading {

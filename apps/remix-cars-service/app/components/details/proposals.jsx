@@ -3,10 +3,8 @@ import ItemActions from './item-actions';
 import { useState } from 'react';
 import { Spinner } from '../shared/spinner';
 import useProposalsLoader from '../../hooks/useProposalsLoader';
-import useData from '../../hooks/useData';
 
-export default function Proposals() {
-	const { item } = useData();
+export default function Proposals({ item, onItemUpdate }) {
 	const { proposals, isLoading } = useProposalsLoader();
 
 	const [selectedId, setSelectedId] = useState(null);
@@ -43,7 +41,7 @@ export default function Proposals() {
 					/>
 				)}
 			</div>
-			<ItemActions selectedId={selectedId}/>
+			<ItemActions updateItem={onItemUpdate} selectedId={selectedId}/>
 		</>
 	);
 }
