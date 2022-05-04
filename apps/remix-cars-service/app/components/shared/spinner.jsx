@@ -1,4 +1,4 @@
-export const Spinner = ({ size }) => {
+export default function Spinner({ size }) {
 	let sizeClassName;
 
 	switch (size) {

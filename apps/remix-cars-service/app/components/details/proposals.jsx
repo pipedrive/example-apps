@@ -1,8 +1,10 @@
+import { useState } from 'react';
+
+import Spinner from '../shared/spinner';
+import useProposalsLoader from '../../hooks/useProposalsLoader';
+
 import Proposal from './proposal';
 import ItemActions from './item-actions';
-import { useState } from 'react';
-import { Spinner } from '../shared/spinner';
-import useProposalsLoader from '../../hooks/useProposalsLoader';
 
 export default function Proposals({ item, onItemUpdate }) {
 	const { proposals, isLoading } = useProposalsLoader();

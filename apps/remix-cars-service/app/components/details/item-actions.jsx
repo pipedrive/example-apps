@@ -1,6 +1,8 @@
 import { Command } from '@pipedrive/custom-app-surfaces-sdk';
 
 import Button from '../shared/button';
+import ButtonLabel from '../shared/button-label';
+
 import useSdk from '../../hooks/useSdk';
 import useData from '../../hooks/useData';
 
@@ -34,10 +36,10 @@ export default function ItemActions({ selectedId, updateItem }) {
 	return (
 		<div className='item-actions'>
 			<Button>
-				<span>New proposal</span>
+				<ButtonLabel>New proposal</ButtonLabel>
 			</Button>
 			<Button variant="primary" disabled={!selectedId} onClick={selectProposal}>
-				<span>Select proposal</span>
+				<ButtonLabel>Select proposal</ButtonLabel>
 			</Button>
 		</div>
 	);

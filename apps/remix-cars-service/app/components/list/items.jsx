@@ -1,12 +1,11 @@
-import { Spinner } from '../shared/spinner';
-import useItemsLoader from '../../hooks/useItemsLoader';
-import ItemStatus from '../details/item-status';
-import Tags from '../details/tags';
-import ProposalImage from '../details/proposal-image';
-import Button from '../shared/button';
-import { ArrowRightIcon } from '../shared/icons';
-import useSdk from '../../hooks/useSdk';
 import { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
+
+import { ArrowRightIcon } from '../shared/icons';
+import Spinner from '../shared/spinner';
+import Button from '../shared/button';
+import useItemsLoader from '../../hooks/useItemsLoader';
+import useSdk from '../../hooks/useSdk';
+
 import ItemDetails from './item-details';
 
 export default function Items() {

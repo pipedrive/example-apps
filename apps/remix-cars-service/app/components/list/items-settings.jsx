@@ -1,14 +1,13 @@
-import { Spinner } from '../shared/spinner';
+import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+
 import useItemsLoader from '../../hooks/useItemsLoader';
-import ItemStatus from '../details/item-status';
-import Tags from '../details/tags';
-import ProposalImage from '../details/proposal-image';
-import Button from '../shared/button';
-import { ArrowRightIcon } from '../shared/icons';
-import useSdk from '../../hooks/useSdk';
-import { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
-import ItemDetails from './item-details';
 import useFormData from '../../hooks/useFormData';
+import useSdk from '../../hooks/useSdk';
+
+import Button from '../shared/button';
+import Spinner from '../shared/spinner';
+import ItemDetails from './item-details';
+import ButtonLabel from '../shared/button-label';
 
 export default function ItemsSettings() {
 	const sdk = useSdk();
@@ -54,7 +53,7 @@ export default function ItemsSettings() {
 					<div className="list-item-actions">
 						{status !== 'assembling' && (
 							<Button variant="negative" onClick={() => resetItem(id)}>
-								Reset
+								<ButtonLabel>Reset</ButtonLabel>
 							</Button>
 						)}
 					</div>

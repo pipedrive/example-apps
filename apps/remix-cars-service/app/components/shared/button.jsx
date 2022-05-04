@@ -28,9 +28,7 @@ export default function Button({ variant, size, disabled, onClick, children }) {
 
 	return (
 		<button className={`cui5-button ${variantClassName} ${sizeClassName}`} disabled={Boolean(disabled)} onClick={onClick}>
-			<span className="cui5-button__label">
-				{children}
-			</span>
+			{children}
 		</button>
 	);
 }
