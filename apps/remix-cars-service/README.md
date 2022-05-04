@@ -1,6 +1,6 @@
 # Cars Service Example app
 
-Example [Remix](https://remix.run) app to demonstrate and experiment with [Custom App Surfaces](https://pipedrive.readme.io/docs/custom-app-surfaces).
+Example [Remix](https://remix.run) app to demonstrate and experiment with [Custom App Surfaces](https://pipedrive.readme.io/docs/custom-app-surfaces): panels, modals and settings page.
 
 **NB:** Shall not be used as production-ready app, OAuth installation and token verification is not covered here. 
 
