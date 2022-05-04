@@ -14,15 +14,14 @@ export const meta = () => ({
 });
 
 import styles from '~/styles/app.css';
+import { PIPEDRIVE_STYLESHEET } from '~/constants';
 import { DataContextProvider } from './contexts/data';
 
 export function links() {
-  const PIPEDRIVE_CSS_HASH = '7c28814e5441007b1df1';
-
   return [
     {
       rel: "stylesheet",
-      href: `https://cdn.eu-central-1.pipedriveassets.com/froot/froot-vendors.${PIPEDRIVE_CSS_HASH}.css`,
+      href: PIPEDRIVE_STYLESHEET,
     },
     {
       rel: "stylesheet",

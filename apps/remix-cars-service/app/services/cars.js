@@ -61,9 +61,6 @@ class CarsService {
 			return item;
 		}
 
-		console.log({ userPref });
-
-
 		return {
 			...item,
 			status: userPref.status,
@@ -100,18 +97,6 @@ class CarsService {
 			...item,
 			status: formData.get('status'),
 			proposal: formData.get('proposal'),
-		});
-
-		console.log({ id, formData, cars: this.cars });
-	}
-
-	resetItem(id) {
-		const item = this.getItem(id);
-
-		this.cars.set(id, {
-			...item,
-			status: 'assembling',
-			proposal: null,
 		});
 	}
 }
