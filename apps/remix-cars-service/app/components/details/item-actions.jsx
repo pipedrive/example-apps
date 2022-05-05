@@ -1,4 +1,4 @@
-import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
 
 import Button from '../shared/button';
 import ButtonLabel from '../shared/button-label';
@@ -8,7 +8,11 @@ import useData from '../../hooks/useData';
 
 export default function ItemActions({ selectedId, updateItem }) {
 	const sdk = useSdk();
-	const { proposals, item } = useData();
+	const { item } = useData();
+
+	const closeModal = async () => {
+		await sdk.execute(Command.CLOSE_MODAL);
+	}
 
 	const selectProposal = async () => {
 		if (item.status !== 'ready') {
@@ -31,12 +35,14 @@ export default function ItemActions({ selectedId, updateItem }) {
 		await sdk.execute(Command.SHOW_SNACKBAR, {
 			message: 'Item has been updated',
 		});
+
+		await closeModal();
 	}
 
 	return (
-		<div className='item-actions'>
-			<Button>
-				<ButtonLabel>New proposal</ButtonLabel>
+		<div className="item-actions">
+			<Button onClick={closeModal}>
+				<ButtonLabel>Close</ButtonLabel>
 			</Button>
 			<Button variant="primary" disabled={!selectedId} onClick={selectProposal}>
 				<ButtonLabel>Select proposal</ButtonLabel>
