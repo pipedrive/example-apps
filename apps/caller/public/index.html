@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <title>Sample Caller App</title>
+    <link href="src/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Pipedialer</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-sm-4 order-sm-last order-md-first">
+                    <label for="speaker-devices" class="form-label">Audio Out</label>
+                    <select class="form-select" id="speaker-devices"></select>
+                    <br />
+                    <label for="mic-devices" class="form-label">Audio In</label>
+                    <select class="form-select" id="mic-devices"></select>
+                    <br />
+                    <small class="text-muted">If the dropdowns are empty / if you see no devices listed, please click on
+                        the `Initiate` button below & grant access to audio devices when the prompt shows up.</small>
+                    <br />
+                    <br />
+                    <button type="button" class="btn btn-primary" id="initiate-dialer">Initiate</button>
+
+                </div>
+
+                <div class="col-sm-4 order-first">
+                    <label for="caller-alias" class="form-label">🎭 Your Caller Alias</label>
+                    <input type="text" readonly class="form-control mb-3" id="caller-alias" placeholder="* * *">
+
+
+                    <label for="caller-id" class="form-label">🎫 Your Caller ID</label>
+                    <input type="text" readonly class="form-control mb-3" id="caller-id" placeholder="* * *">
+
+                    <label for="phone-number" class="form-label">📞 Phone Number</label>
+                    <input type="text" class="form-control mb-3" id="phone-number" placeholder="Enter number to dial">
+
+
+                    <div class="d-grid gap-2  mb-3">
+                        <button type="button" class="btn btn-primary" disabled id="make-call">Dial</button>
+                        <button type="button" class="btn btn-danger invisible" id="reject-call">Reject / Hang
+                            Up</button>
+                        <button type="button" class="btn btn-success invisible" id="answer-call">Pickup the
+                            Call</button>
+
+                        <small id="caller-details"></small>
+                    </div>
+
+
+                </div>
+                <div class="col-sm-4 order-last">
+                    Logs:
+                    <textarea class="form-control" readonly
+                        placeholder="Logs appear here. Make sure you click on the 'Initiate' button if you see no audio devices"
+                        id="logs" style="height: 400px; font-size:12px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/bootstrap.bundle.min.js"></script>
+    <script src="src/jquery.min.js"></script>
+    <script src="src/twilio.min.js"></script>
+    <script src="lib/util.js"></script>
+    <script src="lib/audioDevices.js"></script>
+    <script src="lib/incomingCallHandler.js"></script>
+    <script src="lib/outgoingCallHandler.js"></script>
+    <script>
+        // Step 1: Initiate Dialer
+        $('#initiate-dialer').click(startupClient);
+
+        // Step 2: Request an Access Token
+        async function startupClient() {
+            log("Requesting Access Token...");
+
+            try {
+                const data = await $.getJSON("/token");
+                log("Got a token.");
+                token = data.token;
+                log(data.identity);
+                $('#caller-alias').val(data.identity)
+                $('#caller-id').val(data.phone_number)
+                getAudioDevices();
+                intitializeDevice();
+            } catch (err) {
+                console.error(err);
+                log("An error occurred. See your browser console for more information.");
+            }
+        }
+
+        // Step 3: Instantiate a new Twilio.Device
+        function intitializeDevice() {
+            log("Initializing device");
+            device = new Twilio.Device(token, {
+                logLevel: 1,
+                codecPreferences: ["opus", "pcmu"],
+            });
+
+            addDeviceListeners(device);
+            // Device must be registered in order to receive incoming calls
+            device.register();
+        }
+
+        // Step 4: Listen for Twilio.Device states
+        function addDeviceListeners(device) {
+            device.on("registered", function () {
+                log("Twilio.Device Ready to make and receive calls!");
+                $('#make-call').prop('disabled', false);
+            });
+
+            device.on("error", function (error) {
+                log("Twilio.Device Error: " + error.message);
+            });
+
+            device.on("incoming", handleIncomingCall);
+
+            device.audio.on("deviceChange", updateAllAudioDevices.bind(device));
+        }
+    </script>
+</body>
+
+</html>
