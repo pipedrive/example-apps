@@ -1,4 +1,4 @@
-import { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command } from '@pipedrive/custom-app-surfaces-sdk';
 
 import Button from '../shared/button';
 import ButtonLabel from '../shared/button-label';
