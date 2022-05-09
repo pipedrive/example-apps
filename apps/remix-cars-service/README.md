@@ -35,12 +35,20 @@ There is limitation with Backend API when running service with StackBlitz - item
 
 ## Deploy with Vercel<a id="deploy-with-vercel"></a>
 
-Install `vercel` CLI tool and follow its instructions. 
+### Create project
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpipedrive%2Fexample-apps%2Ftree%2Fmaster%2Fapps%2Fremix-cars-service)
+
+#### Alternative: use CLI
+
+Clone the repository and switch to the folder with the project. Install `vercel` CLI tool and follow its instructions. 
 
 ```sh
 npm i -g vercel
 vercel
 ```
+
+### Setup application in [Marketplace Manager](https://pipedrive.readme.io/docs/marketplace-manager)
 
 Use **generated** project URL in Marketplace Manager for custom surfaces, i.e.
 - set `https://remix-cars-service.vercel.app/list` as Iframe URL for Custom Surface Panel.
