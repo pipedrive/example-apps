@@ -15,8 +15,8 @@ export default function useItemsLoader() {
 		setIsLoading(false);
 	}
 
-	useEffect(async () => {
-		await fetchItems();
+	useEffect(() => {
+		fetchItems().catch(console.error);
 	}, []);
 
 	return { items, setItems, fetchItems, isLoading };

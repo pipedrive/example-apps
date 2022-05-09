@@ -7,12 +7,16 @@ const SdkContext = createContext({ sdk: null });
 const SdkContextProvider = ({ id, children }) => {
 	const [sdk, setSdk] = useState(null);
 
-	useEffect(async () => {
-		const sdk = new SurfaceSDK({ identifier: id })
+	useEffect(() => {
+		const initialize = async () => {
+			const sdk = new SurfaceSDK()
 
-		await sdk.initialize();
+			await sdk.initialize();
 
-		setSdk(sdk);
+			setSdk(sdk);
+		}
+
+		initialize().catch(console.error);
 	}, [id]);
 
 	return (
