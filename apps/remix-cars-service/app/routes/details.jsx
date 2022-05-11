@@ -11,9 +11,9 @@ import useItemDetailsLoader from '../hooks/useItemDetailsLoader';
 
 export const loader = async ({ request }) => {
 	const url = new URL(request.url);
-	const id = url.searchParams.get('id');
+	const prefill = url.searchParams.get('prefill');
 
-	return { id };
+	return JSON.parse(prefill) || { id: 'qwe' };
 };
 
 const MAX_HEIGHT = 750;
@@ -21,9 +21,10 @@ const DEFAULT_HEIGHT = 350;
 const DEFAULT_WIDTH = 496;
 
 const Details = () => {
+	const { id } = useLoaderData();
 	const [height, updateHeight] = useState(0);
 	const sdk = useSdk();
-	const { item, setItem, updateItem } = useItemDetailsLoader({ id: 'qwe' });
+	const { item, setItem, updateItem } = useItemDetailsLoader({ id });
 
 	useEffect(() => {
 		if (!sdk || height === 0) {

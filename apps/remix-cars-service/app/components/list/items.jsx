@@ -20,10 +20,13 @@ export default function Items() {
 		);
 	}
 
-	const showDetails = async () => {
+	const showDetails = async (id) => {
 		await sdk.execute(Command.OPEN_MODAL, {
-			type: Modal.EMBEDDED_ACTION,
+			type: Modal.CUSTOM_SURFACE,
 			action_id: 'Details',
+			prefill: {
+				id,
+			}
 		});
 	}
 
@@ -34,7 +37,7 @@ export default function Items() {
 					<ItemDetails title={title} price={price} status={status} delivery={delivery}/>
 
 					<div className="list-item-actions">
-						<Button variant="ghost-alternative" onClick={showDetails}>
+						<Button variant="ghost-alternative" onClick={() => showDetails(id)}>
 							<ArrowRightIcon/>
 						</Button>
 					</div>
