@@ -1,8 +1,8 @@
-# Cars Service Example app
+# Car Services Example app
 
-Example [Remix](https://remix.run) app to demonstrate and experiment with [Custom App Surfaces](https://pipedrive.readme.io/docs/custom-app-surfaces): panels, modals and settings page.
+This is an example [Remix](https://remix.run) app that demonstrates and experiments with [custom app surfaces](https://pipedrive.readme.io/docs/custom-app-surfaces) in its three types: surface panels, surface modals and surface for app settings.
 
-**NB:** Shall not be used as production-ready app, OAuth installation and token verification is not covered here. 
+**NB:** This app should not be used as a production-ready app as OAuth installation and token verification are not covered here. 
 
 ## Examples
 
@@ -20,18 +20,18 @@ Example [Remix](https://remix.run) app to demonstrate and experiment with [Custo
 
 ## Run with StackBlitz
 
-This option works very well if you want to try out the examples without a need of local development setup or deployment to the cloud servers.
+This option works well if you want to try out the examples without the need of local development setup or deployment to the cloud servers.
 
 Open [project](https://stackblitz.com/edit/remix-cars-service) in StackBlitz.
 
-Use generated URL in Marketplace Manager as iframe URL for custom surfaces, i.e. 
-- set `https://remix-cars-service--3000.local.webcontainer.io/list` as Iframe URL for Custom Surface Panel
-- set `https://remix-cars-service--3000.local.webcontainer.io/details` as Iframe URL for Custom Surface Modal. The name of surface should be set as **Details**, otherwise it won't be opened from Custom Surface Panel with SDK command
-- set `https://remix-cars-service--3000.local.webcontainer.io/settings` as Iframe URL for Settings page
+Use the generated URL in Marketplace Manager as the iframe URL for custom surfaces, i.e. 
+- Set `https://remix-cars-service--3000.local.webcontainer.io/list` as the Iframe URL for the Custom Surface Panel
+- Set `https://remix-cars-service--3000.local.webcontainer.io/details` as the Iframe URL for the Custom Surface Modal. The name of surface should be set as **Details**, otherwise it won't be opened from Custom Surface Panel with SDK command
+- Set `https://remix-cars-service--3000.local.webcontainer.io/settings` as the Iframe URL for the Settings page
 
 ### Known issues
 
-There is limitation with Backend API when running service with StackBlitz - item proposal update and reset from settings will not work. Please choose [Deploy with Vercel](#deploy-with-vercel) for completely working example. 
+There is a limitation with Backend API when running service with StackBlitz: the item proposal update and reset from settings will not work. Please choose [Deploy with Vercel](#deploy-with-vercel) for a full working example. 
 
 ## Deploy with Vercel<a id="deploy-with-vercel"></a>
 
@@ -50,14 +50,14 @@ vercel
 
 ### Setup application in [Marketplace Manager](https://pipedrive.readme.io/docs/marketplace-manager)
 
-Use **generated** project URL in Marketplace Manager for custom surfaces, i.e.
-- set `https://remix-cars-service.vercel.app/list` as Iframe URL for Custom Surface Panel.
-- set `https://remix-cars-service.vercel.app/details` as Iframe URL for Custom Surface Modal. The name of surface should be set as **Details**, otherwise it won't be opened from Custom Surface Panel with SDK command
-- set `https://remix-cars-service.vercel.app/settings` as Iframe URL for Settings page
+Use the **generated** project URL in Marketplace Manager for custom surfaces, i.e.
+- Set `https://remix-cars-service.vercel.app/list` as the Iframe URL for the Custom Surface Panel.
+- Set `https://remix-cars-service.vercel.app/details` as the Iframe URL for the Custom Surface Modal. The name of surface should be set as **Details**. Otherwise, it won't be open from the Custom Surface Panel with the SDK command.
+- Set `https://remix-cars-service.vercel.app/settings` as the Iframe URL for the Settings page
 
 ### Known issues
 
-If you see 404 error on the main page, then you might need to choose `Remix` as Framework Preset for your project in settings.
+If you see a 404 error on the main page, you might need to choose `Remix` as the Framework Preset for your project in settings.
 
 ![Vercel App Settings](public/demo/vercel-framework-preset.png)
 
