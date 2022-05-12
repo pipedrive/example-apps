@@ -1,0 +1,31 @@
+{
+  "name": "remix-cars-service",
+  "private": true,
+  "description": "Example Remix app to demonstrate Custom App Surfaces",
+  "license": "SEE LICENSE.md",
+  "repository": "https://github.com/pipedrive/example-apps/tree/master/apps/remix-cars-service",
+  "sideEffects": false,
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev"
+  },
+  "dependencies": {
+    "@pipedrive/custom-app-surfaces-sdk": "^0.2.0",
+    "@remix-run/node": "^1.4.1",
+    "@remix-run/react": "^1.4.1",
+    "@remix-run/vercel": "^1.4.3",
+    "@vercel/node": "^1.15.0",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.4.1",
+    "@remix-run/eslint-config": "^1.4.1",
+    "@remix-run/serve": "^1.4.3",
+    "eslint": "^8.11.0"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
