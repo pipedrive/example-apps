@@ -11,9 +11,9 @@ import useItemDetailsLoader from '../hooks/useItemDetailsLoader';
 
 export const loader = async ({ request }) => {
 	const url = new URL(request.url);
-	const prefill = url.searchParams.get('prefill');
+	const data = url.searchParams.get('data');
 
-	return JSON.parse(prefill) || { id: 'qwe' };
+	return JSON.parse(data) || { id: 'qwe' };
 };
 
 const MAX_HEIGHT = 750;

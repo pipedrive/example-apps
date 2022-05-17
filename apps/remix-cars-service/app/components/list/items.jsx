@@ -24,7 +24,7 @@ export default function Items() {
 		await sdk.execute(Command.OPEN_MODAL, {
 			type: Modal.CUSTOM_SURFACE,
 			action_id: 'Details',
-			prefill: {
+			data: {
 				id,
 			}
 		});
