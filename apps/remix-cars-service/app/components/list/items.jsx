@@ -22,7 +22,7 @@ export default function Items() {
 
 	const showDetails = async (id) => {
 		await sdk.execute(Command.OPEN_MODAL, {
-			type: Modal.CUSTOM_SURFACE,
+			type: Modal.CUSTOM_MODAL,
 			action_id: 'Details',
 			data: {
 				id,
