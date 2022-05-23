@@ -31,7 +31,7 @@ export default function Wrapper({ setHeight, children }) {
 			return () => {};
 		}
 
-		const modalCloseUnsubscribe = sdk.listen(Event.CLOSE_CUSTOM_MODAL, ({ error, data }) => {
+		const modalCloseUnsubscribe = sdk.listen(Event.CLOSE_CUSTOM_MODAL, () => {
 			setUpdatedDate(Date.now());
 
 			return fetchItems();
@@ -56,7 +56,7 @@ export default function Wrapper({ setHeight, children }) {
 		setHeight(elementRef?.current?.clientHeight);
 	}, [items, elementRef?.current?.clientHeight]);
 
-	const { isHighlighted, isFadingOut } = useHighlight({ fieldValue: updatedDate });
+	const { isHighlighted, isFadingOut } = useHighlight(updatedDate);
 
 	const classNames = useMemo(() => {
 		return Object.entries({

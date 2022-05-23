@@ -9,6 +9,10 @@ html, body {
     padding: var(--pd-spacing-200) var(--pd-spacing-200) var(--pd-spacing-150);
 }
 
+.highlighted {
+    background-color: var(--pd-color-warning-background);
+}
+
 .loading {
     display: flex;
     align-items: center;
