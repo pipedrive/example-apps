@@ -97,7 +97,7 @@ async function sendMessageToPD(accessToken, from, msg, time) {
 async function getAppDomain(port = 3000) {
     let domain;
     if (process.env.PROJECT_DOMAIN) {
-        domain = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
+        domain = `https://${process.env.PROJECT_DOMAIN}`;
     } else {
         domain = `http://localhost:${port}`;
     }
