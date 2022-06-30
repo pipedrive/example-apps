@@ -19,3 +19,5 @@ If you are running this app _locally_, you need to make sure of the following th
 - Use [`ngrok`](https://ngrok.com/) to create a tunnel to your app by using the `ngrok http 3000` command. If you change the port, make sure you change the port in the command accordingly.
 - Set the value for the environment variable `PROJECT_DOMAIN`. This will be the ngrok domain (For instance : xxx.ngrok.io)
 - Use the ngrok generated domain for callback url and in provider endpoints so that it can reach your app over the internet.
+
+> NB! Delete the `sqlite` database that is created in the `data` folder if you are committing to a public repo as it contains information about users.
