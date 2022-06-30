@@ -15,8 +15,7 @@ The app lets you:
 ![](https://cdn.glitch.global/bc471203-097e-4130-886b-48ce20145aa7/0176059b-e29f-465e-af31-006c5f7bfd19.image.png?v=1656575221241)
 
 If you are running this app _locally_, you need to make sure of the following things:
-
-- Modify the path in `db/connection.js` file. Point it to a valid path that exists.
-- Use `ngrok` to expose the localhost. Without doing that, the provider endpoints will not be accessible to Pipedrive and WhatsApp.
-- Create an environment variable `PROJECT_DOMAIN` and add the ngrok domain (without the protocol) as its value.
-- Use the ngrok generated domain for callback url and in provider endpoints so that it can reach your app over the Internet.
+- Fill in the `.env.example` file with required details based on the [tutorial](https://developers.pipedrive.com/tutorials). Make sure you rename it to `.env` before running the app
+- Use [`ngrok`](https://ngrok.com/) to create a tunnel to your app by using the `ngrok http 3000` command. If you change the port, make sure you change the port in the command accordingly.
+- Set the value for the environment variable `PROJECT_DOMAIN`. This will be the ngrok domain (For instance : xxx.ngrok.io)
+- Use the ngrok generated domain for callback url and in provider endpoints so that it can reach your app over the internet.
