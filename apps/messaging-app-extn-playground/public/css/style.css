@@ -1,0 +1,12 @@
+.navbar-light .navbar-text a.btn,
+.navbar-light .navbar-text a.btn:hover {
+  color: white;
+}
+
+.code {
+  background: black;
+  word-break: break-word;
+  color: #a8a8a8;
+  padding: 20px;
+  font-family: monospace;
+}
