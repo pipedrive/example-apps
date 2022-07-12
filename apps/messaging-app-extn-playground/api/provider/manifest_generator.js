@@ -8,9 +8,9 @@ const debug = util.debug;
 router.get("/manifest.json", async (req, res) => {
   debug("Generating manifest.json file content");
   try {
-    let domain = await util.getAppDomain();
-    const manifest_data = await util.generateManifest(domain);
-    res.send(manifest_data);
+    const domain = await util.getAppDomain();
+    const manifestData = await util.generateManifest(domain);
+    res.send(manifestData);
     debug("Successfully rendered manifest.json data");
   } catch (e) {
     debug("Error while generating manifest.json", e);
