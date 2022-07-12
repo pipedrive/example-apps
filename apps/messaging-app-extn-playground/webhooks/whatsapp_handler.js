@@ -28,20 +28,20 @@ router.post("/whatsapp/messages/hook", async (req, res) => {
         ) {
             let message = req.body.entry[0].changes[0].value.messages[0];
             let from = message.from; // extract the phone number from the webhook payload
-            let msg_body;
+            let msgBody;
             if (message.type === 'text') {
-                msg_body = message.text.body; // extract the message text from the webhook payload
+                msgBody = message.text.body; // extract the message text from the webhook payload
             } else {
-                msg_body = `Sent [${message.type}]`;
+                msgBody = `Sent [${message.type}]`;
             }
-            let msg_time = message.timestamp; // extract the message timestamp from the webhook payload
+            let msgTime = message.timestamp; // extract the message timestamp from the webhook payload
             try {
                 debug(`Incoming message from ${from}.Forwarding message to Pipedrive...`, message);
                 await util.sendMessageToPD(
                     req.user.access_token,
                     from,
-                    msg_body,
-                    msg_time
+                    msgBody,
+                    msgTime
                 );
                 debug(`Message forwarded to Pipedrive successfully`);
                 res.sendStatus(200);

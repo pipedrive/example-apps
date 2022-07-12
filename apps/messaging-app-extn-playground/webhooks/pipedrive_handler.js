@@ -17,7 +17,7 @@ router.post(
         debug('Incoming message from Pipedrive');
         try {
             await util.sendMessageToWA(message, recipient);
-            let messageId = "msg-pd-" + Date.now();
+            const messageId = "msg-pd-" + Date.now();
             debug('Message sent to WhatsApp. Responding with message ID');
             res.send({
                 success: true,
