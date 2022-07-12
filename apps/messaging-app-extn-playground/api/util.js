@@ -15,9 +15,7 @@ async function getUser(accessToken) {
         },
         json: true,
     };
-    const userInfo = await request(requestOptions);
-
-    return userInfo;
+    return request(requestOptions);
 }
 
 // Create a messaging channel in Pipedrive
@@ -36,10 +34,8 @@ async function createChannel(accessToken, id, name, type) {
         },
         json: true,
     };
-    const response = await request(requestOptions);
     debug("Channel created!");
-
-    return response;
+    return request(requestOptions);
 }
 
 // Forward message to WhatsApp using their Graph API
@@ -61,9 +57,8 @@ async function sendMessageToWA(msg, recipientId) {
             },
         },
     };
-    const response = await request(requestOptions);
     debug("Message sent to WhatsApp from Pipedrive");
-    return response;
+    return request(requestOptions);
 }
 
 // Forward message to Pipedrive Messaging Inbox using Channels API
@@ -87,9 +82,8 @@ async function sendMessageToPD(accessToken, from, msg, time) {
         },
         json: true,
     };
-    const status = await request(requestOptions);
     debug("Message sent to Pipedrive from WhatsApp");
-    return status;
+    return request(requestOptions);
 }
 
 // Figure out the domain in which the app is running
@@ -122,7 +116,6 @@ function generateManifest(domain) {
 // Calculate access token expiry in minutes
 function getAccessTokenExpiry(expiryTs) {
     const remainingMinutes = parseInt((parseInt(expiryTs) - parseInt(Date.now())) / (1000 * 60));
-
     return {
         expired: (remainingMinutes <= 0),
         remaining_minutes: remainingMinutes,
