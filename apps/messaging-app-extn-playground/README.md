@@ -23,3 +23,6 @@ If you are running this app _locally_, you need to make sure of the following th
 - Use the ngrok generated domain for callback url and in provider endpoints so that it can reach your app over the internet.
 
 > NB! Delete the `sqlite` database that is created in the `data` folder if you are committing to a public repo as it contains information about users.
+
+> You can troubleshoot your app by looking at the logs. This is how it looks once you run the app with .env filled and ngrok running.
+> ![](https://user-images.githubusercontent.com/19341550/178484154-d06bd52e-190c-43a6-b08e-e93477e3c348.png)
