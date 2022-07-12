@@ -12,14 +12,16 @@ const router = new Router();
 // Render the playground page with all the necessary details
 // Few steps require access_token and thus wont be shown in the start
 router.get("/", async (req, res) => {
-    let authStatus = false,
-        tokenExpiresIn = { expired: true };
+    let auth_status = false,
+        token_expires_in = {
+            expired: true
+        };
     const domain = await util.getAppDomain();
     if (req.user) {
         // We are checking for two things: 1. If user has authorized 2. If authorized token is valid
-        tokenExpiresIn = util.getAccessTokenExpiry(req.user.expiry);
-        if (!tokenExpiresIn.expired) {
-            authStatus = true;
+        token_expires_in = util.getAccessTokenExpiry(req.user.expiry);
+        if (!token_expires_in.expired) {
+            auth_status = true;
         }
     }
 
@@ -42,7 +44,11 @@ router.get("/", async (req, res) => {
 router.post("/create_channel", async (req, res) => {
     try {
         debug("Creating a new channel");
-        const { id, name, type } = req.body;
+        const {
+            id,
+            name,
+            type
+        } = req.body;
         const response = await util.createChannel(
             req.user.access_token,
             id,
