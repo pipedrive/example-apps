@@ -20,16 +20,14 @@ async function createTable() {
 
 // A dummy function to get the first authorized user in the table
 async function getCurrent() {
-    const user = await knex.from("users").first();
-
-    return user;
+    return knex.from("users").first();
 }
 
 // Adds a new user after successful authorization. 
 // Updates the same user with latest credentials upon re-authorization
 async function add(user_id, access_token, refresh_token, expiry) {
     debug("Adding user:", user_id);
-    await knex("users").insert({
+    return knex("users").insert({
             user_id,
             access_token,
             refresh_token,
@@ -42,7 +40,7 @@ async function add(user_id, access_token, refresh_token, expiry) {
 //Removes an user from the table
 async function remove(id) {
     debug("Removing user:", id);
-    await knex("users").where({
+    return knex("users").where({
         user_id: id
     }).del();
 }
@@ -50,7 +48,7 @@ async function remove(id) {
 // Get all users
 async function getAll() {
     debug("Getting all users");
-    return await knex("users").select();
+    return knex("users").select();
 }
 
 module.exports = {

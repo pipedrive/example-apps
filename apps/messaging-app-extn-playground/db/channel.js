@@ -10,7 +10,7 @@ async function createTable() {
         return;
     }
 
-    await knex.schema.createTable("channels", (table) => {
+    return knex.schema.createTable("channels", (table) => {
         table.text("id").primary();
         table.text("name");
         table.text("provider_channel_id");
@@ -23,15 +23,13 @@ async function createTable() {
 // Get the channel details by user-defined channel ID
 async function getById(id) {
     debug("Getting channel:", id);
-    const channel = await knex.from("channels").select().where("provider_channel_id", id);
-
-    return channel;
+    return knex.from("channels").select().where("provider_channel_id", id);
 }
 
 // Adds a new channel
 async function add(channel) {
     debug("Adding channel", channel);
-    await knex("channels").insert({
+    return knex("channels").insert({
         id: channel.id,
         name: channel.name,
         provider_channel_id: channel.provider_channel_id,
@@ -44,14 +42,14 @@ async function add(channel) {
 // Deletes a channel based on the provider ID
 async function remove(id) {
     debug("Removing channel", id);
-    await knex("channels").where({
+    return knex("channels").where({
         provider_channel_id: id
     }).del();
 }
 
 // Get all channels
 async function getAll() {
-    return await knex("channels").select();
+    return knex("channels").select();
 }
 
 module.exports = {
