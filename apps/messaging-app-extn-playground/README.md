@@ -15,7 +15,9 @@ The app lets you:
 ![](https://cdn.glitch.global/bc471203-097e-4130-886b-48ce20145aa7/0176059b-e29f-465e-af31-006c5f7bfd19.image.png?v=1656575221241)
 
 If you are running this app _locally_, you need to make sure of the following things:
-- Fill in the `.env.example` file with required details based on the [tutorial](https://developers.pipedrive.com/tutorials). Make sure you rename it to `.env` before running the app
+
+- Make a copy of the `.env.example` file and rename it to `.env`
+- Fill the environment variables in the `.env` file based on the [tutorial](https://developers.pipedrive.com/tutorials).
 - Use [`ngrok`](https://ngrok.com/) to create a tunnel to your app by using the `ngrok http 3000` command. If you change the port, make sure you change the port in the command accordingly.
 - Set the value for the environment variable `PROJECT_DOMAIN`. This will be the ngrok domain (For instance : xxx.ngrok.io)
 - Use the ngrok generated domain for callback url and in provider endpoints so that it can reach your app over the internet.
