@@ -22,7 +22,6 @@ async function getUser(accessToken) {
 
 // Create a messaging channel in Pipedrive
 async function createChannel(accessToken, id, name, type) {
-
     const requestOptions = {
         uri: "https://api.pipedrive.com/v1/channels",
         method: "POST",
@@ -94,7 +93,7 @@ async function sendMessageToPD(accessToken, from, msg, time) {
 }
 
 // Figure out the domain in which the app is running
-async function getAppDomain(port = 3000) {
+function getAppDomain(port = 3000) {
     let domain;
     if (process.env.PROJECT_DOMAIN) {
         domain = `https://${process.env.PROJECT_DOMAIN}`;
@@ -121,11 +120,12 @@ function generateManifest(domain) {
 }
 
 // Calculate access token expiry in minutes
-function getAccessTokenExpiry(expiry_ts) {
-    const remaining_minutes = parseInt((parseInt(expiry_ts) - parseInt(Date.now())) / (1000 * 60));
+function getAccessTokenExpiry(expiryTs) {
+    const remainingMinutes = parseInt((parseInt(expiryTs) - parseInt(Date.now())) / (1000 * 60));
+
     return {
-        expired: (remaining_minutes <= 0),
-        remaining_minutes
+        expired: (remainingMinutes <= 0),
+        remaining_minutes: remainingMinutes,
     }
 }
 

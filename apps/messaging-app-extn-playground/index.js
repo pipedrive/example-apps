@@ -10,17 +10,16 @@ const User = require("./db/user");
 const Channel = require("./db/channel");
 const bodyParser = require("body-parser");
 
-
 // Core API routes
-const core_api = require("./api/core"); 
+const coreApi = require("./api/core");
 
 // Provider and Manifest related endpoints
-const manifest_router = require("./api/provider/manifest_generator");
-const provider_router = require("./api/provider/mock_response_generator");
+const manifestRouter = require("./api/provider/manifest_generator");
+const providerRouter = require("./api/provider/mock_response_generator");
 
 // Webhook Handlers
-const pd_message_handler = require("./webhooks/pipedrive_handler");
-const whatsapp_message_handler = require("./webhooks/whatsapp_handler");
+const pdMessageHandler = require("./webhooks/pipedrive_handler");
+const whatsappMessageHandler = require("./webhooks/whatsapp_handler");
 
 debug("Loading environment variables");
 require('dotenv').config()
@@ -31,7 +30,6 @@ Channel.createTable();
 
 const app = express();
 process.env.PORT = 3000;
-
 
 debug("Configuring Passport for OAuth2");
 passport.use(
@@ -81,17 +79,15 @@ app.get(
   })
 );
 
-
 // Core API
 debug('Loading API routes');
-app.use(core_api);
+app.use(coreApi);
 
 // API pertaining to webhooks that handle incoming messages from either Pipedrive / Provider.
-app.use(pd_message_handler);
-app.use(whatsapp_message_handler);
-app.use(provider_router);
-app.use(manifest_router); 
-
+app.use(pdMessageHandler);
+app.use(whatsappMessageHandler);
+app.use(providerRouter);
+app.use(manifestRouter);
 
 // Let's start the server 💪
 app.listen(process.env.PORT, async () => {
