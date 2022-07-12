@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Messaging App Extension Playground 🕹</a>
         <span class="navbar-text">
-            {{#if tokenExpiresIn.expired}}
+            {{#if token_expires_in.expired}}
             You need to get a new token 👉
             {{else}}
-            Access token expires in {{tokenExpiresIn.remaining_minutes}} mins
+            Access token expires in {{token_expires_in.remaining_minutes}} mins
             {{/if}}
             <a class="btn btn-primary btn-sm" href="/auth/pipedrive">Get New Token</a>
             <a class="btn btn-danger btn-sm" href="/clean_slate">Reset</a>
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-        {{#if authStatus }}
+        {{#if auth_status }}
         <div class="accordion-item">
             <h2 class="accordion-header" id="stepThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
