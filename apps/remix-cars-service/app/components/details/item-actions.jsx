@@ -45,7 +45,7 @@ export default function ItemActions({ selectedId, updateItem }) {
 				<ButtonLabel>Close</ButtonLabel>
 			</Button>
 			<Button variant="primary" disabled={!selectedId} onClick={selectProposal}>
-				<ButtonLabel>Select proposal</ButtonLabel>
+				<ButtonLabel>Send selected proposal</ButtonLabel>
 			</Button>
 		</div>
 	);

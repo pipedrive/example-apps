@@ -34,10 +34,11 @@ export default function Proposals({ item, onItemUpdate }) {
 	return (
 		<>
 			<div className="proposals">
-				{proposals.map(({ id, title }) =>
+				{proposals.map(({ id, title, color }) =>
 					<Proposal
 						key={`proposal-${id}`}
 						title={title}
+						color={color}
 						isSelected={id === selectedId}
 						onClick={() => toggleItem(id)}
 					/>

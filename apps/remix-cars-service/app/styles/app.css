@@ -32,6 +32,13 @@ html, body {
     margin-bottom: var(--pd-spacing-50);
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 var(--pd-spacing-300);
+
+}
+
 .row {
     display: flex;
     flex-direction: row;
@@ -101,7 +108,9 @@ html, body {
     border: 2px solid #fff;
     border-radius: var(--pd-radius-m);
     align-items: center;
+    align-self: start;
     padding: var(--pd-spacing-25);
+    position: relative;
 }
 
 .proposal svg {
@@ -109,11 +118,11 @@ html, body {
 }
 
 .proposal-selected {
-    border-color: var(--pd-color-active);
+    border-color: var(--pd-global-color-neutral-static-600);
 }
 
 .proposal:hover {
-    border-color: var(--pd-color-active-hover);
+    border-color: var(--pd-global-color-neutral-static-250)
 }
 
 .proposal-title {
@@ -128,14 +137,17 @@ html, body {
 .proposal-download {
     cursor: pointer;
     display: flex;
+    position: absolute;
+    top: var(--pd-spacing-150);
+    right: var(--pd-spacing-150);
 }
 
 .download-icon {
-    fill: var(--pd-color-positive-default);
+    fill: var(--pd-global-color-neutral-static-00);
 }
 
 .download-icon:hover {
-    fill: var(--pd-color-positive-hover);
+    fill: var(--pd-global-color-neutral-static-250);
 }
 
 .list-item {
