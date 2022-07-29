@@ -33,6 +33,12 @@ export default function Proposals({ item, onItemUpdate }) {
 
 	return (
 		<>
+			<div className="cui5-separator cui5-separator--type-line">
+				<div className="cui5-separator__label"/>
+			</div>
+
+			<h3 className="cui5-spacing cui5-spacing--top-s">Proposal templates</h3>
+
 			<div className="proposals">
 				{proposals.map(({ id, title, color }) =>
 					<Proposal

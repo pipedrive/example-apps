@@ -17,19 +17,11 @@ export default function ItemProposal({ proposal, onEdit }) {
 
 	return (
 		(
-			<div className='row'>
+			<div className='font-size--s'>
 				<div className="label">
-					<DocumentIcon/>
-				</div>
-
-				<div className="main">
-					<div className="label">
-						{data.title}
-					</div>
-				</div>
-
-				<div className="row-action">
-					<Button size="s" onClick={onEdit}>
+					Proposal:&nbsp;<strong>{data.title}</strong>
+					&nbsp;
+					<Button size="s" variant="ghost-alternative" onClick={onEdit}>
 						<PencilIcon/>
 					</Button>
 				</div>
