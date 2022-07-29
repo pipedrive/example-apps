@@ -1,4 +1,4 @@
-import { userPrefs } from "~/cookies";
+import connection from '~/services/db';
 
 const defaults = [
 	{
@@ -24,96 +24,53 @@ const defaults = [
 class CarsService {
 	constructor({ request }) {
 		this.request = request;
-		this.cars = new Map();
+		this.connection = connection;
 	}
 
 	async fillDefaults() {
-		const settings = await this.getSettings();
+		const tableExists = await this.connection.schema.hasTable('cars');
 
-		defaults.forEach((item) => {
-			const userPref = settings.find(({ id }) => id === item.id);
+		if (tableExists) {
+			return;
+		}
 
-			this.cars.set(item.id, {
-				...item,
-				status: userPref?.status || item.status,
-				proposal: userPref?.proposal || item.proposal,
-			});
-		})
-	}
+		await this.connection.schema.createTable('cars', table => {
+			table.text('id').primary();
+			table.text('title');
+			table.text('price');
+			table.text('status');
+			table.text('delivery');
+			table.text('person');
+			table.text('proposal');
+		});
 
-	async getSettings() {
-		const cookieHeader = this.request.headers.get('Cookie');
-		const cookie = (await userPrefs.parse(cookieHeader)) || {};
-
-		return cookie.data ? JSON.parse(cookie.data) : [];
-	}
-
-	async serialize() {
-		const cookieHeader = this.request.headers.get('Cookie');
-		const cookie = (await userPrefs.parse(cookieHeader)) || {};
-
-		const data = [];
-
-		this.cars.forEach((car) => {
-			data.push({
-				id: car.id,
-				status: car.status,
-				proposal: car.proposal,
-			})
-		})
-
-		cookie.data = JSON.stringify(data);
-
-		return await userPrefs.serialize(cookie);
+		for (const item of defaults) {
+			await this.connection.table('cars').insert(item);
+		}
 	}
 
 	async getItem(id) {
-		const item = this.cars.get(id);
-		const settings = await this.getSettings();
-		const userPref = settings.find(({ id }) => id === item.id);
-
-		if (!userPref) {
-			return item;
-		}
-
-		return {
-			...item,
-			status: userPref.status,
-			proposal: userPref.proposal,
-		};
+		return this.connection.table('cars')
+			.select()
+			.where({ id })
+			.first();
 	}
 
 	async getAll() {
-		const settings = await this.getSettings();
-
-		const data = [];
-
-		this.cars.forEach(car => {
-			const userPref = settings.find((item) => item.id === car.id);
-			const item = { ...car };
-
-			if (userPref) {
-				item.status = userPref.status;
-				item.proposal = userPref.proposal;
-			}
-
-			data.push(item);
-		})
-
-		return data;
+		return this.connection.table('cars').select();
 	}
 
 	async updateItem(id) {
-		const formData = await this.request.formData();
 		const item = await this.getItem(id);
 
+		const formData = await this.request.formData();
 		const proposal = formData.get('proposal');
 
-		this.cars.set(id, {
+		return this.connection.table('cars').update({
 			...item,
 			status: formData.get('status'),
 			proposal: proposal === 'null' ? null : proposal,
-		});
+		}).where({ id });
 	}
 }
 
