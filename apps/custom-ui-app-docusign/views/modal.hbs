@@ -1,0 +1,27 @@
+<iframe src="{{url}}" width="100%" height="800"></iframe>
+<script>
+    window.addEventListener('message', (event) => {
+        const type = event.data && event.data.type;
+        const payload = event.data && event.data.payload;
+
+        switch (type) {
+            case 'session_view.document.loaded':
+                console.info('Session view is loaded');
+                break;
+            case 'session_view.document.completed':
+                console.info('Document is completed');
+                console.info(payload);
+                break;
+            case 'session_view.document.exception':
+                console.info('Exception during document finalization');
+                console.info(payload);
+        }
+    });
+</script>
+
+<script>
+    (async function () {
+        const sdk = await new AppExtensionsSdk().initialize();
+        await sdk.execute(AppExtensionsSdk.Command.RESIZE, { width: 1000, height: 800 });
+    })();
+</script>
