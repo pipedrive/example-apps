@@ -19,8 +19,8 @@ export default function ItemProposal({ proposal, onEdit }) {
 		(
 			<div className='font-size--s'>
 				<div className="label">
-					Proposal:&nbsp;<strong>{data.title}</strong>
-					&nbsp;
+					Proposal:{' '}<strong>{data.title}</strong>
+					{' '}
 					<Button size="s" variant="ghost-alternative" onClick={onEdit}>
 						<PencilIcon/>
 					</Button>

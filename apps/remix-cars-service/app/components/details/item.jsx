@@ -27,25 +27,25 @@ export default function Item({ item, setItem }) {
 
 
 					<div className="label font-size--s">
-						<span>Condition:&nbsp;</span>
+						<span>Condition:{' '}</span>
 						<span className="font-size--s"><strong>New</strong></span>
 					</div>
 					<div className="label font-size--s">
-						<span>Price:&nbsp;</span>
+						<span>Price:{' '}</span>
 						<span><strong>{item.price}</strong></span>
 					</div>
 					<div className="label font-size--s">
-						<span>Status:&nbsp;</span>
+						<span>Status:{' '}</span>
 
 						<ItemStatus status={item.status}/>
 					</div>
 					<div className="label font-size--s">
-						<span>Delivery date: {item.delivery}&nbsp;</span>
+						<span>Delivery date: {item.delivery}{' '}</span>
 
 						<CalendarIcon/>
 					</div>
 					<div className="label font-size--s">
-						<span>Customer name:&nbsp;</span>
+						<span>Customer name:{' '}</span>
 						<strong>{item.person}</strong>
 					</div>
 
