@@ -10,7 +10,7 @@
     "dev": "remix dev"
   },
   "dependencies": {
-    "@pipedrive/custom-app-surfaces-sdk": "^0.4.0",
+    "@pipedrive/app-extensions-sdk": "^0.1.0",
     "@remix-run/node": "^1.6.5",
     "@remix-run/react": "^1.6.5",
     "@remix-run/vercel": "^1.6.5",

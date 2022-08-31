@@ -1,4 +1,4 @@
-import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command } from '@pipedrive/app-extensions-sdk';
 
 import useItemsLoader from '../../hooks/useItemsLoader';
 import useFormData from '../../hooks/useFormData';

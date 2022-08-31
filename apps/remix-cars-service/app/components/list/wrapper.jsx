@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
-import { Event } from '@pipedrive/custom-app-surfaces-sdk';
+import { Event } from '@pipedrive/app-extensions-sdk';
 import useSdk from '../../hooks/useSdk';
 import useItemsLoader from '../../hooks/useItemsLoader';
 import { useHighlight } from '../../hooks/useHighlight';

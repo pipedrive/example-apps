@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import SurfaceSDK from '@pipedrive/custom-app-surfaces-sdk';
+import SurfaceSDK from '@pipedrive/app-extensions-sdk';
 
 const SdkContext = createContext({ sdk: null });
 

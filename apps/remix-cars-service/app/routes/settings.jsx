@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from "@remix-run/react";
-import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command } from '@pipedrive/app-extensions-sdk';
 
 import useSdk from '../hooks/useSdk';
 import Wrapper from '../components/list/wrapper';

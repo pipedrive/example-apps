@@ -1,4 +1,4 @@
-import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command } from '@pipedrive/app-extensions-sdk';
 
 import Button from '../shared/button';
 import ButtonLabel from '../shared/button-label';
