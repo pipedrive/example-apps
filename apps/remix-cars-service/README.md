@@ -1,22 +1,22 @@
 # Car Services Example app
 
-This is an example [Remix](https://remix.run) app that demonstrates and experiments with [custom app surfaces](https://pipedrive.readme.io/docs/custom-app-surfaces) in its three types: surface panels, surface modals and surface for app settings.
+This is an example [Remix](https://remix.run) app that demonstrates and experiments with [Custom UI Extensions](https://pipedrive.readme.io/docs/custom-ui-extensions) in its three types: Custom panels, Custom modals and Custom UI for app settings.
 
 **NB:** This app should not be used as a production-ready app as OAuth installation and token verification are not covered here. 
 
 ## Examples
 
-### Custom Surface Modal
+### Custom Modal
 
-![Custom Surface Modal](public/demo/details.png)
+![Custom Modal](public/demo/details.png)
 
-### Custom Surface Panel
+### Custom Panel
 
-![Custom Surface Panel](public/demo/list.png)
+![Custom Panel](public/demo/list.png)
 
-### Custom Surface Settings
+### Custom UI Settings
 
-![Custom Surface Settings](public/demo/settings.png)
+![Custom UI Settings](public/demo/settings.png)
 
 ## Run with StackBlitz
 
@@ -24,9 +24,9 @@ This option works well if you want to try out the examples without the need of l
 
 Open [project](https://stackblitz.com/edit/remix-cars-service) in StackBlitz.
 
-Use the generated URL in Marketplace Manager as the iframe URL for custom surfaces, i.e. 
-- Set `https://remix-cars-service--3000.local.webcontainer.io/list` as the Iframe URL for the Custom Surface Panel
-- Set `https://remix-cars-service--3000.local.webcontainer.io/details` as the Iframe URL for the Custom Surface Modal. The name of surface should be set as **Details**, otherwise it won't be opened from Custom Surface Panel with SDK command
+Use the generated URL in Marketplace Manager as the iframe URL for Custom UI Extension, i.e. 
+- Set `https://remix-cars-service--3000.local.webcontainer.io/list` as the Iframe URL for the Custom Panel
+- Set `https://remix-cars-service--3000.local.webcontainer.io/details` as the Iframe URL for the Custom Modal. The name of Custom UI Extension should be set as **Details**, otherwise it won't be opened from Custom Panel with SDK command
 - Set `https://remix-cars-service--3000.local.webcontainer.io/settings` as the Iframe URL for the Settings page
 
 ### Known issues
@@ -50,9 +50,9 @@ vercel
 
 ### Setup application in [Marketplace Manager](https://pipedrive.readme.io/docs/marketplace-manager)
 
-Use the **generated** project URL in Marketplace Manager for custom surfaces, i.e.
-- Set `https://remix-cars-service.vercel.app/list` as the Iframe URL for the Custom Surface Panel.
-- Set `https://remix-cars-service.vercel.app/details` as the Iframe URL for the Custom Surface Modal. The name of surface should be set as **Details**. Otherwise, it won't be open from the Custom Surface Panel with the SDK command.
+Use the **generated** project URL in Marketplace Manager for Custom UI Extension, i.e.
+- Set `https://remix-cars-service.vercel.app/list` as the Iframe URL for the Custom Panel.
+- Set `https://remix-cars-service.vercel.app/details` as the Iframe URL for the Custom Modal. The name of Custom UI Extension should be set as **Details**. Otherwise, it won't be open from the Custom Panel with the SDK command.
 - Set `https://remix-cars-service.vercel.app/settings` as the Iframe URL for the Settings page
 
 ### Known issues

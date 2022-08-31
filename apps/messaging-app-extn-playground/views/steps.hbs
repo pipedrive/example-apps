@@ -1,0 +1,175 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Messaging App Extension Playground 🕹</a>
+        <span class="navbar-text">
+            {{#if token_expires_in.expired}}
+            You need to get a new token 👉
+            {{else}}
+            Access token expires in {{token_expires_in.remaining_minutes}} mins
+            {{/if}}
+            <a class="btn btn-primary btn-sm" href="/auth/pipedrive">Get New Token</a>
+            <a class="btn btn-danger btn-sm" href="/clean_slate">Reset</a>
+        </span>
+    </div>
+</nav>
+<div class="container-sm mt-5">
+    <div class="accordion" id="steps">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="stepOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="false" aria-controls="collapseOne">
+                    0. Pipedrive App Configuration
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="stepOne"
+                data-bs-parent="#steps">
+                <div class="accordion-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">CallBack URL</label>
+                            <input type="text" readonly="readonly" class="form-control"
+                                value="{{domain}}/auth/pipedrive/callback">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Manifest File JSON</label>
+                            <textarea readonly="readonly" class="form-control" rows="10">{{manifest_data}}</textarea>
+                            <br>
+                            You can also <a href="/manifest.json" download="manifest.json" class="link-primary">download
+                                it here</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="stepTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    1. Authorize the app after filling necessary details
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="stepTwo" data-bs-parent="#steps">
+                <div class="accordion-body">
+                    <form>
+                        <p>
+                            Once the Pipedrive App is created, copy the <code>client_id</code> and
+                            <code>client_secret</code> details and fill it in the .env file.
+                            Specify an ID for the <code>CHANNEL_ID</code> environment variable before clicking the
+                            button below 👇
+                        </p>
+                        <a class="btn btn-success" href="/auth/pipedrive">Authorize with Pipedrive to see next steps</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{#if auth_status }}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="stepThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    2. Create Channel in Pipedrive
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="stepThree"
+                data-bs-parent="#steps">
+                <div class="accordion-body">
+                    <form id="step_two">
+                        <div class="mb-3">
+                            <label class="form-label">Channel Name</label>
+                            <input type="text" class="form-control" id="channel_name"
+                                placeholder="My New Messaging Channel" value="My New Messaging Channel">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Channel ID</label>
+                            <input type="text" class="form-control" id="channel_id"
+                                placeholder="MY_NEW_MESSAGING_CHANNEL" value="{{messaging_channel_id_default}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Channel Type</label>
+                            <input type="text" class="form-control" id="channel_type"
+                                placeholder="facebook / whatsapp / other" value="other">
+                        </div>
+                        <a class="btn btn-primary" onclick="create_channel()">Create Channel</a>
+                        <hr>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">provider_channel_id</th>
+                                    <th scope="col">pd_company_id</th>
+                                    <th scope="col">pd_user_id</th>
+                                    <th scope="col">provider_type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each channel_details}}
+                                <tr>
+                                    <th scope="row">{{id}}</th>
+                                    <td>{{name}}</td>
+                                    <td>{{provider_channel_id}}</td>
+                                    <td>{{pd_company_id}}</td>
+                                    <td>{{pd_user_id}}</td>
+                                    <td>{{provider_type}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="stepFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    2. WhatsApp Cloud API configuration
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="stepFour"
+                data-bs-parent="#steps">
+                <div class="accordion-body">
+                    <form>
+                        <p>
+                            Once you create a Facebook App for the WhatsApp Cloud API access, make sure you fill the
+                            details in <code>.env</code> file.
+                            You can use the hook URL below to listen to WhatsApp webhook events.
+                        </p>
+                        <div class="mb-3">
+                            <label class="form-label">Provider Hook URL</label>
+                            <input type="text" class="form-control" readonly="readonly"
+                                value="{{domain}}/whatsapp/messages/hook">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+
+<script>
+    function create_channel() {
+        // Calls Create Channel API with the details required for a new channel
+        // Shows the details of the created channel in raw format
+        fetch('/create_channel', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: document.getElementById("channel_id").value,
+                name: document.getElementById("channel_name").value,
+                type: document.getElementById("channel_type").value
+            })
+        }).then(res => res.json())
+            .then(res => {
+                let step2 = document.getElementById('step_two');
+                step2.insertAdjacentHTML('beforeend', '<div class="code">' + JSON
+                    .stringify(res, null, 2) + '</div> <br> <small>(Refresh the page to see the entry in the table)</small>');
+            });
+    }
+</script>
