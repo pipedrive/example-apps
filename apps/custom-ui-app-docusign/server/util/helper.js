@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 const debug = require('debug')('app:helper');
 const querystring = require('querystring');
 const pipedrive = require('pipedrive');
@@ -8,20 +8,20 @@ const apiClient = pipedrive.ApiClient.instance;
 const getNewToken = async (refresh_token) => {
     try {
         return axios({
-            method: "POST",
-            url: "https://oauth.pipedrive.com/oauth/token",
+            method: 'POST',
+            url: 'https://oauth.pipedrive.com/oauth/token',
             headers: {
-                Authorization: `Basic ${Buffer.from(process.env.CLIENT_ID + ":" + process.env.CLIENT_SECRET).toString("base64")}`,
+                Authorization: `Basic ${Buffer.from(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64')}`,
                 'content-type': 'application/x-www-form-urlencoded'
             },
             data: querystring.stringify({
-                grant_type: "refresh_token",
+                grant_type: 'refresh_token',
                 refresh_token,
             }),
         });
     } catch (error) {
         debug(error);
-        throw new Error("Getting new token from refresh token failed");
+        throw new Error('Getting new token from refresh token failed');
     }
 };
 
@@ -38,7 +38,7 @@ async function getDocuSignTemplates(account_id, docusign_token) {
         return templates.data;
     } catch (error) {
         debug(error);
-        throw new Error("API request for getting DocuSign templates failed");
+        throw new Error('API request for getting DocuSign templates failed');
     }
 }
 
@@ -52,13 +52,13 @@ async function generateTemplatePreviewURL(template_id, account_id, docusign_toke
                 'Authorization': `Bearer ${docusign_token}`
             },
             data: {
-                "returnUrl": "https://example.com"
+                'returnUrl': 'https://example.com'
             },
             json: true
         });
     } catch (error) {
         debug(error);
-        throw new Error("API Request for generating template preview URL failed");
+        throw new Error('API Request for generating template preview URL failed');
     }
 }
 
@@ -72,19 +72,19 @@ async function createDocumentFromTemplate(account_id, template_id, docusign_toke
                 'Authorization': `Bearer ${docusign_token}`
             },
             data: {
-                "templateId": template_id,
-                "templateRoles": [{
-                    "email": signer_email,
-                    "name": signer_name,
-                    "roleName": "signer"
+                'templateId': template_id,
+                'templateRoles': [{
+                    'email': signer_email,
+                    'name': signer_name,
+                    'roleName': 'signer'
                 }],
-                "status": "sent"
+                'status': 'sent'
             },
             json: true
         });
     } catch (error) {
         debug(error);
-        throw new Error("API request for sending DocuSign document to the recipient failed");
+        throw new Error('API request for sending DocuSign document to the recipient failed');
     }
 }
 
@@ -97,7 +97,7 @@ async function getDeal(deal_id, access_token) {
         return deal.data;
     } catch (error) {
         debug(error);
-        throw new Error("API request to get deal by ID failed");
+        throw new Error('API request to get deal by ID failed');
     }
 }
 
@@ -112,7 +112,7 @@ function getErrorResponse(name, detail, status_code, response) {
 }
 
 function logImportantURLs() {
-    debug("App started.");
+    debug('App started.');
     const domain = process.env.APP_DOMAIN;
     const callBackUrl = `CallBack URL : https://${domain}/auth/callback`;
     const appPanelUrl = `Custom UI Panel URL : https://${domain}/ui/panel`;

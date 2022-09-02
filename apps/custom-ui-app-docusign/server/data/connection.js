@@ -1,5 +1,5 @@
-const Account = require("./account");
-const util = require("../util/helper")
+const Account = require('./account');
+const util = require('../util/helper')
 
 Account.sync();
 
@@ -22,7 +22,7 @@ const getSettings = async (company_id) => {
             }
     } catch (error) {
         debug(error);
-        throw new Error("Getting app settings from database failed");
+        throw new Error('Getting app settings from database failed');
     }
 }
 
@@ -46,7 +46,7 @@ const getToken = async (company_id) => {
             }
     } catch (error) {
         debug(error);
-        throw new Error("Getting app settings from database failed");
+        throw new Error('Getting app settings from database failed');
     }
 }
 
@@ -58,11 +58,11 @@ const createCompany = async (company, token) => {
             company_name: company.company_name,
             access_token: token.access_token,
             refresh_token: token.refresh_token,
-            settings: "{}"
+            settings: '{}'
         });
     } catch (error) {
         debug(error);
-        throw new Error("Getting app settings from database failed");
+        throw new Error('Getting app settings from database failed');
     }
 }
 
@@ -78,7 +78,7 @@ const updateSettings = async (company_id, settings) => {
         });
     } catch (error) {
         debug(error)
-        throw new Error("Updating app settings in the database failed");
+        throw new Error('Updating app settings in the database failed');
     }
 }
 

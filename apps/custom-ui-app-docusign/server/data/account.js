@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 const {
     Sequelize,
     DataTypes
@@ -6,8 +6,8 @@ const {
 
 // Persist in DB SQLite file
 const sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: path.join(__dirname, "db.sqlite"),
+    dialect: 'sqlite',
+    storage: path.join(__dirname, 'db.sqlite'),
     logging: false
 });
 

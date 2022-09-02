@@ -26,7 +26,7 @@ $(document).on('click', '.send-doc', function (e) {
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             },
-            dataType: "json",
+            dataType: 'json',
             body: JSON.stringify({
                 template_id,
                 deal_id,
@@ -55,7 +55,7 @@ $(document).on('click', '.preview-doc', function (e) {
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
             },
-            dataType: "json",
+            dataType: 'json',
             body: JSON.stringify({
                 company_id,
                 template_id
