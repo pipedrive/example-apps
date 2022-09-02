@@ -28,4 +28,4 @@ app.use(auth);
 app.use(ui);
 app.use(api);
 
-app.listen(3000, util.logImportantURLs);
+app.listen(process.env.PORT || 3000, util.logImportantURLs);
