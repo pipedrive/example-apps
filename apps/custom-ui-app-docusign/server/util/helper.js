@@ -23,15 +23,6 @@ const getNewToken = async (refresh_token) => {
     }
 };
 
-// Gets the page context for rendering the HBS templates
-function getPageContext(company_id, item_id, details) {
-    return {
-        company_id,
-        item_id,
-        details
-    }
-}
-
 // Get the DocuSign templates via REST API
 async function getDocuSignTemplates(account_id, docusign_token) {
     try {
@@ -136,7 +127,6 @@ function logImportantURLs() {
 module.exports = {
     getNewToken,
     getDeal,
-    getPageContext,
     getDocuSignTemplates,
     getErrorResponse,
     generateTemplatePreviewURL,

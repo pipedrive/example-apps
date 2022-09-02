@@ -9,7 +9,11 @@ const debug = require('debug')('app:ui');
 router.get("/ui/panel", async (req, res) => {
     try {
         const queryParams = req.query;
-        let context = util.getPageContext(queryParams.companyId, queryParams.selectedIds, {});
+        let context = {
+            company_id: queryParams.companyId,
+            item_id: queryParams.selectedIds,
+            details: {}
+        };
         const settings = await db.getSettings(context.company_id);
         if (settings.configured) {
             const {
@@ -46,7 +50,11 @@ router.get("/ui/settings", async (req, res) => {
     try {
         const queryParams = req.query;
         let settings = await db.getSettings(queryParams.companyId);
-        let context = util.getPageContext(queryParams.companyId, queryParams.selectedIds, settings.values);
+        let context = {
+            company_id: queryParams.companyId,
+            item_id: queryParams.selectedIds,
+            details: settings.values
+        };
         debug("Rendering the Custom UI Settings page");
         res.render("settings", context);
     } catch (error) {
