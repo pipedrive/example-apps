@@ -20,44 +20,56 @@ async function showModal(data) {
 // Sends the document to the contact associated with the deal
 $(document).on('click', '.send-doc', function (e) {
     const template_id = e.target.dataset.id;
-    $.ajax({
-        type: "POST",
-        url: "/api/send_document",
-        data: JSON.stringify({
-            template_id,
-            deal_id,
-            company_id
-        }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
+
+    fetch('/api/send_document', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            dataType: "json",
+            body: JSON.stringify({
+                template_id,
+                deal_id,
+                company_id
+            })
+        }).then(response => {
+            if (response.ok)
+                return response.json()
+            throw new Error(response);
+        })
+        .then(data => {
             showSnackBar('Document sent successfully');
-        },
-        error: function (errMsg) {
+        })
+        .catch(error => {
+            console.error(response);
             showSnackBar('Sending document failed. Check the console for details.');
-            console.error(errMsg);
-        }
-    });
+        })
 });
 
 // Generates a preview by requesting the preview session URL
 $(document).on('click', '.preview-doc', function (e) {
     const template_id = e.target.dataset.id;
-    $.ajax({
-        type: "POST",
-        url: "/api/generate_preview",
-        data: JSON.stringify({
-            company_id,
-            template_id
-        }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (data) {
+
+    fetch('/api/generate_preview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            dataType: "json",
+            body: JSON.stringify({
+                company_id,
+                template_id
+            }),
+        }).then(response => {
+            if (response.ok)
+                return response.json()
+            throw new Error(response);
+        })
+        .then(data => {
             showModal(data);
-        },
-        error: function (errMsg) {
+        })
+        .catch(error => {
+            console.error(error);
             showSnackBar('Generating template preview failed. Check the console for details.');
-            console.error(errMsg);
-        }
-    });
+        })
 });
