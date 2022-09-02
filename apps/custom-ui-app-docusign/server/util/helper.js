@@ -1,6 +1,8 @@
 const axios = require("axios");
 const debug = require('debug')('app:helper');
 const querystring = require('querystring');
+const pipedrive = require('pipedrive');
+const apiClient = pipedrive.ApiClient.instance;
 
 // Generates a new token based on the refresh token
 const getNewToken = async (refresh_token) => {
@@ -89,13 +91,9 @@ async function createDocumentFromTemplate(account_id, template_id, docusign_toke
 // Gets information about a particular deal (by ID) in Pipedrive
 async function getDeal(deal_id, access_token) {
     try {
-        const deal = await axios({
-            method: 'GET',
-            url: `https://api.pipedrive.com/v1/deals/${deal_id}`,
-            headers: {
-                'Authorization': `Bearer ${access_token}`
-            }
-        });
+        apiClient.authentications.oauth2.accessToken = access_token;
+        let dealsApi = new pipedrive.DealsApi();
+        let deal = await dealsApi.getDeal(deal_id);
         return deal.data;
     } catch (error) {
         debug(error);

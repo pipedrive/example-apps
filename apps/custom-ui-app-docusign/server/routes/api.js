@@ -44,9 +44,9 @@ router.post("/api/send_document", async (req, res) => {
         const settings = await db.getSettings(req.body.company_id);
         if (settings.configured) {
             const deal = await util.getDeal(req.body.deal_id, token.value);
-            if (deal.data.person_id.email.length > 0) {
-                const signer_email = deal.data.person_id.email[0].value,
-                    signer_name = deal.data.person_id.name;
+            if (deal.person_id.email.length > 0) {
+                const signer_email = deal.person_id.email[0].value,
+                    signer_name = deal.person_id.name;
                 await util.createDocumentFromTemplate(settings.values.docusign_accid, req.body.template_id, settings.values.docusign_token, signer_email, signer_name);
                 debug("Document sent for signing");
                 res.send({
