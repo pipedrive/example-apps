@@ -7,11 +7,12 @@ async function showSnackBar(message) {
 }
 
 // Shows a modal with a given data
+// For the 'action_id' parameter, you can specify either the Custom UI modal Name or the ID
 async function showModal(data) {
     const sdk = await new AppExtensionsSdk().initialize();
     await sdk.execute(AppExtensionsSdk.Command.OPEN_MODAL, {
         type: AppExtensionsSdk.Modal.JSON_MODAL,
-        action_id: '5c5fb865-f967-4bc2-88eb-96cae0ee74e7', // ID associated with the Custom UI Modal (visible in Marketplace Manager)
+        action_id: 'Template Editor',
         data
     });
 };
