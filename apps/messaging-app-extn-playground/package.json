@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "hbs": "^4.1.1",
+    "hbs": "^4.2.0",
     "knex": "^2.1.0",
     "passport": "^0.4.0",
     "passport-oauth": "^1.0.0",
