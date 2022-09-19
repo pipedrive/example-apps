@@ -1,6 +1,6 @@
 # DocuSign Custom UI App
 
-A sample app showcasing DocuSign integration using Pipedrive Custom UI.
+A sample app showcasing DocuSign integration using Pipedrive Custom UI. You can follow the [Codelabs guide](https://developers.pipedrive.com/tutorials/codelabs/docusign-contract-management-custom-ui-integration/index.htm?index=..%2F..index#0) for this app to get started.
 
 ### Custom UI Panel
 
