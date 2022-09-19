@@ -1,0 +1,28 @@
+<div class='container mt-3'>
+    <form>
+        <div class='mb-3'>
+            <input type='hidden' value='{{company_id}}' id='company_id' />
+
+            <label for='docusign_token' class='form-label'>DocuSign Token</label>
+            <input type='password' value='{{details.docusign_token}}' class='form-control' id='docusign_token'
+                aria-describedby='help'>
+
+            <div id='apikey_help' class='form-text'>You can generate a temporary token using the <a
+                    href='https://developers.docusign.com/token-generator/' target='_blank'>Token Generator</a>. Note
+                that this token is valid only for 8 hours.
+            </div>
+            <br />
+            <label for='docusign_accid' class='form-label'>DocuSign Account ID</label>
+            <input type='text' value='{{details.docusign_accid}}' class='form-control' id='docusign_accid'
+                aria-describedby='help'>
+            <div id='account_id_help' class='form-text'>You can find the account and app details <a
+                    href='https://admindemo.docusign.com/apps-and-keys' target='_blank'>for the demo account here</a>
+            </div>
+
+        </div>
+        <a id='save_configs' class='btn btn-primary'>Save</a>
+        <div id='save_status' class='mt-5'></div>
+    </form>
+</div>
+
+<script src='/js/settings.js'></script>
