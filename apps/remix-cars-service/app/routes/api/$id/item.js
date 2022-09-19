@@ -24,10 +24,11 @@ export const action = async ({ request, params }) => {
 		case "POST": {
 			await cars.updateItem(params.id);
 
-			return redirect(`/api/${params.id}/item`, {
-				headers: {
-					"Set-Cookie": await cars.serialize(),
-				},
+			const data = await cars.getItem(params.id);
+
+			return json({
+				success: true,
+				data,
 			});
 		}
 	}

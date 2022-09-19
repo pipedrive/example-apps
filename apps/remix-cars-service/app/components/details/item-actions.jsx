@@ -1,4 +1,4 @@
-import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command } from '@pipedrive/app-extensions-sdk';
 
 import Button from '../shared/button';
 import ButtonLabel from '../shared/button-label';
@@ -17,8 +17,9 @@ export default function ItemActions({ selectedId, updateItem }) {
 	const selectProposal = async () => {
 		if (item.status !== 'ready') {
 			const { confirmed } = await sdk.execute(Command.SHOW_CONFIRMATION, {
-				title: 'Change status',
-				description: `You're about to change status to "Ready to delivery".`
+				title: 'Send proposal',
+				okText: 'Send',
+				description: `Sending the proposal to the customer changes car status to “Ready for delivery”. Are you sure you want to proceed?`
 			});
 
 			if (!confirmed) {
@@ -45,7 +46,7 @@ export default function ItemActions({ selectedId, updateItem }) {
 				<ButtonLabel>Close</ButtonLabel>
 			</Button>
 			<Button variant="primary" disabled={!selectedId} onClick={selectProposal}>
-				<ButtonLabel>Select proposal</ButtonLabel>
+				<ButtonLabel>Send proposal</ButtonLabel>
 			</Button>
 		</div>
 	);

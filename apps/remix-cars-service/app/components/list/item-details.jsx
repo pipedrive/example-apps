@@ -1,12 +1,12 @@
 import ItemStatus from '../details/item-status';
 import Tags from '../details/tags';
-import ProposalImage from '../details/proposal-image';
+import ItemImage from './item-image';
 
 export default function ItemDetails({ title, status, price, delivery }) {
 	return (
 		<>
 			<div className="list-item-logo">
-				<ProposalImage/>
+				<ItemImage />
 			</div>
 
 			<div className="list-item-main">

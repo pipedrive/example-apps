@@ -3,6 +3,7 @@ import { CalendarIcon, DealIcon, PersonIcon } from '../shared/icons';
 import ItemStatus from './item-status';
 import ItemProposal from './item-proposal';
 import Tags from './tags';
+import ItemImage from '../list/item-image';
 
 export default function Item({ item, setItem }) {
 	const isReadyForDelivery = item.status === 'ready';
@@ -16,47 +17,41 @@ export default function Item({ item, setItem }) {
 
 	return (
 		<>
-			<div className='row'>
-				<div className="label">
-					<DealIcon/>
-				</div>
+			<div className="row">
+				<ItemImage size="l" />
 
-				<div className="main">
+				<div className="column">
 					<h2 className="cui5-text">
 						{item.title}
 					</h2>
 
-					<Tags items={['New', item.price]}/>
 
-					<ItemStatus status={item.status}/>
-				</div>
-			</div>
-
-			<div className='row'>
-				<div className="label">
-					<CalendarIcon/>
-				</div>
-
-				<div className="main">
-					<div className="label">
-						<span className="font-size--s">Delivery: {item.price}</span>
+					<div className="label font-size--s">
+						<span>Condition:{' '}</span>
+						<span className="font-size--s"><strong>New</strong></span>
 					</div>
-				</div>
-			</div>
-
-			<div className='row'>
-				<div className="label">
-					<PersonIcon/>
-				</div>
-
-				<div className="main">
-					<div className="label">
-						<span className="person">{item.person}</span>
+					<div className="label font-size--s">
+						<span>Price:{' '}</span>
+						<span><strong>{item.price}</strong></span>
 					</div>
+					<div className="label font-size--s">
+						<span>Status:{' '}</span>
+
+						<ItemStatus status={item.status}/>
+					</div>
+					<div className="label font-size--s">
+						<span>Delivery date: {item.delivery}{' '}</span>
+
+						<CalendarIcon/>
+					</div>
+					<div className="label font-size--s">
+						<span>Customer name:{' '}</span>
+						<strong>{item.person}</strong>
+					</div>
+
+					{isReadyForDelivery && <ItemProposal proposal={item.proposal} onEdit={handleReset}/>}
 				</div>
 			</div>
-
-			{isReadyForDelivery && <ItemProposal proposal={item.proposal} onEdit={handleReset}/>}
 		</>
 	);
 }

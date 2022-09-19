@@ -1,4 +1,4 @@
-import { Command, Modal } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command, Modal } from '@pipedrive/app-extensions-sdk';
 
 import { ArrowRightIcon } from '../shared/icons';
 import Spinner from '../shared/spinner';
