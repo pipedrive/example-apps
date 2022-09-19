@@ -19,6 +19,7 @@ A sample app showcasing DocuSign integration using Pipedrive Custom UI.
 - Create a [DocuSign developer account](https://developers.docusign.com/platform/account/) and [Pipedrive Sandbox Account](https://developers.pipedrive.com/start-here) with Marketplace Manager enabled.
 - Create a new app in Pipedrive with Basic scope and Deals (read-only) scope.
 - Rename `.env.example` to `.env`. Fill in the `.env` file with `CLIENT_ID` and `CLIENT_SECRET` details of the newly created app.
+- Make sure you name the Custom UI modal as `Template Editor`. The same will be used in the panel.js file to invoke the modal (`action_id` param).
 - Install `ngrok` using `npm i ngrok -g`. Once installed, run the following command to make the app reachable over the internet - `ngrok http 3000`.
 - Copy the ngrok domain and add it to the `APP_DOMAIN` environment variable in `.env` file.
 - Run the app by using `npm start` command. In the console you will notice the callback, Custom UI modal, settings and panel URL. Open the created app in Marketplace Manager and add them in the respective places.

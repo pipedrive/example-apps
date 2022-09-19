@@ -35,6 +35,8 @@ const getToken = async (company_id) => {
             }
         });
         if (record && String(record.dataValues.refresh_token).length > 1) {
+            // For the sake of simplicity, we obtain a new access token everytime using the refresh token
+            // In the case of live apps, token refresh logic should be based on the expiry date of the access token
             const token = await util.getNewToken(record.dataValues.refresh_token);
             return {
                 success: true,
