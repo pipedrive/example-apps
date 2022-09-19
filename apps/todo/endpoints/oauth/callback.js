@@ -12,7 +12,7 @@ async function handler(req, res) {
 
         await db.saveInstallation(userId, companyId, tokens);
 
-        res.send(
+        res.json(
             await db.getClientInstallation(userId, companyId)
         );
     } catch (e) {
