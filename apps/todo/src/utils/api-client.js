@@ -1,4 +1,4 @@
-import { Command } from '@pipedrive/custom-app-surfaces-sdk';
+import { Command } from '@pipedrive/app-extensions-sdk';
 
 export default class ApiClient {
   constructor(sdk) {
