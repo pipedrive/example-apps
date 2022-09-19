@@ -1,3 +1,3 @@
 module.exports = {
-	PIPEDRIVE_STYLESHEET: 'https://cdn.eu-central-1.pipedriveassets.com/froot/froot-vendors.1f6889f68e05a5f7d9b7.css'
+	PIPEDRIVE_STYLESHEET: 'https://cdn.eu-central-1.pipedriveassets.com/froot/froot-vendors.f8ac94c581c215fc5013.css'
 }
