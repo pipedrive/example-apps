@@ -10,7 +10,7 @@ async function handler(req, res) {
 
     const data = await saveRecord(userId, companyId, dealId, { title });
 
-    res.send(data);
+    res.json(data);
 }
 
 module.exports = handler;

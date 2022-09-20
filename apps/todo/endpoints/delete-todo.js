@@ -5,7 +5,7 @@ async function handler(req, res) {
 
     const record = await deleteRecord(userId, companyId, dealId, recordId);
 
-    res.send(record);
+    res.json(record);
 }
 
 module.exports = handler;

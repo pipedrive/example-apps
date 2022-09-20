@@ -21,18 +21,18 @@
   },
   "homepage": "./",
   "dependencies": {
-    "@pipedrive/custom-app-surfaces-sdk": "^0.1.0",
-    "body-parser": "^1.19.2",
-    "express": "^4.17.2",
+    "@pipedrive/app-extensions-sdk": "^0.1.0",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
-    "pipedrive": "^13.2.4",
+    "pipedrive": "^17.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   },
   "browserslist": {
     "production": [
