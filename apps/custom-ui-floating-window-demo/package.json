@@ -1,0 +1,27 @@
+{
+  "name": "floating-window-demo-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev | pino-pretty",
+    "build": "next build",
+    "start": "next start | pino-pretty",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@pipedrive/app-extensions-sdk": "^0.6.0",
+    "@prisma/client": "^4.6.1",
+    "bootstrap": "^5.2.3",
+    "cookies-next": "^2.1.1",
+    "eslint": "8.28.0",
+    "eslint-config-next": "13.0.5",
+    "next": "13.0.5",
+    "pino": "^8.7.0",
+    "pino-pretty": "^9.1.1",
+    "pipedrive": "^17.5.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "socket.io": "^4.5.4",
+    "socket.io-client": "^4.5.4"
+  }
+}
