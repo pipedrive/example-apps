@@ -1,3 +1,11 @@
+### Floating Window Demo App
+
+<img width="600" alt="Screenshot 2022-12-01 at 01 58 24" src="https://user-images.githubusercontent.com/19341550/204933908-4d9cdc9f-4e93-424d-ab14-c6375e6c707e.png">
+
+<img width="600" alt="Screenshot 2022-12-01 at 01 59 39" src="https://user-images.githubusercontent.com/19341550/204933903-3c3a8100-e539-46d0-a399-e271de717d0d.png">
+
+<img width="600" alt="Screenshot 2022-12-01 at 02 00 34" src="https://user-images.githubusercontent.com/19341550/204933896-d7fcd114-7f4e-43d9-846b-95dbcf92c945.png">
+
 ### Running the app
 
 1. Clone the repo, `cd` into the app directory, and run `npm i` to install all the required dependencies.
