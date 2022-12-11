@@ -17,35 +17,35 @@ export default function ContactList(context) {
   }, [router]);
 
   return (
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="navbar navbar-light bg-mildgreen">
-          <div class="container-fluid">
-            <span class="navbar-brand"> 🟢 Hello, {context.user.name} </span>
+    <div className="container-fluid">
+      <div className="row">
+        <nav className="navbar navbar-light bg-mildgreen">
+          <div className="container-fluid">
+            <span className="navbar-brand"> 🟢 Hello, {context.user.name} </span>
           </div>
         </nav>
         <p> Search and Tap on a contact name to dial </p>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="basic-addon1">
             🔍
           </span>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Type the name of the contact"
           />
         </div>
-        <ol class="contact-list list-group">
+        <ol className="contact-list list-group">
           {/* List the contacts based on the API response */}
           {contacts.map((d) => (
             <li
               key={d.contactId}
               onClick={() => startOutgoingCall(context, d.contactId)}
-              class="list-group-item d-flex justify-content-between align-items-start"
+              className="list-group-item d-flex justify-content-between align-items-start"
             >
               <div>
-                <div class="ms-2 me-auto">
-                  <div class="fw-bold"> {d.contactName} </div>
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold"> {d.contactName} </div>
                   {d.contactNumber}
                 </div>
               </div>
@@ -53,7 +53,7 @@ export default function ContactList(context) {
           ))}
         </ol>
       </div>
-      <div class="fixed-bottom">
+      <div className="fixed-bottom">
         <Footer />
       </div>
     </div>

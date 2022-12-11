@@ -28,12 +28,12 @@ export default function FollowUpActionButtons(context) {
       <>
         <button
           type="button"
-          class="btn btn-link w-100"
+          className="btn btn-link w-100"
           onClick={invokeActivityModal}
         >
           Create a follow-up activity
         </button>
-        <button type="button" class="btn btn-link w-100" onClick={goToDialer}>
+        <button type="button" className="btn btn-link w-100" onClick={goToDialer}>
           Go to dialer
         </button>
       </>
@@ -41,12 +41,12 @@ export default function FollowUpActionButtons(context) {
   else
     return (
       <>
-        <button type="button" class="btn btn-link w-100" onClick={goToContact}>
+        <button type="button" className="btn btn-link w-100" onClick={goToContact}>
           View Contact
         </button>
         <button
           type="button"
-          class="btn btn-link w-100 m-1"
+          className="btn btn-link w-100 m-1"
           onClick={goToDialer}
         >
           Go to dialer

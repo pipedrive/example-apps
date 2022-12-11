@@ -28,15 +28,15 @@ export default function Dialer(context) {
   }, []);
 
   return (
-    <div class="vh-100">
-      <nav class="navbar navbar-light bg-mildgreen">
-        <div class="container-fluid">
-          <span class="navbar-brand"> 🟢 Hello, {context.user.name} </span>
+    <div className="vh-100">
+      <nav className="navbar navbar-light bg-mildgreen">
+        <div className="container-fluid">
+          <span className="navbar-brand"> 🟢 Hello, {context.user.name} </span>
         </div>
       </nav>
       <CallStatus {...context} />
       <CallerDetails {...context} />
-      <div class="fixed-bottom m-2">
+      <div className="fixed-bottom m-2">
         <ActionButtons {...context} />
         <Footer />
       </div>

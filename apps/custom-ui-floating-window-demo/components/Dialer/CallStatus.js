@@ -16,7 +16,7 @@ const CallStatus = (context) => {
   if (context.callerState === "disconnected") {
     statusMsg += " Over";
   }
-  return <div class="w-100 p-2 status-indicator">{statusMsg}</div>;
+  return <div className="w-100 p-2 status-indicator">{statusMsg}</div>;
 };
 
 export default CallStatus;

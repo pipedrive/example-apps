@@ -71,13 +71,13 @@ const ActionButtons = (context) => {
   ) {
     // Answer Button
     buttons.push(
-      <button type="button" class="btn btn-success mt-2 w-100">
+      <button type="button" className="btn btn-success mt-2 w-100">
         Answer
       </button>
     );
     // Reject Button
     buttons.push(
-      <button type="button" class="btn btn-danger mt-2 w-100">
+      <button type="button" className="btn btn-danger mt-2 w-100">
         Reject
       </button>
     );
@@ -89,7 +89,7 @@ const ActionButtons = (context) => {
     context.callerState === "ringing"
   ) {
     buttons.push(
-      <button type="button" class="w-100 mt-2  btn btn-danger" onClick={hangup}>
+      <button type="button" className="w-100 mt-2  btn btn-danger" onClick={hangup}>
         Hang Up
       </button>
     );
@@ -101,7 +101,7 @@ const ActionButtons = (context) => {
       buttons.push(
         <button
           type="button"
-          class="w-100 mt-2 btn btn-warning"
+          className="w-100 mt-2 btn btn-warning"
           onClick={createNewContact}
         >
           Hang Up and Create Contact
@@ -112,7 +112,7 @@ const ActionButtons = (context) => {
         buttons.push(
           <button
             type="button"
-            class="w-100 mt-2 btn btn-warning"
+            className="w-100 mt-2 btn btn-warning"
             onClick={addNotesToDeal}
           >
             Hang Up and add notes to deal.
@@ -122,7 +122,7 @@ const ActionButtons = (context) => {
         buttons.push(
           <button
             type="button"
-            class="w-100 mt-2 btn btn-warning"
+            className="w-100 mt-2 btn btn-warning"
             onClick={addNotesToContact}
           >
             Hang Up and add notes to contact

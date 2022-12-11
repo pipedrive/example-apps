@@ -1,21 +1,21 @@
 const AdditionalCallerDetails = (props) => {
   if (!props.existingContact)
     return (
-      <div class="mb-3">
-        <label class="form-label"> Contact Name </label>
+      <div className="mb-3">
+        <label className="form-label"> Contact Name </label>
         <input
           id="contact_name"
           placeholder="Enter a contact name for this number"
-          class="form-control"
+          className="form-control"
         />
       </div>
     );
   else {
     if (props.relatedDeals?.length > 0) {
       return (
-        <div class="mb-3">
-          <label class="form-label"> Related Deal </label>
-          <select id="deals" class="form-select">
+        <div className="mb-3">
+          <label className="form-label"> Related Deal </label>
+          <select id="deals" className="form-select">
             {props.relatedDeals.map((deal) => (
               <option key={deal.id} value={deal.id}>
                 {deal.title} - {deal.value} {deal.currency}
