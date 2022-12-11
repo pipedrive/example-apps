@@ -5,7 +5,7 @@ import CallStatus from "./Dialer/CallStatus";
 import Footer from "./Footer";
 
 export default function Dialer(context) {
-  let updateCallerDetails = (context, data) => {
+  const updateCallerDetails = (context, data) => {
     context.setCallerDetails({
       ...context.callerDetails,
       name: data.name,

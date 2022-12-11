@@ -5,7 +5,7 @@ const log = logger("admin");
 
 export default function ControlCenter() {
   const socket = io();
-  let dialPipedrive = () => {
+  const dialPipedrive = () => {
     const number = document.getElementById("number").value;
     const agent = document.getElementById("agent").value;
     socket.emit("INBOUND_CALL", { number, agent });

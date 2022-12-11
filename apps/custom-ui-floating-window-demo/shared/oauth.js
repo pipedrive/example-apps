@@ -37,7 +37,7 @@ export async function getLoggedInUser(client) {
 // Update Access and Refresh tokens
 export function updateTokens(client, token) {
   log.info("Updating access + refresh token details");
-  let oAuth2 = client.authentications.oauth2;
+  const oAuth2 = client.authentications.oauth2;
   oAuth2.accessToken = token.access_token;
   oAuth2.refreshToken = token.refresh_token;
 }

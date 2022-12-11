@@ -11,7 +11,7 @@ export function AppContextWrapper({ children }) {
   const [missedCall, setMissedCall] = useState(0);
   const [callerDetails, setCallerDetails] = useState({});
 
-  let sharedState = {
+  const sharedState = {
     user,
     setUser,
     callerState,

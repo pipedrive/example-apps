@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const api = new NotesApi(client);
 
     log.info("Adding notes to contact based on the ID");
-    let note = await api.addNote(
+    const note = await api.addNote(
       AddNoteRequest.constructFromObject({
         personId: d.id,
         content: d.notes,

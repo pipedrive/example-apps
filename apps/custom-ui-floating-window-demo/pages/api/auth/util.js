@@ -13,7 +13,7 @@ export async function refreshAccessToken(refresh_token, user_id) {
       refresh_token,
     }),
   });
-  let credentials = await res.json();
+  const credentials = await res.json();
 
   await db.user.update({
     where: {

@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const api = new PersonsApi(client);
 
     log.info("Getting all persons");
-    let contactObj = await api.getPersons();
+    const contactObj = await api.getPersons();
 
     // Filter only those that have phone number
     log.info("Filtering persons by phone");

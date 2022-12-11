@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 export default function ContactList(context) {
   const router = useRouter();
-  let [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     // Get the contacts and list them

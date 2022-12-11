@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const api = new CallLogsApi(client);
 
     log.info("Adding call log to deal based on the deal ID and other params");
-    let calllog = await api.addCallLog(CallLogObject.constructFromObject(d));
+    const calllog = await api.addCallLog(CallLogObject.constructFromObject(d));
 
     log.info("Call log successfully added");
     res.status(200).json(calllog);

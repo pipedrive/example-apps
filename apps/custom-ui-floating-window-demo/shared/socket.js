@@ -1,7 +1,7 @@
 import logger from "./logger";
 const log = logger("socket");
 
-export function handleSocketCommunication(socket, context, sdk) {
+export const handleSocketCommunication = (socket, context, sdk) => {
   if (socket) {
     socket.on("connect", () => {
       log.info(`Client connected.`);
@@ -21,9 +21,9 @@ export function handleSocketCommunication(socket, context, sdk) {
       }
     });
   }
-}
+};
 
-export let startIncomingCall = (context, number) => {
+export const startIncomingCall = (context, number) => {
   const details = {
     id: undefined,
     number,
@@ -38,7 +38,7 @@ export let startIncomingCall = (context, number) => {
   context.setCallerDetails(details);
 };
 
-export let startOutgoingCall = (context, id) => {
+export const startOutgoingCall = (context, id) => {
   const details = {
     id,
     number: undefined,

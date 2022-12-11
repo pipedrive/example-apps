@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export default function FollowUp(context) {
   // Set Follow up action text
-  let renderFollowUpCompletion = () => {
+  const renderFollowUpCompletion = () => {
     if (context.callerDetails.existing === false) {
       return "✅ Contact Saved";
     } else {

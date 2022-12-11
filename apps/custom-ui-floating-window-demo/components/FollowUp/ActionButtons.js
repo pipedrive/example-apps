@@ -7,18 +7,18 @@ import logger from "../../shared/logger";
 const log = logger("FollowUp");
 
 export default function FollowUpActionButtons(context) {
-  let invokeActivityModal = async () => {
+  const invokeActivityModal = async () => {
     log.info("Invoking activity dialog...");
     const sdk = await initializeSDK();
     openActivityModal(sdk);
   };
-  let goToContact = async () => {
+  const goToContact = async () => {
     log.info("Navigating to the contact based on the contact ID");
     const sdk = await initializeSDK();
     redirectToContact(sdk, context.callerDetails.id);
   };
 
-  let goToDialer = async () => {
+  const goToDialer = async () => {
     log.info("Going back to the dialer by changing the state");
     context.setCallerState("listening");
   };
