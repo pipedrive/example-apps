@@ -79,12 +79,6 @@ export async function initalizeSession(req, res, userId) {
           },
         });
         log.info("Database updated. Session cookie set 🍪");
-        setCookie("aa", "äsdsd|", {
-          req,
-          res,
-          sameSite: "none",
-          secure: true,
-        });
         return setSessionCookie(
           true,
           account.accountId,
