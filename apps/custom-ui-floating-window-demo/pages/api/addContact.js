@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     log.info("Contact successfully created");
 
     // If creation was successful, proceed to add notes
-    if (d.notes.length > 0) {
+    if (d.notes.length) {
       log.info("Proceeding to create notes");
       const notesApi = new NotesApi(client);
       await notesApi.addNote(

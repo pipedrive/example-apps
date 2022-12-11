@@ -18,8 +18,9 @@ const log = logger("Core ✨");
 export const getServerSideProps = async ({ req, res, query }) => {
   log.info("Checking session details based on query parameters");
   const session = await initalizeSession(req, res, query.userId);
-  if (session.auth) return { props: { auth: true, session } };
-  else return { props: { auth: false } };
+  return session.auth
+    ? { props: { auth: true, session } }
+    : { props: { auth: false } };
 };
 
 export default function Home({ auth, session }) {

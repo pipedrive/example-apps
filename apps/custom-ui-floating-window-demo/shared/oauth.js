@@ -50,7 +50,7 @@ export async function initalizeSession(req, res, userId) {
     let session = getCookie("session", { req, res });
 
     // 1.2. If the session is not set, get the user ID value from the query params
-    if (session === undefined) {
+    if (!session) {
       log.info(
         "Session cookie is not found. Checking the database for OAuth details"
       );
@@ -60,7 +60,7 @@ export async function initalizeSession(req, res, userId) {
         },
       });
       // 1.3. If no entry exists in DB, the user hasn't even authorized once
-      if (account === null) {
+      if (!account) {
         log.info("No matching account found. You need to authorize the app 🔑");
         return { auth: false };
       } else if (Date.now() > parseInt(account.expiresAt)) {

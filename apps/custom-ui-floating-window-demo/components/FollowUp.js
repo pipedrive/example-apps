@@ -22,7 +22,7 @@ export default function FollowUp(context) {
       <CallStatus {...context} />
       <div class="p-2">
         <div class="position-absolute top-50 start-50 translate-middle text-center">
-          <h6> {renderFollowUpCompletion(context)} </h6>
+          <h6>{renderFollowUpCompletion(context)}</h6>
         </div>
       </div>
       <div class="fixed-bottom m-2">
