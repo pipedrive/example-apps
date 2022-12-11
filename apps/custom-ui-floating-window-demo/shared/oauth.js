@@ -114,7 +114,7 @@ export async function initalizeSession(req, res, userId) {
 
 // Set cookies
 function setSessionCookie(auth, id, name, token, expiry, req, res) {
-  const new_session = {
+  const newSession = {
     auth,
     id,
     name,
@@ -129,7 +129,7 @@ function setSessionCookie(auth, id, name, token, expiry, req, res) {
     res,
   };
   // 1.4. Set the cookie
-  setCookie("session", JSON.stringify(new_session), cookieParams);
+  setCookie("session", JSON.stringify(newSession), cookieParams);
 
-  return new_session;
+  return newSession;
 }

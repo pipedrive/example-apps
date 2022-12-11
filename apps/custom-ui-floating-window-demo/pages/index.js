@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useAppContext } from "../shared/context";
-
 import io from "Socket.IO-client";
+
+import { useAppContext } from "../shared/context";
 import logger from "../shared/logger";
 import { initalizeSession } from "../shared/oauth";
+import { initializeSDK } from "../shared/custom_ui_sdk";
+import { handleSocketCommunication } from "../shared/socket";
 
 import ContactList from "../components/ContactList";
 import Dialer from "../components/Dialer";
 import FollowUp from "../components/FollowUp";
-import { initializeSDK } from "../shared/custom_ui_sdk";
-import { handleSocketCommunication } from "../shared/socket";
 import Login from "../components/Login";
 
 const log = logger("Core ✨");

@@ -1,6 +1,6 @@
 import { getCookie } from "cookies-next";
-import logger from "../../shared/logger";
 import { PersonsApi } from "pipedrive";
+import logger from "../../shared/logger";
 import { initAPIClient } from "../../shared/oauth";
 const log = logger("Get Contacts API 📚");
 
