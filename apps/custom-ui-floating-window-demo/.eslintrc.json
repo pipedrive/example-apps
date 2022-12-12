@@ -17,8 +17,8 @@
       "extensions": [".js", ".jsx"]
     }],
     "react/prop-types": "off",
-    "camelcase": "error",
-    "quotes": [2, "single", {
+    "camelcase": "warn",
+    "quotes": [1, "single", {
       "avoidEscape": true
     }]
   }
