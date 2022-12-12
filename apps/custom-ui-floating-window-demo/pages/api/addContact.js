@@ -1,4 +1,3 @@
-import { getCookie } from 'cookies-next';
 import {
   PersonsApi,
   NewPerson,
@@ -7,18 +6,14 @@ import {
   AddNoteRequest,
 } from 'pipedrive';
 import logger from '../../shared/logger';
-import { initAPIClient } from '../../shared/oauth';
+import { getAPIClient } from '../../shared/oauth';
 const log = logger('Add Contact API ➕');
 
 export const handler = async (req, res) => {
   try {
     log.info('Getting session details');
-    const session = getCookie('session', { req, res });
     const d = req.body;
-
-    const client = initAPIClient({
-      accessToken: JSON.parse(session).token,
-    });
+    const client = getAPIClient(req, res);
 
     log.info('Initializing client');
     const api = new PersonsApi(client);

@@ -19,6 +19,14 @@ export const initAPIClient = ({ accessToken = '', refreshToken = '' }) => {
   return client;
 };
 
+// Gets the API client based on session cookies
+export const getAPIClient = (req, res) => {
+  const session = getCookie('session', { req, res });
+  return initAPIClient({
+    accessToken: JSON.parse(session).token,
+  });
+};
+
 // Generate the authorization URL for the 1st step
 export const getAuthorizationUrl = (client) => {
   const authUrl = client.buildAuthorizationUrl();

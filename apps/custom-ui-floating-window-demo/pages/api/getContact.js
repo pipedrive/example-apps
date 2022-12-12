@@ -1,7 +1,6 @@
-import { getCookie } from 'cookies-next';
 import { PersonsApi } from 'pipedrive';
 import logger from '../../shared/logger';
-import { initAPIClient } from '../../shared/oauth';
+import { getAPIClient } from '../../shared/oauth';
 const log = logger('Get Contact API 📕');
 /**
  * Get the current session
@@ -12,12 +11,9 @@ const log = logger('Get Contact API 📕');
 export const handler = async (req, res) => {
   try {
     log.info('Getting session details');
-    const session = getCookie('session', { req, res });
+    const client = getAPIClient(req, res);
     let contact;
 
-    const client = initAPIClient({
-      accessToken: JSON.parse(session).token,
-    });
     log.info('Initializing client');
     const api = new PersonsApi(client);
 
