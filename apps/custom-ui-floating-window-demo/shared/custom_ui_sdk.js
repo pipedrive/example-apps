@@ -2,32 +2,32 @@ import AppExtensionsSDK, {
   Command,
   Modal,
   View,
-} from "@pipedrive/app-extensions-sdk";
-import logger from "./logger";
+} from '@pipedrive/app-extensions-sdk';
+import logger from './logger';
 
-const log = logger("Custom UI SDK");
+const log = logger('Custom UI SDK');
 // Initialize SDK and set height
 export async function initializeSDK() {
   try {
-    log.info("Initialized SDK");
+    log.info('Initialized SDK');
     return await new AppExtensionsSDK().initialize({ size: { height: 550 } });
   } catch (e) {
-    log.error("Error during SDK initialization", e);
+    log.error('Error during SDK initialization', e);
   }
 }
 
 export async function hideFloatingWindow(sdk) {
-  log.info("Hiding floating window");
+  log.info('Hiding floating window');
   await sdk.execute(Command.HIDE_FLOATING_WINDOW, {});
 }
 
 export async function showFloatingWindow(sdk) {
-  log.info("Showing floating window");
+  log.info('Showing floating window');
   await sdk.execute(Command.SHOW_FLOATING_WINDOW, {});
 }
 
 export async function openActivityModal(sdk) {
-  log.info("Opening activity modal");
+  log.info('Opening activity modal');
   // const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
   //   type: Modal.ACTIVITY,
   // });

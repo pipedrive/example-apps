@@ -1,13 +1,13 @@
-import { createContext, useContext, useState } from "react";
-import logger from "./logger";
+import { createContext, useContext, useState } from 'react';
+import logger from './logger';
 
 const AppContext = createContext();
-const log = logger("App Context");
+const log = logger('App Context');
 
 export const AppContextWrapper = ({ children }) => {
   const [user, setUser] = useState({});
   // TODO: Possible States -> Listening, Ringing, Connected, Disconnected
-  const [callerState, setCallerState] = useState("listening");
+  const [callerState, setCallerState] = useState('listening');
   const [missedCall, setMissedCall] = useState(0);
   const [callerDetails, setCallerDetails] = useState({});
 
@@ -22,7 +22,7 @@ export const AppContextWrapper = ({ children }) => {
     setMissedCall,
   };
 
-  log.info("Context created");
+  log.info('Context created');
   return (
     <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
   );

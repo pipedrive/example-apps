@@ -1,7 +1,7 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { startOutgoingCall } from "../shared/socket";
-import Footer from "./Footer";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { startOutgoingCall } from '../shared/socket';
+import Footer from './Footer';
 
 const ContactList = (context) => {
   const router = useRouter();
@@ -9,7 +9,7 @@ const ContactList = (context) => {
 
   useEffect(() => {
     // Get the contacts and list them
-    fetch("/api/getContacts")
+    fetch('/api/getContacts')
       .then((res) => res.json())
       .then((data) => {
         setContacts(data);
@@ -22,8 +22,8 @@ const ContactList = (context) => {
         <nav className="navbar navbar-light bg-mildgreen">
           <div className="container-fluid">
             <span className="navbar-brand">
-              {" "}
-              🟢 Hello, {context.user.name}{" "}
+              {' '}
+              🟢 Hello, {context.user.name}{' '}
             </span>
           </div>
         </nav>

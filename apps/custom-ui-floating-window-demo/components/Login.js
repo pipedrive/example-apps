@@ -16,7 +16,7 @@ const Login = () => {
           window.location.reload();
         }}
       >
-        {" "}
+        {' '}
         refresh the page
       </a>
     </>

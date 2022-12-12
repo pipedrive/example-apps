@@ -2,25 +2,25 @@ import {
   initializeSDK,
   openActivityModal,
   redirectToContact,
-} from "../../shared/custom_ui_sdk";
-import logger from "../../shared/logger";
-const log = logger("FollowUp");
+} from '../../shared/custom_ui_sdk';
+import logger from '../../shared/logger';
+const log = logger('FollowUp');
 
 const FollowUpActionButtons = (context) => {
   const invokeActivityModal = async () => {
-    log.info("Invoking activity dialog...");
+    log.info('Invoking activity dialog...');
     const sdk = await initializeSDK();
     openActivityModal(sdk);
   };
   const goToContact = async () => {
-    log.info("Navigating to the contact based on the contact ID");
+    log.info('Navigating to the contact based on the contact ID');
     const sdk = await initializeSDK();
     redirectToContact(sdk, context.callerDetails.id);
   };
 
   const goToDialer = async () => {
-    log.info("Going back to the dialer by changing the state");
-    context.setCallerState("listening");
+    log.info('Going back to the dialer by changing the state');
+    context.setCallerState('listening');
   };
 
   if (context.callerDetails.existing)

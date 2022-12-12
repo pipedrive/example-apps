@@ -1,8 +1,8 @@
-import { getCookie } from "cookies-next";
-import { PersonsApi } from "pipedrive";
-import logger from "../../shared/logger";
-import { initAPIClient } from "../../shared/oauth";
-const log = logger("Get Contact API 📕");
+import { getCookie } from 'cookies-next';
+import { PersonsApi } from 'pipedrive';
+import logger from '../../shared/logger';
+import { initAPIClient } from '../../shared/oauth';
+const log = logger('Get Contact API 📕');
 /**
  * Get the current session
  * Obtain the person by ID / Number
@@ -11,49 +11,49 @@ const log = logger("Get Contact API 📕");
  */
 export default async function handler(req, res) {
   try {
-    log.info("Getting session details");
-    const session = getCookie("session", { req, res });
+    log.info('Getting session details');
+    const session = getCookie('session', { req, res });
     let contact;
 
     const client = initAPIClient({
       accessToken: JSON.parse(session).token,
     });
-    log.info("Initializing client");
+    log.info('Initializing client');
     const api = new PersonsApi(client);
 
-    if (req.query.id && req.query.id !== "undefined") {
-      log.info(req.query.id, "Getting contact based on ID");
+    if (req.query.id && req.query.id !== 'undefined') {
+      log.info(req.query.id, 'Getting contact based on ID');
       // Let's get the person by ID
       let contactObj = await api.getPerson(req.query.id);
-      log.info("Contact details obtained");
+      log.info('Contact details obtained');
       contact = contactObj.data;
       contact.number = contact.phone[0].value;
       contact.existing = true;
-    } else if (req.query.number && req.query.number !== "undefined") {
-      log.info(req.query.number, "Getting contact based on number search");
+    } else if (req.query.number && req.query.number !== 'undefined') {
+      log.info(req.query.number, 'Getting contact based on number search');
       // Let's get the person by the number
       let contactsObj = await api.searchPersons(req.query.number);
       let contacts = contactsObj.data;
       if (contacts.items.length == 0) {
-        log.info("No matching contacts found");
+        log.info('No matching contacts found');
         contact = {
-          name: "Unknown",
+          name: 'Unknown',
           number: req.query.number,
           existing: false,
         };
         return res.status(200).json(contact);
       } else {
-        log.info("Matching contact found");
+        log.info('Matching contact found');
         contact = contacts.items[0].item;
         contact.number = contact.phones[0];
         contact.existing = true;
       }
     }
-    log.info("Getting associated deals");
+    log.info('Getting associated deals');
     // Now let's get the associated details
     let relatedDealObj = await api.getPersonDeals(contact.id);
     let relatedDealsJson = relatedDealObj.data;
-    log.info("Returning response");
+    log.info('Returning response');
     // Prepare the response
     let apiResponse = contact;
     apiResponse.relatedDeals = relatedDealsJson;
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
     // And, send it :)
     res.status(200).json(apiResponse);
   } catch (error) {
-    log.info("Failed get contact");
+    log.info('Failed get contact');
     log.error(error);
     res.status(500).json({ success: false, data: error });
   }

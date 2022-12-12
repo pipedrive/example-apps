@@ -1,14 +1,14 @@
-import CallStatus from "./Dialer/CallStatus";
-import FollowUpActionButtons from "./FollowUp/ActionButtons";
-import Footer from "./Footer";
+import CallStatus from './Dialer/CallStatus';
+import FollowUpActionButtons from './FollowUp/ActionButtons';
+import Footer from './Footer';
 
 const FollowUp = (context) => {
   // Set Follow up action text
   const renderFollowUpCompletion = () => {
     if (context.callerDetails.existing === false) {
-      return "✅ Contact Saved";
+      return '✅ Contact Saved';
     } else {
-      return "✅ Call Log Saved";
+      return '✅ Call Log Saved';
     }
   };
 

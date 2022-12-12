@@ -1,15 +1,15 @@
-import { useEffect } from "react";
-import ActionButtons from "./Dialer/ActionButtons";
-import CallerDetails from "./Dialer/CallerDetails";
-import CallStatus from "./Dialer/CallStatus";
-import Footer from "./Footer";
+import { useEffect } from 'react';
+import ActionButtons from './Dialer/ActionButtons';
+import CallerDetails from './Dialer/CallerDetails';
+import CallStatus from './Dialer/CallStatus';
+import Footer from './Footer';
 
 const Dialer = (context) => {
   const updateCallerDetails = (context, data) => {
     context.setCallerDetails({
       ...context.callerDetails,
       name: data.name,
-      picture: data?.picture_id?.pictures["128"] || "/profile.png",
+      picture: data?.picture_id?.pictures['128'] || '/profile.png',
       number: data.number,
       relatedDeals: data?.relatedDeals,
       existing: data.existing,
