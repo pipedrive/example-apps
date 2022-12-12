@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   try {
     log.info('Getting session details');
     const session = getCookie('session', { req, res });
-    const d = JSON.parse(req.body);
+    const d = req.body;
 
     const client = initAPIClient({
       accessToken: JSON.parse(session).token,
