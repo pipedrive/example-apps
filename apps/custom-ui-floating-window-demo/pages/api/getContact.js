@@ -9,7 +9,7 @@ const log = logger('Get Contact API 📕');
  * Get associated deals of that person (if available)
  * Return the response
  */
-export default async function handler(req, res) {
+export const handler = async (req, res) => {
   try {
     log.info('Getting session details');
     const session = getCookie('session', { req, res });
@@ -65,4 +65,4 @@ export default async function handler(req, res) {
     log.error(error);
     res.status(500).json({ success: false, data: error });
   }
-}
+};

@@ -4,6 +4,9 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
+  "plugins": [
+    "prefer-arrow-functions"
+  ],
   "rules": {
     "react/no-unknown-property": ["error", {
       "ignore": ["css"]
@@ -20,6 +23,15 @@
     "camelcase": "warn",
     "quotes": [1, "single", {
       "avoidEscape": true
-    }]
+    }],
+    "prefer-arrow-functions/prefer-arrow-functions": [
+      "warn",
+      {
+        "classPropertiesAllowed": false,
+        "disallowPrototype": false,
+        "returnStyle": "unchanged",
+        "singleReturnOnly": false
+      }
+    ]
   }
 }

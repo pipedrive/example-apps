@@ -5,7 +5,7 @@ import logger from './logger';
 const log = logger('OAuth 🔒');
 
 // Initialize the API client
-export function initAPIClient({ accessToken = '', refreshToken = '' }) {
+export const initAPIClient = ({ accessToken = '', refreshToken = '' }) => {
   const client = new ApiClient();
   let oAuth2 = client.authentications.oauth2;
 
@@ -17,33 +17,33 @@ export function initAPIClient({ accessToken = '', refreshToken = '' }) {
   if (refreshToken) oAuth2.refreshToken = refreshToken;
 
   return client;
-}
+};
 
 // Generate the authorization URL for the 1st step
-export function getAuthorizationUrl(client) {
+export const getAuthorizationUrl = (client) => {
   const authUrl = client.buildAuthorizationUrl();
   log.info('Authorization URL generated');
   return authUrl;
-}
+};
 
 // Get the currently authorized user details
-export async function getLoggedInUser(client) {
+export const getLoggedInUser = async (client) => {
   const api = new UsersApi(client);
   const data = await api.getCurrentUser();
   log.info('Currently logged-in user details obtained');
   return data;
-}
+};
 
 // Update Access and Refresh tokens
-export function updateTokens(client, token) {
+export const updateTokens = (client, token) => {
   log.info('Updating access + refresh token details');
   const oAuth2 = client.authentications.oauth2;
   oAuth2.accessToken = token.access_token;
   oAuth2.refreshToken = token.refresh_token;
-}
+};
 
 // Get Session Details
-export async function initalizeSession(req, res, userId) {
+export const initalizeSession = async (req, res, userId) => {
   try {
     // 1.1 Check if the session cookie is already set
     log.info(`Checking if a session cookie is set for ${userId}`);
@@ -110,10 +110,10 @@ export async function initalizeSession(req, res, userId) {
     log.error("Couldn't create session :[");
     log.error(error);
   }
-}
+};
 
 // Set cookies
-function setSessionCookie(auth, id, name, token, expiry, req, res) {
+const setSessionCookie = (auth, id, name, token, expiry, req, res) => {
   const newSession = {
     auth,
     id,
@@ -132,4 +132,4 @@ function setSessionCookie(auth, id, name, token, expiry, req, res) {
   setCookie('session', JSON.stringify(newSession), cookieParams);
 
   return newSession;
-}
+};

@@ -4,7 +4,7 @@ import logger from '../../shared/logger';
 import { initAPIClient } from '../../shared/oauth';
 const log = logger('Get Contacts API 📚');
 
-export default async function handler(req, res) {
+export const handler = async (req, res) => {
   try {
     log.info('Getting session details');
     const session = getCookie('session', { req, res });
@@ -39,4 +39,4 @@ export default async function handler(req, res) {
     log.error(error);
     res.status(500).json({ success: false, data: error });
   }
-}
+};
