@@ -2,7 +2,7 @@ import CallStatus from "./Dialer/CallStatus";
 import FollowUpActionButtons from "./FollowUp/ActionButtons";
 import Footer from "./Footer";
 
-export default function FollowUp(context) {
+const FollowUp = (context) => {
   // Set Follow up action text
   const renderFollowUpCompletion = () => {
     if (context.callerDetails.existing === false) {
@@ -31,4 +31,6 @@ export default function FollowUp(context) {
       </div>
     </div>
   );
-}
+};
+
+export default FollowUp;

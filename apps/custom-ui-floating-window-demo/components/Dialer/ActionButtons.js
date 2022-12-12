@@ -35,7 +35,7 @@ const ActionButtons = (context) => {
       .replace(/\..+/, "");
     const end_time = start_time;
 
-    const res = await fetch(`/api/addCallLogsToDeal`, {
+    await fetch(`/api/addCallLogsToDeal`, {
       method: "POST",
       body: JSON.stringify({
         dealId,
@@ -89,7 +89,11 @@ const ActionButtons = (context) => {
     context.callerState === "ringing"
   ) {
     buttons.push(
-      <button type="button" className="w-100 mt-2  btn btn-danger" onClick={hangup}>
+      <button
+        type="button"
+        className="w-100 mt-2  btn btn-danger"
+        onClick={hangup}
+      >
         Hang Up
       </button>
     );

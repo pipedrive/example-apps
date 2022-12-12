@@ -23,7 +23,7 @@ export const getServerSideProps = async ({ req, res, query }) => {
     : { props: { auth: false } };
 };
 
-export default function Home({ auth, session }) {
+const Home = ({ auth, session }) => {
   const router = useRouter();
   const context = useAppContext();
   const socket = io();
@@ -62,4 +62,6 @@ export default function Home({ auth, session }) {
     default:
       return <ContactList {...context} />;
   }
-}
+};
+
+export default Home;

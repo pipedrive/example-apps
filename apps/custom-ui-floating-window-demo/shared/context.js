@@ -4,7 +4,7 @@ import logger from "./logger";
 const AppContext = createContext();
 const log = logger("App Context");
 
-export function AppContextWrapper({ children }) {
+export const AppContextWrapper = ({ children }) => {
   const [user, setUser] = useState({});
   // TODO: Possible States -> Listening, Ringing, Connected, Disconnected
   const [callerState, setCallerState] = useState("listening");

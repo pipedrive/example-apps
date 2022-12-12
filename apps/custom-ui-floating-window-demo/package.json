@@ -13,7 +13,6 @@
     "@prisma/client": "^4.6.1",
     "bootstrap": "^5.2.3",
     "cookies-next": "^2.1.1",
-    "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
     "next": "13.0.5",
     "pino": "^8.7.0",
@@ -23,5 +22,9 @@
     "react-dom": "18.2.0",
     "socket.io": "^4.5.4",
     "socket.io-client": "^4.5.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "eslint-plugin-react": "^7.31.11"
   }
 }

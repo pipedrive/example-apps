@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { startOutgoingCall } from "../shared/socket";
 import Footer from "./Footer";
 
-export default function ContactList(context) {
+const ContactList = (context) => {
   const router = useRouter();
   const [contacts, setContacts] = useState([]);
 
@@ -21,7 +21,10 @@ export default function ContactList(context) {
       <div className="row">
         <nav className="navbar navbar-light bg-mildgreen">
           <div className="container-fluid">
-            <span className="navbar-brand"> 🟢 Hello, {context.user.name} </span>
+            <span className="navbar-brand">
+              {" "}
+              🟢 Hello, {context.user.name}{" "}
+            </span>
           </div>
         </nav>
         <p> Search and Tap on a contact name to dial </p>
@@ -59,3 +62,5 @@ export default function ContactList(context) {
     </div>
   );
 }
+
+export default ContactList;

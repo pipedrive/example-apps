@@ -4,7 +4,7 @@ import CallerDetails from "./Dialer/CallerDetails";
 import CallStatus from "./Dialer/CallStatus";
 import Footer from "./Footer";
 
-export default function Dialer(context) {
+const Dialer = (context) => {
   const updateCallerDetails = (context, data) => {
     context.setCallerDetails({
       ...context.callerDetails,
@@ -42,4 +42,6 @@ export default function Dialer(context) {
       </div>
     </div>
   );
-}
+};
+
+export default Dialer;

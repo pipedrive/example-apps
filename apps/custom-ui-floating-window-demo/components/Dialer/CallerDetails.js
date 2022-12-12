@@ -1,3 +1,4 @@
+import Image from "next/image";
 import AdditionalCallerDetails from "./AdditionalCallerDetails";
 
 const CallerDetails = (context) => {
@@ -5,8 +6,9 @@ const CallerDetails = (context) => {
     return (
       <div className="p-2">
         <div className="position-absolute top-50 start-50 translate-middle text-center">
-          <img
+          <Image
             src={context.callerDetails?.picture || "/profile.png"}
+            alt={context.callerDetails.name}
             className="mb-3 caller-image"
             width="72px"
           />
@@ -20,9 +22,10 @@ const CallerDetails = (context) => {
       <>
         <div className="row p-2">
           <div className="col-4">
-            <img
+            <Image
               src={context.callerDetails?.picture || "/profile.png"}
               className="mb-3 caller-image"
+              alt={context.callerDetails.name}
               width="72px"
             />
           </div>

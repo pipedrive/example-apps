@@ -6,7 +6,7 @@ import {
 import logger from "../../shared/logger";
 const log = logger("FollowUp");
 
-export default function FollowUpActionButtons(context) {
+const FollowUpActionButtons = (context) => {
   const invokeActivityModal = async () => {
     log.info("Invoking activity dialog...");
     const sdk = await initializeSDK();
@@ -33,7 +33,11 @@ export default function FollowUpActionButtons(context) {
         >
           Create a follow-up activity
         </button>
-        <button type="button" className="btn btn-link w-100" onClick={goToDialer}>
+        <button
+          type="button"
+          className="btn btn-link w-100"
+          onClick={goToDialer}
+        >
           Go to dialer
         </button>
       </>
@@ -41,7 +45,11 @@ export default function FollowUpActionButtons(context) {
   else
     return (
       <>
-        <button type="button" className="btn btn-link w-100" onClick={goToContact}>
+        <button
+          type="button"
+          className="btn btn-link w-100"
+          onClick={goToContact}
+        >
           View Contact
         </button>
         <button
@@ -53,4 +61,6 @@ export default function FollowUpActionButtons(context) {
         </button>
       </>
     );
-}
+};
+
+export default FollowUpActionButtons;

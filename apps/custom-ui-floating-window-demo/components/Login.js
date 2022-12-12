@@ -1,4 +1,4 @@
-export default function Login() {
+const Login = () => {
   return (
     <>
       <a
@@ -21,4 +21,6 @@ export default function Login() {
       </a>
     </>
   );
-}
+};
+
+export default Login;
