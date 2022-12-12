@@ -1,5 +1,5 @@
 const AdditionalCallerDetails = (props) => {
-  if (!props.existingContact)
+  if (!props.existingContact) {
     return (
       <div className="mb-3">
         <label className="form-label"> Contact Name </label>
@@ -10,26 +10,23 @@ const AdditionalCallerDetails = (props) => {
         />
       </div>
     );
-  else {
-    if (props.relatedDeals?.length > 0) {
-      return (
-        <div className="mb-3">
-          <label className="form-label"> Related Deal </label>
-          <select id="deals" className="form-select">
-            {props.relatedDeals.map((deal) => (
-              <option key={deal.id} value={deal.id}>
-                {deal.title} - {deal.value} {deal.currency}
-              </option>
-            ))}
-          </select>
-        </div>
-      );
-    } else
-      return (
-        <div>
-          No related deals found. Notes will be saved against the contact
-        </div>
-      );
+  } else if (props.relatedDeals?.length) {
+    return (
+      <div className="mb-3">
+        <label className="form-label"> Related Deal </label>
+        <select id="deals" className="form-select">
+          {props.relatedDeals.map((deal) => (
+            <option key={deal.id} value={deal.id}>
+              {deal.title} - {deal.value} {deal.currency}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  } else {
+    return (
+      <div>No related deals found. Notes will be saved against the contact</div>
+    );
   }
 };
 

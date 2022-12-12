@@ -1,6 +1,4 @@
 const ActionButtons = (props) => {
-  let buttons = [];
-
   // Takes the user back to dialer by changing the state
   let hangup = async () => {
     props.setCallerState('listening');
@@ -64,42 +62,33 @@ const ActionButtons = (props) => {
     props.setCallerState('disconnected');
   };
 
-  // Only show the 'Answer' and 'Reject' buttons during Incoming calls
-  if (
-    props.callerDetails.direction === 'in' &&
-    props.callerState === 'ringing'
-  ) {
-    // Answer Button
-    buttons.push(
-      <button type="button" className="btn btn-success mt-2 w-100">
-        Answer
-      </button>
-    );
-    // Reject Button
-    buttons.push(
-      <button type="button" className="btn btn-danger mt-2 w-100">
-        Reject
-      </button>
-    );
-  }
-
-  // When to show the 'Hang up'button
-  if (props.callerState === 'connected' || props.callerState === 'ringing') {
-    buttons.push(
-      <button
-        type="button"
-        className="w-100 mt-2  btn btn-danger"
-        onClick={hangup}
-      >
-        Hang Up
-      </button>
-    );
-  }
-
-  // Hang Up + propsual Action button
-  if (props.callerState === 'connected') {
-    if (!props.callerDetails.existing) {
-      buttons.push(
+  return (
+    <>
+      {/* Only show the 'Answer' and 'Reject' buttons during Incoming calls */}
+      {props.callerDetails.direction === 'in' &&
+        props.callerState === 'ringing' && (
+          <>
+            <button type="button" className="btn btn-success mt-2 w-100">
+              Answer
+            </button>
+            <button type="button" className="btn btn-danger mt-2 w-100">
+              Reject
+            </button>
+          </>
+        )}
+      {/* Common hang-up button is shown for connected and ringing states */}
+      {(props.callerState === 'connected' ||
+        props.callerState === 'ringing') && (
+        <button
+          type="button"
+          className="w-100 mt-2  btn btn-danger"
+          onClick={hangup}
+        >
+          Hang Up
+        </button>
+      )}
+      {/* Hang Up + Create Contact Action button if the call is connected and the contact is new */}
+      {props.callerState === 'connected' && !props.callerDetails.existing && (
         <button
           type="button"
           className="w-100 mt-2 btn btn-warning"
@@ -107,10 +96,11 @@ const ActionButtons = (props) => {
         >
           Hang Up and Create Contact
         </button>
-      );
-    } else {
-      if (props.callerDetails.relatedDeals)
-        buttons.push(
+      )}
+      {/* Hang Up + Add notes to deal if the contact has related deals */}
+      {props.callerState === 'connected' &&
+        props.callerDetails.existing &&
+        props.callerDetails.relatedDeals && (
           <button
             type="button"
             className="w-100 mt-2 btn btn-warning"
@@ -118,9 +108,11 @@ const ActionButtons = (props) => {
           >
             Hang Up and add notes to deal.
           </button>
-        );
-      else
-        buttons.push(
+        )}
+      {/* Hang Up + Add notes to contact if the contact has no related deals */}
+      {props.callerState === 'connected' &&
+        props.callerDetails.existing &&
+        !props.callerDetails.relatedDeals && (
           <button
             type="button"
             className="w-100 mt-2 btn btn-warning"
@@ -128,11 +120,9 @@ const ActionButtons = (props) => {
           >
             Hang Up and add notes to contact
           </button>
-        );
-    }
-  }
-
-  return <> {buttons} </>;
+        )}
+    </>
+  );
 };
 
 export default ActionButtons;
