@@ -28,9 +28,9 @@ export const showFloatingWindow = async (sdk) => {
 
 export const openActivityModal = async (sdk) => {
   log.info('Opening activity modal');
-  // const { status, id } = await sdk.execute(Command.OPEN_MODAL, {
-  //   type: Modal.ACTIVITY,
-  // });
+  await sdk.execute(Command.OPEN_MODAL, {
+    type: Modal.ACTIVITY,
+  });
 };
 
 export const redirectToContact = async (sdk, id) => {

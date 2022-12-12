@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import AdditionalCallerDetails from './AdditionalCallerDetails';
 
 const CallerDetails = (props) => {
@@ -6,11 +5,12 @@ const CallerDetails = (props) => {
     return (
       <div className="p-2">
         <div className="position-absolute top-50 start-50 translate-middle text-center">
-          <Image
+          <img
             src={props.callerDetails?.picture || '/profile.png'}
             alt={props.callerDetails.name}
             className="mb-3 caller-image"
-            width="72px"
+            width="72"
+            height="72"
           />
           <h1> {props.callerDetails.name} </h1>
           <span> {props.callerDetails.number} </span>
@@ -22,11 +22,12 @@ const CallerDetails = (props) => {
       <>
         <div className="row p-2">
           <div className="col-4">
-            <Image
+            <img
               src={props.callerDetails?.picture || '/profile.png'}
               className="mb-3 caller-image"
               alt={props.callerDetails.name}
-              width="72px"
+              width="72"
+              height="72"
             />
           </div>
           <div className="col-6 p-2">

@@ -3,7 +3,7 @@ import logger from '../../shared/logger';
 import { getAPIClient } from '../../shared/oauth';
 const log = logger('Add Notes API 📝');
 
-export const handler = async (req, res) => {
+const handler = async (req, res) => {
   try {
     log.info('Getting session details');
     const d = req.body;
@@ -28,3 +28,5 @@ export const handler = async (req, res) => {
     res.status(500).json({ success: false, data: error });
   }
 };
+
+export default handler;

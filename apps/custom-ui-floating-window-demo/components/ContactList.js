@@ -5,16 +5,27 @@ import Footer from './Footer';
 
 const ContactList = (props) => {
   const router = useRouter();
+  const [search, setSearch] = useState('');
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    // Get the contacts and list them
-    fetch('/api/getContacts')
+    // Get the contacts and list them, performs simple filtering
+    fetch('/api/getContacts', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
+        if (search) data = data.filter((i) => i.contactName.includes(search));
         setContacts(data);
       });
-  }, [router]);
+  }, [router, search]);
+
+  const performSearch = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <div className="container-fluid">
@@ -33,6 +44,7 @@ const ContactList = (props) => {
             type="text"
             className="form-control"
             placeholder="Type the name of the contact"
+            onChange={(e) => performSearch(e)}
           />
         </div>
         <ol className="contact-list list-group">

@@ -13,7 +13,12 @@ const ControlCenter = () => {
 
   useEffect(() => {
     (async () => {
-      await fetch('/api/socket');
+      await fetch('/api/socket', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       if (socket) {
         socket.on('connect', () => {
           log.info('☎️ Phone booth socket client connected.');

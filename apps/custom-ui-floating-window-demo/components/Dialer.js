@@ -19,7 +19,13 @@ const Dialer = (props) => {
 
   useEffect(() => {
     fetch(
-      `/api/getContact?id=${props.callerDetails.id}&number=${props.callerDetails.number}`
+      `/api/getContact?id=${props.callerDetails.id}&number=${props.callerDetails.number}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
     )
       .then((res) => res.json())
       .then((data) => {

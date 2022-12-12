@@ -37,7 +37,12 @@ const Home = ({ auth, session }) => {
       // Initialize Custom UI SDK and Socket communications
       (async () => {
         sdk = await initializeSDK();
-        await fetch('/api/socket');
+        await fetch('/api/socket', {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        });
         handleSocketCommunication(socket, context, sdk);
       })();
     }

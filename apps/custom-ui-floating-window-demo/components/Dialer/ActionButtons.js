@@ -10,6 +10,10 @@ const ActionButtons = (props) => {
     // Create Contact
     const newContact = await fetch('/api/addContact', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         name,
         number: props.callerDetails.number,
@@ -35,6 +39,10 @@ const ActionButtons = (props) => {
 
     await fetch('/api/addCallLogsToDeal', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         dealId,
         note,
@@ -53,6 +61,10 @@ const ActionButtons = (props) => {
 
     await fetch('/api/addNotesToContact', {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         id: props.callerDetails.id,
         notes,

@@ -8,7 +8,7 @@ const log = logger('Get Contact API 📕');
  * Get associated deals of that person (if available)
  * Return the response
  */
-export const handler = async (req, res) => {
+const handler = async (req, res) => {
   try {
     log.info('Getting session details');
     const client = getAPIClient(req, res);
@@ -62,3 +62,5 @@ export const handler = async (req, res) => {
     res.status(500).json({ success: false, data: error });
   }
 };
+
+export default handler;
