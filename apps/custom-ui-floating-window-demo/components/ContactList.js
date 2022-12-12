@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { startOutgoingCall } from '../shared/socket';
 import Footer from './Footer';
 
-const ContactList = (context) => {
+const ContactList = (props) => {
   const router = useRouter();
   const [contacts, setContacts] = useState([]);
 
@@ -21,10 +21,7 @@ const ContactList = (context) => {
       <div className="row">
         <nav className="navbar navbar-light bg-mildgreen">
           <div className="container-fluid">
-            <span className="navbar-brand">
-              {' '}
-              🟢 Hello, {context.user.name}{' '}
-            </span>
+            <span className="navbar-brand"> 🟢 Hello, {props.user.name} </span>
           </div>
         </nav>
         <p> Search and Tap on a contact name to dial </p>
@@ -43,7 +40,7 @@ const ContactList = (context) => {
           {contacts.map((d) => (
             <li
               key={d.contactId}
-              onClick={() => startOutgoingCall(context, d.contactId)}
+              onClick={() => startOutgoingCall(props, d.contactId)}
               className="list-group-item d-flex justify-content-between align-items-start"
             >
               <div>
@@ -61,6 +58,6 @@ const ContactList = (context) => {
       </div>
     </div>
   );
-}
+};
 
 export default ContactList;

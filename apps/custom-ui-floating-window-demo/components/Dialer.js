@@ -4,10 +4,10 @@ import CallerDetails from './Dialer/CallerDetails';
 import CallStatus from './Dialer/CallStatus';
 import Footer from './Footer';
 
-const Dialer = (context) => {
-  const updateCallerDetails = (context, data) => {
-    context.setCallerDetails({
-      ...context.callerDetails,
+const Dialer = (props) => {
+  const updateCallerDetails = (props, data) => {
+    props.setCallerDetails({
+      ...props.callerDetails,
       name: data.name,
       picture: data?.picture_id?.pictures['128'] || '/profile.png',
       number: data.number,
@@ -19,11 +19,11 @@ const Dialer = (context) => {
 
   useEffect(() => {
     fetch(
-      `/api/getContact?id=${context.callerDetails.id}&number=${context.callerDetails.number}`
+      `/api/getContact?id=${props.callerDetails.id}&number=${props.callerDetails.number}`
     )
       .then((res) => res.json())
       .then((data) => {
-        updateCallerDetails(context, data);
+        updateCallerDetails(props, data);
       });
   }, []);
 
@@ -31,13 +31,13 @@ const Dialer = (context) => {
     <div className="vh-100">
       <nav className="navbar navbar-light bg-mildgreen">
         <div className="container-fluid">
-          <span className="navbar-brand"> 🟢 Hello, {context.user.name} </span>
+          <span className="navbar-brand"> 🟢 Hello, {props.user.name} </span>
         </div>
       </nav>
-      <CallStatus {...context} />
-      <CallerDetails {...context} />
+      <CallStatus {...props} />
+      <CallerDetails {...props} />
       <div className="fixed-bottom m-2">
-        <ActionButtons {...context} />
+        <ActionButtons {...props} />
         <Footer />
       </div>
     </div>

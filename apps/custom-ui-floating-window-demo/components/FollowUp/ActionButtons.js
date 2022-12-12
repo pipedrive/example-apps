@@ -6,7 +6,7 @@ import {
 import logger from '../../shared/logger';
 const log = logger('FollowUp');
 
-const FollowUpActionButtons = (context) => {
+const FollowUpActionButtons = (props) => {
   const invokeActivityModal = async () => {
     log.info('Invoking activity dialog...');
     const sdk = await initializeSDK();
@@ -15,15 +15,15 @@ const FollowUpActionButtons = (context) => {
   const goToContact = async () => {
     log.info('Navigating to the contact based on the contact ID');
     const sdk = await initializeSDK();
-    redirectToContact(sdk, context.callerDetails.id);
+    redirectToContact(sdk, props.callerDetails.id);
   };
 
   const goToDialer = async () => {
     log.info('Going back to the dialer by changing the state');
-    context.setCallerState('listening');
+    props.setCallerState('listening');
   };
 
-  if (context.callerDetails.existing)
+  if (props.callerDetails.existing)
     return (
       <>
         <button

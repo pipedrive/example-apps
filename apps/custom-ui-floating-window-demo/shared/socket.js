@@ -1,7 +1,7 @@
 import logger from './logger';
 const log = logger('socket');
 
-export const handleSocketCommunication = (socket, context, sdk) => {
+export const handleSocketCommunication = (socket, props, sdk) => {
   if (socket) {
     socket.on('connect', () => {
       log.info('Client connected.');
@@ -14,8 +14,8 @@ export const handleSocketCommunication = (socket, context, sdk) => {
     socket.on('INBOUND_CALL', (...args) => {
       log.info('Receiving incoming call...');
 
-      if (context.callerState === 'listening')
-        startIncomingCall(context, args[0].number);
+      if (props.callerState === 'listening')
+        startIncomingCall(props, args[0].number);
       else {
         log.info('Cannot place a call when a current call is in progress');
       }
@@ -23,32 +23,32 @@ export const handleSocketCommunication = (socket, context, sdk) => {
   }
 };
 
-export const startIncomingCall = (context, number) => {
+export const startIncomingCall = (props, number) => {
   const details = {
     id: undefined,
     number,
     direction: 'in',
     existing: false,
   };
-  context.setCallerState('ringing');
+  props.setCallerState('ringing');
   setTimeout(() => {
-    context.setCallerState('connected');
+    props.setCallerState('connected');
   }, 2000);
 
-  context.setCallerDetails(details);
+  props.setCallerDetails(details);
 };
 
-export const startOutgoingCall = (context, id) => {
+export const startOutgoingCall = (props, id) => {
   const details = {
     id,
     number: undefined,
     direction: 'out',
     existing: true,
   };
-  context.setCallerState('ringing');
+  props.setCallerState('ringing');
   setTimeout(() => {
-    context.setCallerState('connected');
+    props.setCallerState('connected');
   }, 2000);
 
-  context.setCallerDetails(details);
+  props.setCallerDetails(details);
 };

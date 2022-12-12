@@ -1,9 +1,9 @@
-const ActionButtons = (context) => {
+const ActionButtons = (props) => {
   let buttons = [];
 
   // Takes the user back to dialer by changing the state
   let hangup = async () => {
-    context.setCallerState('listening');
+    props.setCallerState('listening');
   };
 
   let createNewContact = async () => {
@@ -14,15 +14,15 @@ const ActionButtons = (context) => {
       method: 'POST',
       body: JSON.stringify({
         name,
-        number: context.callerDetails.number,
+        number: props.callerDetails.number,
         notes,
       }),
     });
     let contactObj = await newContact.json();
     let contact = contactObj.data;
 
-    context.setCallerDetails({ ...context.callerDetails, id: contact.id });
-    context.setCallerState('disconnected');
+    props.setCallerDetails({ ...props.callerDetails, id: contact.id });
+    props.setCallerState('disconnected');
   };
 
   let addNotesToDeal = async () => {
@@ -40,14 +40,14 @@ const ActionButtons = (context) => {
       body: JSON.stringify({
         dealId,
         note,
-        to_phone_number: context.callerDetails.number,
+        to_phone_number: props.callerDetails.number,
         start_time,
         end_time,
         outcome: 'busy',
       }),
     });
 
-    context.setCallerState('disconnected');
+    props.setCallerState('disconnected');
   };
 
   let addNotesToContact = async () => {
@@ -56,18 +56,18 @@ const ActionButtons = (context) => {
     await fetch('/api/addNotesToContact', {
       method: 'POST',
       body: JSON.stringify({
-        id: context.callerDetails.id,
+        id: props.callerDetails.id,
         notes,
       }),
     });
 
-    context.setCallerState('disconnected');
+    props.setCallerState('disconnected');
   };
 
   // Only show the 'Answer' and 'Reject' buttons during Incoming calls
   if (
-    context.callerDetails.direction === 'in' &&
-    context.callerState === 'ringing'
+    props.callerDetails.direction === 'in' &&
+    props.callerState === 'ringing'
   ) {
     // Answer Button
     buttons.push(
@@ -84,10 +84,7 @@ const ActionButtons = (context) => {
   }
 
   // When to show the 'Hang up'button
-  if (
-    context.callerState === 'connected' ||
-    context.callerState === 'ringing'
-  ) {
+  if (props.callerState === 'connected' || props.callerState === 'ringing') {
     buttons.push(
       <button
         type="button"
@@ -99,9 +96,9 @@ const ActionButtons = (context) => {
     );
   }
 
-  // Hang Up + Contextual Action button
-  if (context.callerState === 'connected') {
-    if (!context.callerDetails.existing) {
+  // Hang Up + propsual Action button
+  if (props.callerState === 'connected') {
+    if (!props.callerDetails.existing) {
       buttons.push(
         <button
           type="button"
@@ -112,7 +109,7 @@ const ActionButtons = (context) => {
         </button>
       );
     } else {
-      if (context.callerDetails.relatedDeals)
+      if (props.callerDetails.relatedDeals)
         buttons.push(
           <button
             type="button"

@@ -31,6 +31,6 @@ const AdditionalCallerDetails = (props) => {
         </div>
       );
   }
-}
+};
 
 export default AdditionalCallerDetails;
