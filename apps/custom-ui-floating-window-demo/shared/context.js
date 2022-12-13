@@ -6,7 +6,7 @@ const log = logger('App Context');
 
 export const AppContextWrapper = ({ children }) => {
   const [user, setUser] = useState({});
-  // TODO: Possible States -> Listening, Ringing, Connected, Disconnected
+  // Possible States -> Listening, Ringing, Connected, Disconnected
   const [callerState, setCallerState] = useState('listening');
   const [missedCall, setMissedCall] = useState(0);
   const [callerDetails, setCallerDetails] = useState({});
@@ -26,6 +26,6 @@ export const AppContextWrapper = ({ children }) => {
   return (
     <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
   );
-}
+};
 
 export const useAppContext = () => useContext(AppContext);

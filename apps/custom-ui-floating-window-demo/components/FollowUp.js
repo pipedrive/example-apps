@@ -2,8 +2,8 @@ import CallStatus from './Dialer/CallStatus';
 import FollowUpActionButtons from './FollowUp/ActionButtons';
 import Footer from './Footer';
 
+// Follow up actions based on the contact
 const FollowUp = (props) => {
-  // Set Follow up action text
   const renderFollowUpCompletion = () => {
     if (props.callerDetails.existing === false) {
       return '✅ Contact Saved';

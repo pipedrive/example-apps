@@ -2,7 +2,9 @@ import { PersonsApi } from 'pipedrive';
 import logger from '../../shared/logger';
 import { getAPIClient } from '../../shared/oauth';
 const log = logger('Get Contacts API 📚');
-
+/**
+ * Gets a list of contacts in Pipedrive for the ContactList page
+ */
 const handler = async (req, res) => {
   try {
     log.info('Getting session details');

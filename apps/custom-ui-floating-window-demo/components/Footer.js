@@ -1,3 +1,4 @@
+// Footer containing the disclaimer message
 const Footer = () => {
   {
     return (

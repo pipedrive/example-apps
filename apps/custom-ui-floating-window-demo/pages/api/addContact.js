@@ -8,7 +8,9 @@ import {
 import logger from '../../shared/logger';
 import { getAPIClient } from '../../shared/oauth';
 const log = logger('Add Contact API ➕');
-
+/**
+ * Adds contact to Pipedrive with notes
+ */
 const handler = async (req, res) => {
   try {
     log.info('Getting session details');

@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react';
 import { startOutgoingCall } from '../shared/socket';
 import Footer from './Footer';
 
+// Shows the contacts in Pipedrive with an ability to filter
 const ContactList = (props) => {
   const router = useRouter();
   const [search, setSearch] = useState('');
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    // Get the contacts and list them, performs simple filtering
     fetch('/api/getContacts', {
       headers: {
         Accept: 'application/json',

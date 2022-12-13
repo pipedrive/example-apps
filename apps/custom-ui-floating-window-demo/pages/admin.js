@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import io from 'Socket.IO-client';
 import logger from '../shared/logger';
 const log = logger('admin');
-
+/**
+ * Control Center can be used to simulate an inbound call
+ */
 const ControlCenter = () => {
   const socket = io();
   const dialPipedrive = () => {

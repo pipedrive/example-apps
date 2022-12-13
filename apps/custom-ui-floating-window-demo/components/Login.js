@@ -1,3 +1,4 @@
+// Login page if there is an issue with authorization
 const Login = () => {
   return (
     <>
@@ -16,7 +17,6 @@ const Login = () => {
           window.location.reload();
         }}
       >
-        {' '}
         refresh the page
       </a>
     </>

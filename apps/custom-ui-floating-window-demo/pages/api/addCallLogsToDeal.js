@@ -2,7 +2,9 @@ import { CallLogsApi, CallLogObject } from 'pipedrive';
 import logger from '../../shared/logger';
 import { getAPIClient } from '../../shared/oauth';
 const log = logger('Call Logs API 📇');
-
+/**
+ * Adds a call log to a specified deal
+ */
 const handler = async (req, res) => {
   try {
     log.info('Getting session details');

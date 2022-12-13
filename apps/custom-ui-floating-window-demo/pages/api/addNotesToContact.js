@@ -2,7 +2,9 @@ import { NotesApi, AddNoteRequest } from 'pipedrive';
 import logger from '../../shared/logger';
 import { getAPIClient } from '../../shared/oauth';
 const log = logger('Add Notes API 📝');
-
+/**
+ * Adds notes to an existing contact in Pipedrive
+ */
 const handler = async (req, res) => {
   try {
     log.info('Getting session details');

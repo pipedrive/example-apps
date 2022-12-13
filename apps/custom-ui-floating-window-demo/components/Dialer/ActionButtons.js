@@ -3,11 +3,11 @@ const ActionButtons = (props) => {
   let hangup = async () => {
     props.setCallerState('listening');
   };
-
+  // Creates a new contact in Pipedrive
   let createNewContact = async () => {
     let notes = document.getElementById('notes').value;
     let name = document.getElementById('contact_name').value;
-    // Create Contact
+
     const newContact = await fetch('/api/addContact', {
       method: 'POST',
       headers: {
@@ -27,6 +27,7 @@ const ActionButtons = (props) => {
     props.setCallerState('disconnected');
   };
 
+  // Adds a CallLog to an associated deal
   let addNotesToDeal = async () => {
     const note = document.getElementById('notes').value;
     const dealId = document.getElementById('deals').value;
@@ -56,6 +57,7 @@ const ActionButtons = (props) => {
     props.setCallerState('disconnected');
   };
 
+  // Adds notes to the associated contact
   let addNotesToContact = async () => {
     let notes = document.getElementById('notes').value;
 

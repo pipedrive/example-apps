@@ -1,3 +1,4 @@
+// Additional inputs such as contact name and associated deals dropdown
 const AdditionalCallerDetails = (props) => {
   if (!props.existingContact) {
     return (

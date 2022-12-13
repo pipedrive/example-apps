@@ -4,6 +4,7 @@ import CallerDetails from './Dialer/CallerDetails';
 import CallStatus from './Dialer/CallStatus';
 import Footer from './Footer';
 
+// Dialer view showing call status, caller details and relevant action buttons
 const Dialer = (props) => {
   const updateCallerDetails = (props, data) => {
     props.setCallerDetails({
