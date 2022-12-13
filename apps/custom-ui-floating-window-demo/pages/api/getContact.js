@@ -20,47 +20,58 @@ const handler = async (req, res) => {
     if (req.query.id && req.query.id !== 'undefined') {
       log.info(req.query.id, 'Getting contact based on ID');
       // Let's get the person by ID
-      let contactObj = await api.getPerson(req.query.id);
-      log.info('Contact details obtained');
-      contact = contactObj.data;
-      contact.number = contact.phone[0].value;
-      contact.existing = true;
+      contact = await getContactById(api, req.query.id);
     } else if (req.query.number && req.query.number !== 'undefined') {
       log.info(req.query.number, 'Getting contact based on number search');
       // Let's get the person by the number
-      let contactsObj = await api.searchPersons(req.query.number);
-      let contacts = contactsObj.data;
-      if (contacts.items.length == 0) {
-        log.info('No matching contacts found');
-        contact = {
-          name: 'Unknown',
-          number: req.query.number,
-          existing: false,
-        };
-        return res.status(200).json(contact);
-      } else {
-        log.info('Matching contact found');
-        contact = contacts.items[0].item;
-        contact.number = contact.phones[0];
-        contact.existing = true;
-      }
+      // If the contact does not exist in Pipedrive, simply return the contact object
+      contact = await getContactByNumber(api, req.query.number);
+      if (!contact.existing) return res.status(200).json(contact);
     }
     log.info('Getting associated deals');
-    // Now let's get the associated details
+    // Now let's get the associated details if the contact exists in Pipedrive
     let relatedDealObj = await api.getPersonDeals(contact.id);
     let relatedDealsJson = relatedDealObj.data;
     log.info('Returning response');
-    // Prepare the response
+    // Prepare the response and send
     let apiResponse = contact;
     apiResponse.relatedDeals = relatedDealsJson;
 
-    // And, send it :)
     res.status(200).json(apiResponse);
   } catch (error) {
     log.info('Failed get contact');
     log.error(error);
     res.status(500).json({ success: false, data: error });
   }
+};
+
+const getContactById = async (api, id) => {
+  let contactObj = await api.getPerson(id);
+  log.info('Contact details obtained based on id');
+  let contact = contactObj.data;
+  contact.number = contact.phone[0].value;
+  contact.existing = true;
+  return contact;
+};
+
+const getContactByNumber = async (api, number) => {
+  let contactsObj = await api.searchPersons(number);
+  let contacts = contactsObj.data;
+  let contact;
+  if (contacts.items.length === 0) {
+    log.info('No matching contacts found');
+    contact = {
+      name: 'Unknown',
+      number: number,
+      existing: false,
+    };
+  } else {
+    log.info('Matching contact found');
+    contact = contacts.items[0].item;
+    contact.number = contact.phones[0];
+    contact.existing = true;
+  }
+  return contact;
 };
 
 export default handler;
