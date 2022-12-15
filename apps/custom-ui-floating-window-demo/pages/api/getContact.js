@@ -30,11 +30,11 @@ const handler = async (req, res) => {
     }
     log.info('Getting associated deals');
     // Now let's get the associated details if the contact exists in Pipedrive
-    let relatedDealObj = await api.getPersonDeals(contact.id);
-    let relatedDealsJson = relatedDealObj.data;
+    const relatedDealObj = await api.getPersonDeals(contact.id);
+    const relatedDealsJson = relatedDealObj.data;
     log.info('Returning response');
     // Prepare the response and send
-    let apiResponse = contact;
+    const apiResponse = contact;
     apiResponse.relatedDeals = relatedDealsJson;
 
     res.status(200).json(apiResponse);
@@ -46,17 +46,17 @@ const handler = async (req, res) => {
 };
 
 const getContactById = async (api, id) => {
-  let contactObj = await api.getPerson(id);
+  const contactObj = await api.getPerson(id);
   log.info('Contact details obtained based on id');
-  let contact = contactObj.data;
+  const contact = contactObj.data;
   contact.number = contact.phone[0].value;
   contact.existing = true;
   return contact;
 };
 
 const getContactByNumber = async (api, number) => {
-  let contactsObj = await api.searchPersons(number);
-  let contacts = contactsObj.data;
+  const contactsObj = await api.searchPersons(number);
+  const contacts = contactsObj.data;
   let contact;
   if (contacts.items.length === 0) {
     log.info('No matching contacts found');

@@ -1,12 +1,12 @@
 const ActionButtons = (props) => {
   // Takes the user back to dialer by changing the state
-  let hangup = async () => {
+  const hangup = async () => {
     props.setCallerState('listening');
   };
   // Creates a new contact in Pipedrive
-  let createNewContact = async () => {
-    let notes = document.getElementById('notes').value;
-    let name = document.getElementById('contact_name').value;
+  const createNewContact = async () => {
+    const notes = document.getElementById('notes').value;
+    const name = document.getElementById('contact_name').value;
 
     const newContact = await fetch('/api/addContact', {
       method: 'POST',
@@ -20,15 +20,15 @@ const ActionButtons = (props) => {
         notes,
       }),
     });
-    let contactObj = await newContact.json();
-    let contact = contactObj.data;
+    const contactObj = await newContact.json();
+    const contact = contactObj.data;
 
     props.setCallerDetails({ ...props.callerDetails, id: contact.id });
     props.setCallerState('disconnected');
   };
 
   // Adds a CallLog to an associated deal
-  let addNotesToDeal = async () => {
+  const addNotesToDeal = async () => {
     const note = document.getElementById('notes').value;
     const dealId = document.getElementById('deals').value;
 
@@ -58,8 +58,8 @@ const ActionButtons = (props) => {
   };
 
   // Adds notes to the associated contact
-  let addNotesToContact = async () => {
-    let notes = document.getElementById('notes').value;
+  const addNotesToContact = async () => {
+    const notes = document.getElementById('notes').value;
 
     await fetch('/api/addNotesToContact', {
       method: 'POST',

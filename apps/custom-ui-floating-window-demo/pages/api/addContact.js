@@ -22,7 +22,7 @@ const handler = async (req, res) => {
 
     // Create contact
     log.info('Creating contact');
-    let person = await api.addPerson(
+    const person = await api.addPerson(
       NewPerson.constructFromObject({
         name: d.name,
         phone: [
