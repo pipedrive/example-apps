@@ -1,8 +1,14 @@
 const ActionButtons = (props) => {
-  // Takes the user back to dialer by changing the state
+  // Takes the user back to the contact list by changing the state
   const hangup = async () => {
     props.setCallerState('listening');
   };
+
+  // Answer the call by changing the state
+  const answer = async () => {
+    props.setCallerState('connected');
+  };
+
   // Creates a new contact in Pipedrive
   const createNewContact = async () => {
     const notes = document.getElementById('notes').value;
@@ -82,10 +88,18 @@ const ActionButtons = (props) => {
       {props.callerDetails.direction === 'in' &&
         props.callerState === 'ringing' && (
           <>
-            <button type="button" className="btn btn-success mt-2 w-100">
+            <button
+              type="button"
+              onClick={answer}
+              className="btn btn-success mt-2 w-100"
+            >
               Answer
             </button>
-            <button type="button" className="btn btn-danger mt-2 w-100">
+            <button
+              type="button"
+              onClick={hangup}
+              className="btn btn-danger mt-2 w-100"
+            >
               Reject
             </button>
           </>

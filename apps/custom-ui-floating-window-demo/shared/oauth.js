@@ -7,7 +7,7 @@ const log = logger('OAuth 🔒');
 // Initialize the API client
 export const initAPIClient = ({ accessToken = '', refreshToken = '' }) => {
   const client = new ApiClient();
-  let oAuth2 = client.authentications.oauth2;
+  const oAuth2 = client.authentications.oauth2;
 
   // Set the Client Credentials based on the Pipedrive App details
   oAuth2.clientId = process.env.CLIENT_ID;
@@ -55,14 +55,14 @@ export const initalizeSession = async (req, res, userId) => {
   try {
     // 1.1 Check if the session cookie is already set
     log.info(`Checking if a session cookie is set for ${userId}`);
-    let session = getCookie('session', { req, res });
+    const session = getCookie('session', { req, res });
 
     // 1.2. If the session is not set, get the user ID value from the query params
     if (!session) {
       log.info(
         'Session cookie is not found. Checking the database for OAuth details'
       );
-      let account = await db.user.findUnique({
+      const account = await db.user.findUnique({
         where: {
           accountId: String(userId),
         },

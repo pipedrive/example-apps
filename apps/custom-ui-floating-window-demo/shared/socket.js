@@ -31,10 +31,6 @@ export const startIncomingCall = (props, number) => {
     existing: false,
   };
   props.setCallerState('ringing');
-  setTimeout(() => {
-    props.setCallerState('connected');
-  }, 2000);
-
   props.setCallerDetails(details);
 };
 
