@@ -98,13 +98,14 @@ export const initalizeSession = async (req, res, userId) => {
         );
       } else {
         log.info('Access token is valid. Session cookie set 🍪');
-        // 1.5. Return this value to the app
+        // 1.5. Return this value to the app.
+        // Make sure to set the cookie lifetime only for the remaining validity time of the access token
         return setSessionCookie(
           true,
           account.accountId,
           account.name,
           account.accessToken,
-          String(Date.now() + 59 * 60 * 1000),
+          account.expiresAt,
           req,
           res
         );
