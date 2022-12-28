@@ -25,7 +25,6 @@ export const handleSocketCommunication = (socket, props, sdk) => {
 
 export const startIncomingCall = (props, number) => {
   const details = {
-    id: undefined,
     number,
     direction: 'in',
     existing: false,
@@ -37,7 +36,6 @@ export const startIncomingCall = (props, number) => {
 export const startOutgoingCall = (props, id) => {
   const details = {
     id,
-    number: undefined,
     direction: 'out',
     existing: true,
   };

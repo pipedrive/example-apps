@@ -6,11 +6,14 @@ import AppExtensionsSDK, {
 import logger from './logger';
 
 const log = logger('Custom UI SDK');
-// Initialize SDK and set height
-export const initializeSDK = async () => {
+let SDK;
+// Initialize SDK and set height. If SDK is already initialized, just return it.
+export const getCustomUISDK = async () => {
   try {
-    log.info('Initialized SDK');
-    return await new AppExtensionsSDK().initialize({ size: { height: 550 } });
+    if (SDK) return SDK;
+    log.info('Initializing SDK');
+    SDK = await new AppExtensionsSDK().initialize({ size: { height: 550 } });
+    return SDK;
   } catch (e) {
     log.error('Error during SDK initialization', e);
   }

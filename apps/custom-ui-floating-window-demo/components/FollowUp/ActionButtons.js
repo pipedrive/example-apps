@@ -1,5 +1,5 @@
 import {
-  initializeSDK,
+  getCustomUISDK,
   openActivityModal,
   redirectToContact,
 } from '../../shared/custom_ui_sdk';
@@ -10,13 +10,13 @@ const FollowUpActionButtons = (props) => {
   // Invokes the Activity Modal
   const invokeActivityModal = async () => {
     log.info('Invoking activity dialog...');
-    const sdk = await initializeSDK();
+    const sdk = await getCustomUISDK();
     openActivityModal(sdk);
   };
   // Navigates to the newly created contact in Pipedrive
   const goToContact = async () => {
     log.info('Navigating to the contact based on the contact ID');
-    const sdk = await initializeSDK();
+    const sdk = await getCustomUISDK();
     redirectToContact(sdk, props.callerDetails.id);
   };
   // Navigates to the dialer

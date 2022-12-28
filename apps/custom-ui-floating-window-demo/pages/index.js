@@ -5,7 +5,7 @@ import io from 'Socket.IO-client';
 import { useAppContext } from '../shared/context';
 import logger from '../shared/logger';
 import { initalizeSession } from '../shared/oauth';
-import { initializeSDK } from '../shared/custom_ui_sdk';
+import { getCustomUISDK } from '../shared/custom_ui_sdk';
 import { handleSocketCommunication } from '../shared/socket';
 
 import ContactList from '../components/ContactList';
@@ -27,7 +27,6 @@ const Home = ({ auth, session }) => {
   const router = useRouter();
   const context = useAppContext();
   const socket = io();
-  let sdk;
 
   useEffect(() => {
     if (auth) {
@@ -36,7 +35,7 @@ const Home = ({ auth, session }) => {
       context.setUser(session);
       // Initialize Custom UI SDK and Socket communications
       (async () => {
-        sdk = await initializeSDK();
+        const sdk = await getCustomUISDK();
         await fetch('/api/socket', {
           headers: {
             Accept: 'application/json',
