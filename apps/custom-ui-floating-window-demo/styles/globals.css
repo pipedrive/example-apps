@@ -1,0 +1,83 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+.bg-mildgreen {
+  background: #d9f2dd;
+}
+
+nav .navbar-brand {
+  font-size: 12px;
+}
+
+.alert.note {
+  line-height: initial
+}
+
+.contact-list {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.contact-list li {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contact-list li * {
+  pointer-events: none;
+}
+
+.status-indicator {
+  background-color: #7951f2;
+  color: white
+}
+
+.fixed-bottom {
+  position: absolute !important;
+}
+
+.session-details {
+  color: white
+}
+
+.caller-image {
+  border-radius: 20px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+img {
+  background-color: #b2b5b5;
+}
+
+.center-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
