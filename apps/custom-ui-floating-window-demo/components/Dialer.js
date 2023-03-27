@@ -1,21 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ActionButtons from './Dialer/ActionButtons';
 import CallerDetails from './Dialer/CallerDetails';
 import CallStatus from './Dialer/CallStatus';
 import Footer from './Footer';
 
+import { getCustomUISDK, showFloatingWindow } from '../shared/custom_ui_sdk';
+
 // Dialer view showing call status, caller details and relevant action buttons
 const Dialer = (props) => {
-  const updateCallerDetails = (props, data) => {
-    props.setCallerDetails({
-      ...props.callerDetails,
-      name: data.name,
-      picture: data?.picture_id?.pictures['128'] || '/profile.png',
-      number: data.number,
-      relatedDeals: data?.relatedDeals,
-      existing: data.existing,
-      id: data.id,
-    });
+  const updateCallerDetails = async (props, data) => {
+    if (props.pageVisibility.state === 'visible') {
+      showFloatingWindow(props.customSdk);
+
+      props.setCallerDetails({
+        ...props.callerDetails,
+        name: data.name,
+        picture: data?.picture_id?.pictures['128'] || '/profile.png',
+        number: data.number,
+        relatedDeals: data?.relatedDeals,
+        existing: data.existing,
+        id: data.id,
+      });
+    };
   };
 
   useEffect(() => {

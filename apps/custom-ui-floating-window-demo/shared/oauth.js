@@ -9,10 +9,14 @@ export const initAPIClient = ({ accessToken = '', refreshToken = '' }) => {
   const client = new ApiClient();
   const oAuth2 = client.authentications.oauth2;
 
+console.log('oAuth2', oAuth2);
   // Set the Client Credentials based on the Pipedrive App details
   oAuth2.clientId = process.env.CLIENT_ID;
   oAuth2.clientSecret = process.env.CLIENT_SECRET;
   oAuth2.redirectUri = process.env.REDIRECT_URL;
+
+  oAuth2.host = "https://oauth.testbox173.pipedrive.xyz";
+  client.host = "https://oauth.testbox173.pipedrive.xyz";
   if (accessToken) oAuth2.accessToken = accessToken;
   if (refreshToken) oAuth2.refreshToken = refreshToken;
 
@@ -29,7 +33,8 @@ export const getAPIClient = (req, res) => {
 
 // Generate the authorization URL for the 1st step
 export const getAuthorizationUrl = (client) => {
-  const authUrl = client.buildAuthorizationUrl();
+  console.log('build => ', client.buildAuthorizationUrl());
+  const authUrl = "https://oauth.testbox173.pipedrive.xyz/api/auth/pipedrive/callback?code=6.18.036c5cc52b2968bc01c6681f3eac37d884d81ba7&redirect_uri=http://localhost:3000/api/auth/callback&grant_type=authorization_code";
   log.info('Authorization URL generated');
   return authUrl;
 };

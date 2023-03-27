@@ -18,7 +18,7 @@ const ContactList = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (search) data = data.filter((i) => i.contactName.includes(search));
+        if (search) data = data && data.filter((i) => i.contactName.includes(search)) || [];
         setContacts(data);
       });
   }, [router, search]);
@@ -49,7 +49,7 @@ const ContactList = (props) => {
         </div>
         <ol className="contact-list list-group">
           {/* List the contacts based on the API response */}
-          {contacts.map((d) => (
+          {contacts.length && contacts.map((d) => (
             <li
               key={d.contactId}
               onClick={() => startOutgoingCall(props, d.contactId)}

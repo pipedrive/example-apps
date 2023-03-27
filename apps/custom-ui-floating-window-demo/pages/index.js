@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import io from 'Socket.IO-client';
 
 import { useAppContext } from '../shared/context';
@@ -28,6 +28,22 @@ const Home = ({ auth, session }) => {
   const context = useAppContext();
   const socket = io();
 
+  const [pageVisibility, setPageVisibilityState] = useState({ state: 'hidden' });
+  const [customSdk, setCustomSdk] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const sdk = await getCustomUISDK();
+
+      setCustomSdk(sdk);
+
+      const stopReceivingPageState = sdk.listen('page_visibility_state', ({ data }) => {
+        console.log('DATA => ', data.state);
+        setPageVisibilityState(data);
+      });
+    })();
+  }, []);
+
   useEffect(() => {
     if (auth) {
       // Update the context variables once the session is initialized
@@ -54,11 +70,13 @@ const Home = ({ auth, session }) => {
 
   switch (context.callerState) {
     case 'listening': {
-      return <ContactList {...context} />;
+      return <ContactList {...context } />;
     }
     case 'ringing':
     case 'connected': {
-      return <Dialer {...context} />;
+      const props = { ...context, pageVisibility, customSdk };
+     
+      return <Dialer {...props} />;
     }
     case 'disconnected': {
       return <FollowUp {...context} />;
