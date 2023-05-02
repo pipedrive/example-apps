@@ -21,7 +21,7 @@
     "passport-oauth": "^1.0.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "sqlite3": "^5.1.1",
+    "sqlite3": "^5.1.5",
     "twilio": "~3.64.0"
   }
 }
