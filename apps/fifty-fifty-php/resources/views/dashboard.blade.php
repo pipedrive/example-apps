@@ -30,16 +30,16 @@
                     <div class="flex items-center flex-1 min-w-0">
                         <div class="mt-0 mr-0 mb-0 ml-4 flex-1 min-w-0 py-2">
                             <div class="space-y-0.5">
-                                <p class="text-lg font-bold text-gray-800 truncate">{{ $item->title }}</p>
+                                <p class="text-lg font-bold text-gray-800 truncate">{{ $item['title'] }}</p>
                                 <p class="text-sm font-light">
-                                    ID: {{ $item->id }}
+                                    ID: {{ $item['id'] }}
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div
                         class="items-center pr-4">
-                        <form method="POST" action={{ route('deal.pick', ['id' => $item->id]) }}>
+                        <form method="POST" action={{ route('deal.pick', ['id' => $item['id']]) }}>
                             @csrf
                             <button
                                 class="px-4 py-1 text-sm text-sky-600 font-semibold rounded-full border border-gray-300 hover:text-white hover:bg-sky-500 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-sky-300 focus:ring-offset-2"

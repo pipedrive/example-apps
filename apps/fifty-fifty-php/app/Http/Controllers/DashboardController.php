@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Pipedrive\Client;
+use Pipedrive\Api\DealsApi;
 use Pipedrive\Configuration;
 
 class DashboardController extends Controller
@@ -17,27 +17,27 @@ class DashboardController extends Controller
     {
         $user = Auth::getUser();
 
-        $config = Config::get('auth.pipedrive');
-        $client = new Client(
-            $config['client_id'],
-            $config['client_secret'],
-            $config['redirect_uri'],
+        $config = Configuration::getDefaultConfiguration();
+        $config->setClientId(Config::get('auth.pipedrive.client_id'));
+        $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
+        $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
+
+        $config->setAccessToken($user->access_token);
+        $config->setRefreshToken($user->refresh_token);
+        $config->setExpiresAt($user->expiry);
+
+        $dealsApiInstance = new DealsApi(null, $config);
+        $response = $dealsApiInstance->getDeals(
+            null,
+            null,
+            null,
+            'open',
+            0,
+            10,
         );
 
-        Configuration::$oAuthToken = (object) [
-            'accessToken' => $user->access_token,
-            'refreshToken' => $user->refresh_token,
-            'expiry' => $user->expiry,
-            'tokenType' => 'Bearer',
-        ];
-
-        $response = $client->getDeals()->getAllDeals([
-            'limit' => 10,
-            'status' => 'open',
-        ]);
-
         return view('dashboard', [
-            'items' => $response->data
+            'items' => $response->getData()
         ]);
     }
 }

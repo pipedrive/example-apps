@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Pipedrive\Api\DealsApi;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
 use Pipedrive\Models\OAuthToken;
@@ -22,43 +23,42 @@ class DealPickController extends Controller
     {
         $user = Auth::getUser();
 
-        $config = Config::get('auth.pipedrive');
-        $client = new Client(
-            $config['client_id'],
-            $config['client_secret'],
-            $config['redirect_uri'],
-        );
+        $config = Configuration::getDefaultConfiguration();
+        $config->setClientId(Config::get('auth.pipedrive.client_id'));
+        $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
+        $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
 
-        Configuration::$oAuthToken = (object) [
-            'accessToken' => $user->access_token,
-            'refreshToken' => $user->refresh_token,
-            'expiry' => $user->expiry,
-            'tokenType' => 'Bearer',
-        ];
-        Configuration::$oAuthTokenUpdateCallback = function (OAuthToken $token) use ($user) {
+        $config->setAccessToken($user->access_token);
+        $config->setRefreshToken($user->refresh_token);
+        $config->setExpiresAt($user->expiry);
+
+        // TODO: set token type in SDK
+        $config->setOAuthTokenUpdateCallback(function ($token) use ($user) {
+            dd($token);
+
             User::query()->where([
                 'company_id' => $user->company_id,
                 'user_id' => $user->user_id,
             ])->update([
-                'access_token' => $token->accessToken,
-                'refresh_token' => $token->refreshToken,
-                'expiry' => $token->expiry,
+                'access_token' => $token['access_token'],
+                'refresh_token' => $token['refresh_token'],
+                'expiry' => $token['expiry'],
             ]);
-        };
+        });
 
         $status = random_int(0, 1) ? 'won' : 'lost';
 
-        $deal = $client->getDeals()->getDetailsOfADeal($id);
+        $dealsApiInstance = new DealsApi(null, $config);
+        $deal = $dealsApiInstance->getDeal($id)->getData();
 
-        $client->getDeals()->updateADeal([
-            'id' => $id,
-            'status' => $status
+        $dealsApiInstance->updateDeal($id, [
+            'status' => $status,
         ]);
 
         if ($status === 'won') {
-            return redirect('dashboard')->with('won', "Deal {$deal->data->title} has been won");
+            return redirect('dashboard')->with('won', "Deal {$deal['title']} has been won");
         } else {
-            return redirect('dashboard')->with('lost', "Deal {$deal->data->title} has been lost");
+            return redirect('dashboard')->with('lost', "Deal {$deal['title']} has been lost");
         }
     }
 }
