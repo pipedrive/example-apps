@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ class DealPickController extends Controller
 {
     /**
      * Handle the incoming request.
+     * @throws Exception
      */
     public function __invoke(Request $request, string $id): RedirectResponse
     {
@@ -34,7 +36,7 @@ class DealPickController extends Controller
             'tokenType' => 'Bearer',
         ];
         Configuration::$oAuthTokenUpdateCallback = function (OAuthToken $token) use ($user) {
-            User::where([
+            User::query()->where([
                 'company_id' => $user->company_id,
                 'user_id' => $user->user_id,
             ])->update([

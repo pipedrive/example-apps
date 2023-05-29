@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Pipedrive\APIException;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
 use Pipedrive\Exceptions\OAuthProviderException;
@@ -35,7 +36,7 @@ class PipedriveController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws APIException
      */
     public function handle(Request $request): RedirectResponse
     {
@@ -54,7 +55,7 @@ class PipedriveController extends Controller
 
             $result = $client->getUsers()->getCurrentUserData();
 
-            $user = User::firstOrNew([
+            $user = User::query()->firstOrNew([
                 'company_id' => $result->data->companyId,
                 'user_id' => $result->data->id,
             ]);
