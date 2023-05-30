@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Pipedrive\Api\UsersApi;
 use Pipedrive\APIException;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
@@ -22,15 +24,12 @@ class PipedriveController extends Controller
 {
     public function create(): RedirectResponse
     {
-        $config = Config::get('auth.pipedrive');
+        $config = Configuration::getDefaultConfiguration();
+        $config->setClientId(Config::get('auth.pipedrive.client_id'));
+        $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
+        $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
 
-        $client = new Client(
-            $config['client_id'],
-            $config['client_secret'],
-            $config['redirect_uri'],
-        );
-
-        return redirect()->to($client->auth()->buildAuthorizationUrl());
+        return redirect()->to($config->getAuthorizationPageUrl());
     }
 
     /**
@@ -42,32 +41,31 @@ class PipedriveController extends Controller
     {
         $code = $request->input('code');
 
-        $config = Config::get('auth.pipedrive');
-
-        $client = new Client(
-            $config['client_id'],
-            $config['client_secret'],
-            $config['redirect_uri'],
-        );
+        $config = Configuration::getDefaultConfiguration();
+        $config->setClientId(Config::get('auth.pipedrive.client_id'));
+        $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
+        $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
+        $config->setOAuthTokenUpdateCallback(function ($token) use ($config) {
+            return $token;
+        });
 
         try {
-            $token = $client->auth()->authorize($code);
+            $token = $config->authorize($code);
 
-            $result = $client->getUsers()->getCurrentUserData();
+            $usersApiInstance = new UsersApi(null, $config);
+            $currentUserData = $usersApiInstance->getCurrentUser()->getData();
 
             $user = User::query()->firstOrNew([
-                'company_id' => $result->data->companyId,
-                'user_id' => $result->data->id,
+                'company_id' => $currentUserData->getCompanyId(),
+                'user_id' => $currentUserData->getId(),
             ]);
 
             $user->fill([
-                'name' => $result->data->name,
-                'company_id' => $result->data->companyId,
-                'user_id' => $result->data->id,
-                'company_domain' => $result->data->companyDomain,
-                'access_token' => $token->accessToken,
-                'refresh_token' => $token->refreshToken,
-                'expiry' => $token->expiry,
+                'name' => $currentUserData->getName(),
+                'company_domain' => $currentUserData->getCompanyDomain(),
+                'access_token' => $token->access_token,
+                'refresh_token' => $token->refresh_token,
+                'expiry' => time() + $token->expires_in,
             ]);
             $user->save();
 
@@ -76,8 +74,10 @@ class PipedriveController extends Controller
             Auth::login($user);
 
             return redirect(RouteServiceProvider::HOME);
-        } catch (OAuthProviderException $exception) {
-            dd($exception->getResponseBody());
+        } catch (GuzzleException $exception) {
+            dd($exception);
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
         }
     }
 }

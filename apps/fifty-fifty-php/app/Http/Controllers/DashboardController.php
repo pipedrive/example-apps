@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -25,6 +26,17 @@ class DashboardController extends Controller
         $config->setAccessToken($user->access_token);
         $config->setRefreshToken($user->refresh_token);
         $config->setExpiresAt($user->expiry);
+
+        $config->setOAuthTokenUpdateCallback(function ($token) use ($user) {
+            User::query()->where([
+                'company_id' => $user->company_id,
+                'user_id' => $user->user_id,
+            ])->update([
+                'access_token' => $token['access_token'],
+                'refresh_token' => $token['refresh_token'],
+                'expiry' => time() + $token['expires_in'],
+            ]);
+        });
 
         $dealsApiInstance = new DealsApi(null, $config);
         $response = $dealsApiInstance->getDeals(

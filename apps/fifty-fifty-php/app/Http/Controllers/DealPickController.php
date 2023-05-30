@@ -32,17 +32,14 @@ class DealPickController extends Controller
         $config->setRefreshToken($user->refresh_token);
         $config->setExpiresAt($user->expiry);
 
-        // TODO: set token type in SDK
         $config->setOAuthTokenUpdateCallback(function ($token) use ($user) {
-            dd($token);
-
             User::query()->where([
                 'company_id' => $user->company_id,
                 'user_id' => $user->user_id,
             ])->update([
                 'access_token' => $token['access_token'],
                 'refresh_token' => $token['refresh_token'],
-                'expiry' => $token['expiry'],
+                'expiry' => time() + $token['expires_in'],
             ]);
         });
 
