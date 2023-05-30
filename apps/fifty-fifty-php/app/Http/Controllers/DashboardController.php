@@ -27,14 +27,14 @@ class DashboardController extends Controller
         $config->setRefreshToken($user->refresh_token);
         $config->setExpiresAt($user->expiry);
 
-        $config->setOAuthTokenUpdateCallback(function ($token) use ($user) {
+        $config->setOAuthTokenUpdateCallback(function () use ($config, $user) {
             User::query()->where([
                 'company_id' => $user->company_id,
                 'user_id' => $user->user_id,
             ])->update([
-                'access_token' => $token['access_token'],
-                'refresh_token' => $token['refresh_token'],
-                'expiry' => time() + $token['expires_in'],
+                'access_token' => $config->getAccessToken(),
+                'refresh_token' => $config->getRefreshToken(),
+                'expiry' => $config->getExpiresAt(),
             ]);
         });
 

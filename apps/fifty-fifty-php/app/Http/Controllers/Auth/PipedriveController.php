@@ -50,7 +50,7 @@ class PipedriveController extends Controller
         });
 
         try {
-            $token = $config->authorize($code);
+            $config->authorize($code);
 
             $usersApiInstance = new UsersApi(null, $config);
             $currentUserData = $usersApiInstance->getCurrentUser()->getData();
@@ -63,9 +63,9 @@ class PipedriveController extends Controller
             $user->fill([
                 'name' => $currentUserData->getName(),
                 'company_domain' => $currentUserData->getCompanyDomain(),
-                'access_token' => $token->access_token,
-                'refresh_token' => $token->refresh_token,
-                'expiry' => time() + $token->expires_in,
+                'access_token' => $config->getAccessToken(),
+                'refresh_token' => $config->getRefreshToken(),
+                'expiry' => $config->getExpiresAt(),
             ]);
             $user->save();
 
