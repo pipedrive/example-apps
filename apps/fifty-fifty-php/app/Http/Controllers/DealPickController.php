@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Exception;
+use http\Exception\RuntimeException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Pipedrive\Api\DealsApi;
-use Pipedrive\Client;
 use Pipedrive\Configuration;
-use Pipedrive\Models\OAuthToken;
+use Pipedrive\Model\UpdateDealRequest;
 
 class DealPickController extends Controller
 {
@@ -21,6 +21,7 @@ class DealPickController extends Controller
      */
     public function __invoke(Request $request, string $id): RedirectResponse
     {
+        /** @var User $user */
         $user = Auth::getUser();
 
         $config = Configuration::getDefaultConfiguration();
@@ -46,16 +47,21 @@ class DealPickController extends Controller
         $status = random_int(0, 1) ? 'won' : 'lost';
 
         $dealsApiInstance = new DealsApi(null, $config);
-        $deal = $dealsApiInstance->getDeal($id)->getData();
 
-        $dealsApiInstance->updateDeal($id, [
+        $deal = $dealsApiInstance->getDeal((int) $id)->getData();
+
+        if (is_null($deal)) {
+            throw new RuntimeException('Fail');
+        }
+
+        $dealsApiInstance->updateDeal((int) $id, new UpdateDealRequest([
             'status' => $status,
-        ]);
+        ]));
 
         if ($status === 'won') {
-            return redirect('dashboard')->with('won', "Deal {$deal['title']} has been won");
+            return redirect('dashboard')->with('won', "Deal {$deal->getTitle()} has been won");
         } else {
-            return redirect('dashboard')->with('lost', "Deal {$deal['title']} has been lost");
+            return redirect('dashboard')->with('lost', "Deal {$deal->getTitle()} has been lost");
         }
     }
 }

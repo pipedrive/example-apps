@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\View\View;
 use Pipedrive\Api\UsersApi;
-use Pipedrive\APIException;
 use Pipedrive\Client;
 use Pipedrive\Configuration;
 use Pipedrive\Exceptions\OAuthProviderException;
+use Pipedrive\Model\BaseUserMe;
+use Pipedrive\Model\Unauthorized;
 
 class PipedriveController extends Controller
 {
@@ -35,7 +37,8 @@ class PipedriveController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws APIException
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function handle(Request $request): RedirectResponse
     {
@@ -45,39 +48,43 @@ class PipedriveController extends Controller
         $config->setClientId(Config::get('auth.pipedrive.client_id'));
         $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
         $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
-        $config->setOAuthTokenUpdateCallback(function ($token) use ($config) {
+        $config->setOAuthTokenUpdateCallback(function ($token) {
             return $token;
         });
 
-        try {
-            $config->authorize($code);
+        $config->authorize($code);
 
-            $usersApiInstance = new UsersApi(null, $config);
-            $currentUserData = $usersApiInstance->getCurrentUser()->getData();
+        $usersApiInstance = new UsersApi(null, $config);
 
-            $user = User::query()->firstOrNew([
-                'company_id' => $currentUserData->getCompanyId(),
-                'user_id' => $currentUserData->getId(),
-            ]);
+        $currentUserData = $usersApiInstance->getCurrentUser();
 
-            $user->fill([
-                'name' => $currentUserData->getName(),
-                'company_domain' => $currentUserData->getCompanyDomain(),
-                'access_token' => $config->getAccessToken(),
-                'refresh_token' => $config->getRefreshToken(),
-                'expiry' => $config->getExpiresAt(),
-            ]);
-            $user->save();
-
-            event(new Registered($user));
-
-            Auth::login($user);
-
-            return redirect(RouteServiceProvider::HOME);
-        } catch (GuzzleException $exception) {
-            dd($exception);
-        } catch (\Exception $exception) {
-            dd($exception->getMessage());
+        if ($currentUserData instanceof Unauthorized) {
+            throw new UnauthorizedException();
         }
+
+        $currentUser = $currentUserData->getData();
+
+        if (is_null($currentUser)) {
+            return redirect(RouteServiceProvider::HOME);
+        }
+
+        $user = User::query()->firstOrNew([
+            'company_id' => $currentUser->getCompanyId(),
+            'user_id' => $currentUser->getId(),
+        ]);
+
+        $user->fill([
+            'name' => $currentUser->getName(),
+            'company_domain' => $currentUser->getCompanyDomain(),
+            'access_token' => $config->getAccessToken(),
+            'refresh_token' => $config->getRefreshToken(),
+            'expiry' => $config->getExpiresAt(),
+        ])->save();
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }

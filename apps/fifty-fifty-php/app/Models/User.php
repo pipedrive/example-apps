@@ -8,7 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * @mixin Eloquent\Builder
+ * @property string $name
+ * @property string $company_id
+ * @property string $user_id
+ * @property string $access_token
+ * @property string $refresh_token
+ * @property string $company_domain
+ * @property int $expiry
  */
 class User extends Authenticatable
 {

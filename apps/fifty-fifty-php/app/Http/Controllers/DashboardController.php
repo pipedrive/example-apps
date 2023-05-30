@@ -14,8 +14,9 @@ class DashboardController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): \Illuminate\View\View
     {
+        /** @var User $user */
         $user = Auth::getUser();
 
         $config = Configuration::getDefaultConfiguration();
@@ -39,17 +40,17 @@ class DashboardController extends Controller
         });
 
         $dealsApiInstance = new DealsApi(null, $config);
-        $response = $dealsApiInstance->getDeals(
+        $deals = $dealsApiInstance->getDeals(
             null,
             null,
             null,
             'open',
             0,
             10,
-        );
+        )->getData();
 
         return view('dashboard', [
-            'items' => $response->getData()
+            'items' => $deals,
         ]);
     }
 }
