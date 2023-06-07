@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
         /** @var User $user */
         $user = Auth::getUser();
 
-        $config = Configuration::getDefaultConfiguration();
+        $config = new Configuration();
         $config->setClientId(Config::get('auth.pipedrive.client_id'));
         $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
         $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));

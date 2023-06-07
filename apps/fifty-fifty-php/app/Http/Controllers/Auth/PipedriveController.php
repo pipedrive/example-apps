@@ -21,7 +21,7 @@ class PipedriveController extends Controller
 {
     public function create(): RedirectResponse
     {
-        $config = Configuration::getDefaultConfiguration();
+        $config = new Configuration();
         $config->setClientId(Config::get('auth.pipedrive.client_id'));
         $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
         $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
@@ -40,7 +40,7 @@ class PipedriveController extends Controller
     {
         $code = $request->input('code');
 
-        $config = Configuration::getDefaultConfiguration();
+        $config = new Configuration();
         $config->setClientId(Config::get('auth.pipedrive.client_id'));
         $config->setClientSecret(Config::get('auth.pipedrive.client_secret'));
         $config->setOauthRedirectUri(Config::get('auth.pipedrive.redirect_uri'));
