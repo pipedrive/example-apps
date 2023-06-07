@@ -22,9 +22,9 @@ Required: PHP >= 8.1 (recommended) with sqlite.
 - run `php artisan key:generate`
 - run `php artisan serve`
 
-## Preview
+## Demo
 
-![](https://github.com/pipedrive/example-apps/assets/333910/a8dbac25-a3b3-4530-bcd4-c8610775c418)
+<img src="docs/images/demo.gif" width=400 />
 
 # Credits
 
