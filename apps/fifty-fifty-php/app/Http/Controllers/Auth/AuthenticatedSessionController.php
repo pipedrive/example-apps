@@ -20,6 +20,8 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Destroy an authenticated session.
+     *
+     * @throws OAuthProviderException
      */
     public function destroy(Request $request): RedirectResponse
     {

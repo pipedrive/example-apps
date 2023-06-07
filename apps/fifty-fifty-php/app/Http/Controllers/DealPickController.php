@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use http\Exception\RuntimeException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class DealPickController extends Controller
 {
     /**
      * Handle the incoming request.
-     * @throws Exception
+     * @throws Exception|GuzzleException
      */
     public function __invoke(Request $request, string $id): RedirectResponse
     {

@@ -5,21 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\Validation\UnauthorizedException;
-use Illuminate\View\View;
 use Pipedrive\Api\UsersApi;
-use Pipedrive\Client;
 use Pipedrive\Configuration;
-use Pipedrive\Exceptions\OAuthProviderException;
-use Pipedrive\Model\BaseUserMe;
 use Pipedrive\Model\Unauthorized;
 
 class PipedriveController extends Controller
@@ -39,6 +34,7 @@ class PipedriveController extends Controller
      *
      * @param Request $request
      * @return RedirectResponse
+     * @throws Exception|GuzzleException
      */
     public function handle(Request $request): RedirectResponse
     {

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\View\View;
 use Pipedrive\Api\DealsApi;
 use Pipedrive\Configuration;
 
@@ -13,8 +16,10 @@ class DashboardController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
+     * @throws Exception|GuzzleException
      */
-    public function __invoke(Request $request): \Illuminate\View\View
+    public function __invoke(Request $request): View
     {
         /** @var User $user */
         $user = Auth::getUser();
