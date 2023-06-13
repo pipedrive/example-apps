@@ -9,7 +9,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.8",
         "laravel/tinker": "^2.8",
-        "pipedrive/client-dummy": "^1.0"
+        "pipedrive/pipedrive": "^5@beta"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -28,27 +28,12 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "Pipedrive\\": "vendor/pipedrive/client-dummy/lib"
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
-    },
-    "repositories": {
-        "client-dummy": {
-            "type": "package",
-            "package": {
-                "name": "pipedrive/client-dummy",
-                "version": "1.0",
-                "source": {
-                    "url": "https://github.com/pipedrive/client-dummy.git",
-                    "type": "git",
-                    "reference": "origin/master"
-                }
-            }
         }
     },
     "scripts": {
