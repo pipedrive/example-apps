@@ -10,7 +10,7 @@
   "author": "Hem",
   "license": "ISC",
   "dependencies": {
-    "@twilio/voice-sdk": "^2.1.1",
+    "@twilio/voice-sdk": "^2.6.0",
     "@vscode/sqlite3": "^5.0.8",
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
@@ -22,6 +22,6 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "sqlite3": "^5.1.5",
-    "twilio": "~3.64.0"
+    "twilio": "~4.12.0"
   }
 }
