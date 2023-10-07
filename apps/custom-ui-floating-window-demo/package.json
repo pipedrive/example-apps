@@ -14,7 +14,7 @@
     "bootstrap": "^5.2.3",
     "cookies-next": "^2.1.1",
     "eslint-config-next": "13.0.5",
-    "next": "13.0.5",
+    "next": "13.5.4",
     "pino": "^8.7.0",
     "pino-pretty": "^9.1.1",
     "pipedrive": "^17.5.4",
