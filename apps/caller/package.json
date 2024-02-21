@@ -22,6 +22,6 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "sqlite3": "^5.1.5",
-    "twilio": "~3.64.0"
+    "twilio": "~4.22.0"
   }
 }
