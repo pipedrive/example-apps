@@ -19,7 +19,7 @@
         "pipedrive": "^15.0.1",
         "querystring": "^0.2.1",
         "sequelize": "^6.21.3",
-        "sqlite3": "^5.0.10"
+        "sqlite3": "^5.1.6"
     },
     "engines": {
         "node": "14.x"
