@@ -11,17 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "@twilio/voice-sdk": "^2.1.1",
-    "@vscode/sqlite3": "^5.0.8",
+    "@vscode/sqlite3": "^5.1.6-vscode",
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
     "express": "^4.19.2",
     "jquery": "^3.6.0",
-    "knex": "^1.0.7",
+    "knex": "^2.4.0",
     "passport": "^0.6.0",
     "passport-oauth": "^1.0.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "sqlite3": "^5.1.5",
+    "sqlite3": "^5.1.6",
     "twilio": "~3.64.0"
   }
 }
