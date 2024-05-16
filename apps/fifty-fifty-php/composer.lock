@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "376af60834762a3c3d2fcd6f432b8aa9",
+    "content-hash": "36b98e80a1ea418ef3209fae007746d9",
     "packages": [
         {
             "name": "brick/math",
@@ -2265,16 +2265,16 @@
         },
         {
             "name": "pipedrive/pipedrive",
-            "version": "5.0.0-beta.0",
+            "version": "dev-next",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pipedrive/client-php.git",
-                "reference": "e9973fbc8954f5e0006c199b3fdafcc92d400838"
+                "reference": "c41ef0d2b4030df488d71b0d4f8828f768c98b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pipedrive/client-php/zipball/e9973fbc8954f5e0006c199b3fdafcc92d400838",
-                "reference": "e9973fbc8954f5e0006c199b3fdafcc92d400838",
+                "url": "https://api.github.com/repos/pipedrive/client-php/zipball/c41ef0d2b4030df488d71b0d4f8828f768c98b85",
+                "reference": "c41ef0d2b4030df488d71b0d4f8828f768c98b85",
                 "shasum": ""
             },
             "require": {
@@ -2313,9 +2313,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pipedrive/client-php/issues",
-                "source": "https://github.com/pipedrive/client-php/tree/5.0.0-beta.0"
+                "source": "https://github.com/pipedrive/client-php/tree/next"
             },
-            "time": "2023-06-14T15:40:27+00:00"
+            "time": "2024-05-16T11:36:30+00:00"
         },
         {
             "name": "psr/container",
@@ -9067,7 +9067,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "pipedrive/pipedrive": 10
+        "pipedrive/pipedrive": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -9075,5 +9075,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
