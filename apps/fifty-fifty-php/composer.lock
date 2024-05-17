@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36b98e80a1ea418ef3209fae007746d9",
+    "content-hash": "6cbaed547d258a8ae5c981dd98649fe2",
     "packages": [
         {
             "name": "brick/math",
@@ -2265,16 +2265,16 @@
         },
         {
             "name": "pipedrive/pipedrive",
-            "version": "dev-next",
+            "version": "6.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pipedrive/client-php.git",
-                "reference": "c41ef0d2b4030df488d71b0d4f8828f768c98b85"
+                "reference": "8283934ea8eb14d9c2cff1e22544792408963aee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pipedrive/client-php/zipball/c41ef0d2b4030df488d71b0d4f8828f768c98b85",
-                "reference": "c41ef0d2b4030df488d71b0d4f8828f768c98b85",
+                "url": "https://api.github.com/repos/pipedrive/client-php/zipball/8283934ea8eb14d9c2cff1e22544792408963aee",
+                "reference": "8283934ea8eb14d9c2cff1e22544792408963aee",
                 "shasum": ""
             },
             "require": {
@@ -2313,9 +2313,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pipedrive/client-php/issues",
-                "source": "https://github.com/pipedrive/client-php/tree/next"
+                "source": "https://github.com/pipedrive/client-php/tree/6.7.0"
             },
-            "time": "2024-05-16T11:36:30+00:00"
+            "time": "2024-05-17T05:26:52+00:00"
         },
         {
             "name": "psr/container",
@@ -9066,9 +9066,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "pipedrive/pipedrive": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
