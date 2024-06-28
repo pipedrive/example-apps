@@ -2,6 +2,6 @@
   "name": "example-apps",
   "description": "Examples on how to integrate with Pipedrive",
   "owner": "Gravity",
-  "type": "library",
+  "type": "misc",
   "status": "released"
 }
