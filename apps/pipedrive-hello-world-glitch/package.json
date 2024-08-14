@@ -1,0 +1,28 @@
+{
+  "name": "FiftyFifty",
+  "version": "1.0.0",
+  "description": "Example app for Pipedrive Marketplace",
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/pipedrive/FiftyFifty.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "IS_LOCAL=true PORT=3000 node index.js"
+  },
+  "author": "Siim Kibus",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.3",
+    "express": "^4.19.2",
+    "hbs": "^4.2.0",
+    "knex": "^3.1.0",
+    "passport": "^0.7.0",
+    "passport-oauth2": "^1.8.0",
+    "sqlite3": "^5.1.7"
+  }
+}
