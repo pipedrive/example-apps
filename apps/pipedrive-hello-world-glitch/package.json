@@ -11,7 +11,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "IS_LOCAL=true PORT=3000 node index.js"
   },
   "author": "Siim Kibus",
   "license": "ISC",

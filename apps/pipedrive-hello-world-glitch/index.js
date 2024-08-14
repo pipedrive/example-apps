@@ -87,4 +87,8 @@ app.get('/deals/:id', async (req, res) => {
 
 app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}`));
 
-console.log(`🟢 App has started. \n🔗 Live URL: https://${process.env.PROJECT_DOMAIN}.glitch.me`);
+if (process.env.IS_LOCAL === 'true') {
+	console.log(`🟢 App has started. \n🔗 Development URL: http://localhost:3000`);
+} else {
+	console.log(`🟢 App has started. \n🔗 Live URL: https://${process.env.PROJECT_DOMAIN}.glitch.me`);
+}

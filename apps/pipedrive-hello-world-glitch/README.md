@@ -14,4 +14,4 @@ Follow the instructions in the [Tutorial](https://developers.pipedrive.com/tutor
 - Create a test app in [Developer Hub](https://app.pipedrive.com/developer-hub) with the following callback URL: http://localhost:3000/auth/pipedrive/callback
 - Run npm install
 - Rename config.example.js to config.js and edit the clientID and clientSecret values
-- Run node index.js and open http://localhost:3000/
+- Run `npm run dev` and open http://localhost:3000/
