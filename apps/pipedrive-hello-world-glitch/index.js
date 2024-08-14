@@ -42,6 +42,8 @@ app.use(async (req, res, next) => {
 		next();
 });
 
+// Remove this section on Glitch
+
 app.get('/auth/pipedrive', passport.authenticate('pipedrive'));
 app.get('/auth/pipedrive/callback', passport.authenticate('pipedrive', {
 	session: false,
@@ -80,6 +82,8 @@ app.get('/deals/:id', async (req, res) => {
 		return res.send('Failed to update the deal');
 	}
 });
+
+// End of section to remove on Glitch
 
 app.listen(process.env.PORT, () => console.log(`App listening on port ${process.env.PORT}`));
 
