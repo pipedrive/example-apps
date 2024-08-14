@@ -1,0 +1,22 @@
+.jumbotron {
+    height: 100vh;
+    opacity: 0;
+    animation: reveal 4s forwards;
+}
+
+.outcome-won {
+    background-color: green!important;
+}
+
+.outcome-lost {
+    background-color: red!important;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
