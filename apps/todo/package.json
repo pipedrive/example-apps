@@ -22,8 +22,8 @@
   "homepage": "./",
   "dependencies": {
     "@pipedrive/app-extensions-sdk": "^0.1.0",
-    "body-parser": "^1.20.0",
-    "express": "^4.19.2",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.0",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
     "pipedrive": "^17.1.2",
