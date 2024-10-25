@@ -12,7 +12,7 @@
     "@pipedrive/app-extensions-sdk": "^0.6.0",
     "@prisma/client": "^4.6.1",
     "bootstrap": "^5.2.3",
-    "cookies-next": "^2.1.1",
+    "cookies-next": "^4.3.0",
     "eslint-config-next": "13.0.5",
     "next": "13.5.1",
     "pino": "^8.7.0",
@@ -20,7 +20,7 @@
     "pipedrive": "^17.5.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "socket.io": "^4.6.2",
+    "socket.io": "^4.8.0",
     "socket.io-client": "^4.5.4"
   },
   "devDependencies": {
