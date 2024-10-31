@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@pipedrive/app-extensions-sdk": "^0.6.0",
+    "@pipedrive/app-extensions-sdk": "^0.10.3",
     "@prisma/client": "^4.6.1",
     "bootstrap": "^5.2.3",
     "cookies-next": "^2.1.1",
