@@ -6,6 +6,11 @@ A very basic example of how to:
 - Get all open deals from Pipedrive.
 - Mark selected deal randomly as won or lost.
 
+⚠️ **Disclaimer**
+
+**This repository contains non-production code.**\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
+
 ## Installation and usage on Glitch
 
 Follow the instructions in the [Tutorial](https://developers.pipedrive.com/tutorials/build-your-first-pipedrive-hello-world-app?) to get started.

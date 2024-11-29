@@ -1,6 +1,7 @@
 # Messaging App Extension Playground 🕹
 
-The playground app is intended for getting started and experimenting with the key aspects before starting to build production-ready applications.
+The playground app is intended for getting started and experimenting with the key aspects before starting to build production-ready applications.\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
 
 ![](https://user-images.githubusercontent.com/19341550/176623698-0e114f30-c1bc-4709-bb01-e8a40faa14a9.gif)
 

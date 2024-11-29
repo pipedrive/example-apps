@@ -30,3 +30,9 @@ A sample app showcasing DocuSign integration using Pipedrive Custom UI. You can 
 - You can also _Send_ the document to the deal contact if a valid email is provided.
 
 > For advanced troubleshooting, you can start the app using the following command - `DEBUG=app* npm start`
+
+⚠️ **Disclaimer**
+
+**This repository contains non-production code.**\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
+

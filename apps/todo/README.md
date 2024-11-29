@@ -8,6 +8,11 @@ This example app covers following Pipedrive app capabilities:
 * Embedded actions
 * Pipedrive API client
 
+⚠️ **Disclaimer**
+
+**This repository contains non-production code.**\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
+
 ## Installation
 
 Recommended Node.js version is 16.

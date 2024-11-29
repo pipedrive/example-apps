@@ -8,6 +8,11 @@ A very basic app with example how to:
  - get all open deals from Pipedrive
  - mark selected deal randomly as won or lost
 
+⚠️ **Disclaimer**
+
+**This repository contains non-production code.**\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
+
 ## Installation and usage
 
 Required: PHP >= 8.1 (recommended) with sqlite.

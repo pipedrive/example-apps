@@ -2,6 +2,12 @@
 
 Read more about ways how to integrate with Pipedrive from [developer documentation](https://pipedrive.readme.io/docs).
 
+⚠️ **Disclaimer**
+
+**This repository contains non-production code.**\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
+
+
 ### Apps
 
 |     | App                                                                          | Description                                                                                                                                                                                                                                        | Features                                                                                                        |
