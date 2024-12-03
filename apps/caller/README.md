@@ -2,7 +2,8 @@
 
 ![](https://developers.pipedrive.com/tutorials/codelabs/building-cti-phone-solutions-pipedrive-app/img/abfe63a936ef293.png)
 
-This app lets you build a simple caller app using Twilio. The accompanying tutorial can be found [here](https://developers.pipedrive.com/tutorials/building-cti-phone-solutions-pipedrive-app).
+This app lets you build a simple caller app using Twilio. The accompanying tutorial can be found [here](https://developers.pipedrive.com/tutorials/building-cti-phone-solutions-pipedrive-app).\
+**NB:** Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
 
 
 ### What will we be doing?

@@ -1,6 +1,7 @@
 ### Custom Floating Window Demo App
 
 This is a demo app that makes use of the Floating window app extension to render a persistent iframe inside Pipedrive. It makes use of Next.js for frontend and API routes, Prisma ORM for data storage and Pipedrive SDK for securely communicating with Pipedrive APIs. The app also showcases the use of cookies for session management inside the window.
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
 
 ![1](https://user-images.githubusercontent.com/19341550/207391309-050c49fd-ff35-422b-b479-1837b11cb744.gif)
 ![2](https://user-images.githubusercontent.com/19341550/207391322-a672c1a7-7f38-4ceb-b54c-a300f6e15b6c.gif)

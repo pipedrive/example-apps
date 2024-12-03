@@ -2,7 +2,8 @@
 
 This is an example [Remix](https://remix.run) app that demonstrates and experiments with [Custom UI Extensions](https://pipedrive.readme.io/docs/custom-ui-extensions) in its three types: Custom panels, Custom modals and Custom UI for app settings.
 
-**NB:** This app should not be used as a production-ready app as OAuth installation and token verification are not covered here. 
+**NB:** This app should not be used as a production-ready app as OAuth installation and token verification are not covered here.\
+Sensitive information, such as tokens or credentials, should always be securely encrypted and stored according to best practices. Do not use hardcoded or plaintext tokens in production.
 
 ## Examples
 
