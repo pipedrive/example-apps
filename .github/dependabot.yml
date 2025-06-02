@@ -1,0 +1,49 @@
+# Please see the documentation for all configuration options:
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+registries:
+  npm-pipedrive:
+    type: npm-registry
+    url: https://npm-registry-proxy.pipedrive.tools
+    token: ${{ secrets.NPM_TOKEN }}
+  github:
+    type: git
+    url: https://github.com
+    username: x-access-token
+    password: ${{ secrets.GHA_ACCESS_TOKEN }}
+
+updates:
+  # Update config based in the comment https://github.com/dependabot/dependabot-core/issues/4993#issuecomment-1289133027
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '10:00'
+      timezone: 'Europe/Tallinn'
+    rebase-strategy: 'disabled'
+    registries:
+      - npm-pipedrive
+      - github
+    open-pull-requests-limit: 10
+    versioning-strategy: increase
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    groups:
+      all-minor-patch-updates:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '10:00'
+      timezone: 'Europe/Tallinn'
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
