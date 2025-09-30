@@ -1,0 +1,32 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "visitTime": {
+        "label": "Visit time",
+        "$ref": "#/definitions/date-time"
+      },
+      "company": {
+        "$ref": "#/definitions/text"
+      },
+      "source": {
+        "$ref": "#/definitions/text"
+      },
+      "landingPage": {
+        "label": "Landing page",
+        "$ref": "#/definitions/text"
+      },
+      "pageViews": {
+        "label": "Page views",
+        "$ref": "#/definitions/numerical"
+      },
+      "duration": {
+        "$ref": "#/definitions/text"
+      },
+      "header": {
+        "$ref": "#/definitions/header"
+      }
+    }
+  }
+}

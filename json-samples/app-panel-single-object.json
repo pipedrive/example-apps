@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "required": [
+    "id",
+    "header"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/numerical"
+    },
+    "header": {
+      "$ref": "#/definitions/header"
+    },
+    "project": {
+      "$ref": "#/definitions/text"
+    },
+    "manufacturer": {
+      "$ref": "#/definitions/text"
+    },
+    "delivery_date": {
+      "$ref": "#/definitions/date-time",
+      "label": "Delivery date"
+    },
+    "status": {
+      "$ref": "#/definitions/label"
+    },
+    "delivery_company": {
+      "$ref": "#/definitions/text",
+      "label": "Delivery company"
+    },
+    "tracking": {
+      "$ref": "#/definitions/text"
+    },
+    "note": {
+      "$ref": "#/definitions/text"
+    },
+    "extras": {
+      "$ref": "#/definitions/tags"
+    },
+    "delivery_cost": {
+      "$ref": "#/definitions/currency",
+      "label": "Delivery cost"
+    }
+  }
+}
