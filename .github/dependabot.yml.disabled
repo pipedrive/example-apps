@@ -16,6 +16,10 @@ registries:
 updates:
   # Update config based in the comment https://github.com/dependabot/dependabot-core/issues/4993#issuecomment-1289133027
   - package-ecosystem: 'npm'
+    cooldown:
+      semver-major-days: 14
+      semver-minor-days: 14
+      semver-patch-days: 7
     directory: '/'
     schedule:
       interval: 'daily'
