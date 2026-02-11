@@ -1,0 +1,107 @@
+name: Security Checks PR
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: Github repository name (without pipedrive/ prefix)
+        type: string
+        required: false
+      pr_number:
+        description: PR Number (To compare with the default branch)
+        type: string
+        required: false
+      ignored_dependencies:
+        description: Ignored Dependencies Array - [{"ignoreType":"vulnerability","ignoreSubject":"koa@2.13.4","justification":"AAAAAA","ignoredBy":"giookro"}]
+        type: string
+        required: false
+        default: "[]"
+
+jobs:
+  # Do not change the name (key) of this job!
+  # The name of this job is used in the ci-cd-system-check action
+  # to exclude it from the list of checks that need to pass in pull requests.
+  Security-Checks-PR:
+    runs-on: eks-runner-secops-pr
+    timeout-minutes: 30
+    permissions:
+      pull-requests: write
+      contents: read
+    env:
+      # This is necessary to set true and false, otherwise, it sets pr_number as the env var value
+      IS_MANUAL_RUN: ${{ (inputs.repository && inputs.pr_number) && true || false }}
+      IS_PR_FROM_AUTOTUNER: ${{ github.event.pull_request.user.login == 'autotuner-bot[bot]' }}
+      IS_PR_FROM_PRBOT: ${{ github.event.pull_request.user.login == 'pipedrive-backoffice-pr[bot]' }}
+      PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+      IS_BLOCKER_VULNERABILITY: false
+      IS_BLOCKER_INTERNAL_VULNERABILITY: false
+      IS_BLOCKER_LICENSE: false
+    steps:
+      - name: Get Pipedrive GitHub Actions Bot Token
+        uses: actions/create-github-app-token@v1
+        id: get-workflow-token
+        with:
+          app-id: ${{ vars.PD_GHA_BOT_APPLICATION_ID }}
+          private-key: ${{ secrets.PD_GHA_BOT_APPLICATION_PRIVATE_KEY_PEM }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout repository (branch) (MANUAL RUN)
+        if: ${{ env.IS_MANUAL_RUN == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.get-workflow-token.outputs.token }}
+          repository: pipedrive/${{ inputs.repository }}
+          ref: refs/pull/${{ inputs.pr_number }}/head
+
+      - name: Checkout repository (branch)
+        if: ${{ env.IS_MANUAL_RUN == 'false' }}
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scan (branch)
+        uses: pipedrive/gha-security-checks/actions/scan@master
+        continue-on-error: true
+        with:
+          output_file_name: _trivy_report_branch.json
+          raw_output_file_name: _trivy_report_raw_branch.json
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          gha_access_token: ${{ steps.get-workflow-token.outputs.token }}
+
+      - name: Checkout repository (default) (MANUAL RUN)
+        if: ${{ env.IS_MANUAL_RUN == 'true' }}
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.get-workflow-token.outputs.token }}
+          repository: pipedrive/${{ inputs.repository }}
+          ref: ${{ github.BASE_REF }}
+
+      - name: Checkout repository (default)
+        uses: actions/checkout@v4
+        if: ${{ env.IS_MANUAL_RUN == 'false' }}
+        with:
+          ref: ${{ github.BASE_REF }}
+
+      - name: Run Trivy vulnerability scan (default)
+        uses: pipedrive/gha-security-checks/actions/scan@master
+        continue-on-error: true
+        with:
+          output_file_name: _trivy_report_master.json
+          npm_token: ${{ secrets.NPM_TOKEN }}
+          gha_access_token: ${{ steps.get-workflow-token.outputs.token}}
+
+      - name: Post comment to PR
+        uses: pipedrive/gha-security-checks/actions/pr-comment@master
+        continue-on-error: true
+        with:
+          base_ref: ${{ github.BASE_REF }}
+          base_report_file_name: _trivy_report_master.json
+          branch_report_file_name: _trivy_report_branch.json
+          raw_report_file_name: _trivy_report_raw_branch.json
+          ignored_dependencies: ${{ inputs.ignored_dependencies }}
+          is_manual_run: ${{ env.IS_MANUAL_RUN }}
+
+      - name: Block PR if necessary
+        id: block-pr-if-necessary
+        if: (env.IS_PR_FROM_AUTOTUNER != 'true' && env.IS_PR_FROM_PRBOT != 'true') && (env.IS_BLOCKER_VULNERABILITY == 'true' || env.IS_BLOCKER_LICENSE == 'true' || env.IS_BLOCKER_INTERNAL_VULNERABILITY == 'true')
+        shell: bash
+        run: exit 1
