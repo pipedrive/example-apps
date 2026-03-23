@@ -11,25 +11,40 @@
   },
   "dependencies": {
     "@pipedrive/app-extensions-sdk": "^0.1.0",
-    "@remix-run/node": "^1.7.1",
-    "@remix-run/react": "^1.7.1",
-    "@remix-run/vercel": "^1.7.1",
-    "@vercel/node": "^2.5.14",
+    "@remix-run/node": "^2.17.4",
+    "@remix-run/react": "^2.17.4",
+    "@vercel/node": "^5.6.18",
+    "@vercel/remix": "^2.16.7",
     "cross-spawn": "^7.0.6",
+    "isbot": "^3.6.8",
     "knex": "^2.4.0",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "sqlite3": "^5.1.6",
-    "tar": "^7.5.7"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sqlite3": "^6.0.1",
+    "tar": "^7.5.12"
   },
   "devDependencies": {
-    "@remix-run/dev": "^1.7.1",
-    "@remix-run/eslint-config": "^1.7.1",
-    "@remix-run/serve": "^1.7.1",
+    "@remix-run/dev": "2.16.7",
+    "@remix-run/eslint-config": "^2.17.4",
+    "@remix-run/serve": "^2.17.4",
     "eslint": "^8.23.1"
   },
   "engines": {
-    "node": "16.x"
+    "node": ">=18.0.0"
+  },
+  "overrides": {
+    "minimatch": "^3.1.4",
+    "flatted": "^3.4.1",
+    "tar-fs": "^2.1.4",
+    "tar": "^7.5.12",
+    "valibot": "^1.2.0",
+    "@remix-run/node": "^2.17.4",
+    "@remix-run/router": "^1.23.2",
+    "@remix-run/server-runtime": "^2.17.4",
+    "@vercel/node": {
+      "path-to-regexp": "^6.3.0",
+      "undici": "^5.29.0"
+    }
   }
 }
