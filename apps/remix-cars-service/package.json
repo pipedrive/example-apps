@@ -48,6 +48,7 @@
     },
     "picomatch": "^4.0.4",
     "brace-expansion": "^2.0.3",
-    "path-to-regexp": "0.1.13"
+    "path-to-regexp": "0.1.13",
+    "estree-util-value-to-estree": "^3.3.3"
   }
 }
