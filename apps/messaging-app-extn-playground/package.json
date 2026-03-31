@@ -24,6 +24,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.22.1",
     "form-data": "^4.0.5",
+    "handlebars": "^4.7.9",
     "hbs": "^4.2.0",
     "knex": "^2.4.0",
     "multer": "^1.4.5-lts.1",
