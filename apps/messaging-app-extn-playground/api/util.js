@@ -1,53 +1,35 @@
-// Setting this environment variable allows us have detailed logs
 process.env.DEBUG = "app";
 
-const request = require("request-promise");
+const axios = require("axios");
 const debug = require('debug')('app');
 debug.log = console.info.bind(console);
 
-//Get basic details about the user by calling `users/me` endpoint
 async function getUser(accessToken) {
     debug("Retrieving user details using the access token");
-    const requestOptions = {
-        uri: "https://api.pipedrive.com/v1/users/me",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-        json: true,
-    };
-    return request(requestOptions);
+    const response = await axios.get("https://api.pipedrive.com/v1/users/me", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+    });
+    return response.data;
 }
 
-// Create a messaging channel in Pipedrive
 async function createChannel(accessToken, id, name, type) {
-    const requestOptions = {
-        uri: "https://api.pipedrive.com/v1/channels",
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-        body: {
-            name: name,
-            provider_channel_id: id,
-            avatar_url: 'https://robohash.org/mxtouwlpxqjqtxiltdui?set=set1&bgset=&size=48x48',
-            provider_type: type
-        },
-        json: true,
-    };
+    const response = await axios.post("https://api.pipedrive.com/v1/channels", {
+        name: name,
+        provider_channel_id: id,
+        avatar_url: 'https://robohash.org/mxtouwlpxqjqtxiltdui?set=set1&bgset=&size=48x48',
+        provider_type: type
+    }, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+    });
     debug("Channel created!");
-    return request(requestOptions);
+    return response.data;
 }
 
-// Forward message to WhatsApp using their Graph API
 async function sendMessageToWA(msg, recipientId) {
     debug("Sending a whatsapp message based on data received from Pipedrive");
-    const requestOptions = {
-        uri: `https://graph.facebook.com/v13.0/${process.env.WA_PHONE_NUMBER_ID}/messages`,
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.WA_TOKEN}`,
-        },
-        json: {
+    const response = await axios.post(
+        `https://graph.facebook.com/v13.0/${process.env.WA_PHONE_NUMBER_ID}/messages`,
+        {
             messaging_product: "whatsapp",
             to: recipientId.split('wa-')[1],
             type: "text",
@@ -56,37 +38,32 @@ async function sendMessageToWA(msg, recipientId) {
                 body: msg,
             },
         },
-    };
+        {
+            headers: { Authorization: `Bearer ${process.env.WA_TOKEN}` }
+        }
+    );
     debug("Message sent to WhatsApp from Pipedrive");
-    return request(requestOptions);
+    return response.data;
 }
 
-// Forward message to Pipedrive Messaging Inbox using Channels API
 async function sendMessageToPD(accessToken, from, msg, time) {
     debug("Sending a Pipedrive Inbox message based on data from WhatsApp chat:", msg);
-    const requestOptions = {
-        uri: "https://api.pipedrive.com/v1/channels/messages/receive",
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-        body: {
-            id: "msg-wa-" + Date.now(),
-            channel_id: process.env.CHANNEL_ID,
-            conversation_id: `conversation-${from}`,
-            sender_id: `sender-wa-${from}`,
-            message: msg,
-            status: "sent",
-            created_at: new Date(parseInt(time) * 1000).toISOString().replace("T", " ").substring(0, 16),
-            attachments: [],
-        },
-        json: true,
-    };
+    const response = await axios.post("https://api.pipedrive.com/v1/channels/messages/receive", {
+        id: "msg-wa-" + Date.now(),
+        channel_id: process.env.CHANNEL_ID,
+        conversation_id: `conversation-${from}`,
+        sender_id: `sender-wa-${from}`,
+        message: msg,
+        status: "sent",
+        created_at: new Date(parseInt(time) * 1000).toISOString().replace("T", " ").substring(0, 16),
+        attachments: [],
+    }, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+    });
     debug("Message sent to Pipedrive from WhatsApp");
-    return request(requestOptions);
+    return response.data;
 }
 
-// Figure out the domain in which the app is running
 function getAppDomain(port = 3000) {
     let domain;
     if (process.env.PROJECT_DOMAIN) {
@@ -97,7 +74,6 @@ function getAppDomain(port = 3000) {
     return domain;
 }
 
-// Dynamically generate the manifest.json file
 function generateManifest(domain) {
     return {
         version: "v202101",
@@ -113,7 +89,6 @@ function generateManifest(domain) {
     };
 }
 
-// Calculate access token expiry in minutes
 function getAccessTokenExpiry(expiryTs) {
     const remainingMinutes = parseInt((parseInt(expiryTs) - parseInt(Date.now())) / (1000 * 60));
     return {
