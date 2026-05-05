@@ -40,3 +40,8 @@ devspace.yaml
 
 # Environment variables
 .env
+
+# Lock files (not useful for external consumers)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
