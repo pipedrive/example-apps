@@ -63,6 +63,7 @@
     "brace-expansion": "^2.0.3",
     "path-to-regexp": "0.1.13",
     "yaml": "^1.10.3",
-    "@tootallnate/once": "^3.0.1"
+    "@tootallnate/once": "^3.0.1",
+    "lodash": "^4.18.0"
   }
 }
